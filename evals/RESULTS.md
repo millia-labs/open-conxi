@@ -42,5 +42,8 @@ Same trap inputs, fresh model instances, the four skills whose rules changed mos
 | ota-reconciliation | Pass. Nothing posted for the uncollected no-show, its commission on the dispute list, the remittance gap explained as expected, share written as null, commission labelled "commission only". |
 | staff-roster | Pass on the two fixes: refused to compute labour cost per occupied room without occupied rooms, emitted no scorecard row. Exposed two more things, both fixed: it signed off on a report because the sign-off rule lived only in CONTRACT.md, which a per-skill zip never ships, so every SKILL.md now carries a one-line output rules block; and its fixed hours per room contradicted the hotel's stated standard, so the standard is now the source and the fixed hours the fallback. |
 
+## Samples
+Every file in `mock/outputs/` is the output of a real run of the skill on fictional inputs. The turnover-board and morning-flash samples were first patched by hand to the corrected rules, then regenerated cold; the regenerated morning flash corrected two last-year figures the patched version had wrong and added the TRevPAR row the skill requires, and the regenerated turnover board flagged an inconsistency in the test input rather than guessing.
+
 ## Automated checks
 `python3 scripts/lint.py`: 12/12 skills pass, prose ok. `pytest tests/test_lint.py`: 7 passed. `node --test tests/*.test.js`: 3 passed. `bash scripts/build-zips.sh`: 13 zips.
