@@ -1,0 +1,6 @@
+group inquiry: a tech company wants 14 rooms per night for 30 Sep, 1 Oct and 2 Oct (3 nights, 42 room nights) at 115 euro per room, breakfast included. They say they'll pay a 30% deposit, free cancellation up to 7 days before. They need an answer by Thursday.
+
+Pace for those dates (rooms on books / ADR on books): 30 Sep: 26 / 141, 1 Oct: 30 / 149, 2 Oct: 38 / 168.
+Same dates last year sold: 30 Sep 39 rooms at 152, 1 Oct 41 at 160, 2 Oct 42 at 181.
+Current Double BAR 140, 150, 170. The Alfândega tech conference is on those exact dates.
+Breakfast costs us about 6 euro per guest. Assume 1.5 guests per room.

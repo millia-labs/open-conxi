@@ -1,0 +1,21 @@
+reconcile Booking.com for August 2026.
+
+Booking.com reservation statement August (res ID, guest, arrival-departure, gross, commission 17%):
+4412001 Smith 02-05 Aug 510.00 86.70
+4412002 Lopez 04-06 Aug 300.00 51.00
+4412003 Chen 10-12 Aug 380.00 64.60
+4412004 Müller 14-17 Aug 555.00 94.35
+4412005 Rossi 20-21 Aug 150.00 25.50 (no-show)
+4412006 Dubois 25-28 Aug 420.00 71.40
+Total commission invoiced 393.55
+
+Mews departed stays August, source Booking.com (res ID, folio total room revenue):
+4412001 510.00
+4412002 260.00 (guest shortened stay, left 05 Aug, 1 night refunded)
+4412003 380.00
+4412004 555.00
+4412006 420.00
+4412007 Nakamura 29-31 Aug 290.00
+
+Rossi was a no-show, non-refundable but the card declined, we never collected anything.
+I don't have the bank lines yet.
