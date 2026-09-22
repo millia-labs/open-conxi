@@ -3,7 +3,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { execSync } = require("node:child_process");
 
-const REPO = "https://github.com/millia-labs/open-conxi.git";
+const REPO = "https://github.com/millia-labs/openconxi.git";
 const SKILLS = ["hotel-setup","hotel-dashboard","morning-flash","review-replies","guest-messages","turnover-board","work-orders","rate-check","group-displacement","staff-roster","ota-reconciliation","owner-report"];
 
 function home() {

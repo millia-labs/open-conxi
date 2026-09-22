@@ -1,6 +1,6 @@
 # PR draft: Open Conxi v0.1.0
 
-Repo: millia-labs/open-conxi (new, public). Branch: main, first release.
+Repo: millia-labs/openconxi (new, public). Branch: main, first release.
 
 ## Summary
 Twelve Claude skills that run the daily, weekly and monthly work of an independent hotel from pasted exports, with one profile file and one data file, a lint that enforces a six-section contract, an npx installer, and a release action that builds claude.ai-ready zips.

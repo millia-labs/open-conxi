@@ -6,7 +6,7 @@ Date: 2026-09-22. Owner: Mark. Status: awaiting approval. Spec: docs/superpowers
 Hotels want AI and do not know where to start. Conxi's cold email needs something a GM can use the same day, for free, that shows what good hotel work looks like in Claude and makes the case for Conxi without a sales pitch.
 
 ## Product
-A public MIT repo, `millia-labs/open-conxi`, with twelve Claude skills: two setup skills (hotel-setup, hotel-dashboard) and ten job skills (morning-flash, review-replies, guest-messages, turnover-board, work-orders, rate-check, group-displacement, staff-roster, ota-reconciliation, owner-report). Installable in claude.ai by zip upload, in Claude Code by plugin or npx, or by paste.
+A public MIT repo, `millia-labs/openconxi`, with twelve Claude skills: two setup skills (hotel-setup, hotel-dashboard) and ten job skills (morning-flash, review-replies, guest-messages, turnover-board, work-orders, rate-check, group-displacement, staff-roster, ota-reconciliation, owner-report). Installable in claude.ai by zip upload, in Claude Code by plugin or npx, or by paste.
 
 ## Users
 Any independent or small-group hotel, 20 to 300 keys, any country, where one person covers several seats. The first readers are the hotel leads in the Conxi lead engine.

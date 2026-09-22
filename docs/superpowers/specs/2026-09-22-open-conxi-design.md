@@ -14,7 +14,7 @@ Any hotel where one person covers several seats. Region-neutral. Country, curren
 
 ## 3. Name, home, licence
 
-- Name: Open Conxi. Repo: `millia-labs/open-conxi` (org exists, name free on GitHub and npm). MIT.
+- Name: Open Conxi. Repo: `millia-labs/openconxi` (org exists, name free on GitHub and npm). MIT.
 - Public description in the README is the locked Conxi text, verbatim, plus the founder line: the founders ran a 106-room hospitality operation and launched Conxi in June 2026.
 
 ## 4. Install paths, in the order the email reaches people

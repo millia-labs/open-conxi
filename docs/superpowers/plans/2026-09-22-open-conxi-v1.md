@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Ship `millia-labs/open-conxi` v0.1.0: twelve region-neutral Claude skills (two setup, ten job skills) that run a hotel's daily, weekly and monthly work from pasted exports, installable in claude.ai (zip), Claude Code (plugin, npx) or by paste.
+**Goal:** Ship `millia-labs/openconxi` v0.1.0: twelve region-neutral Claude skills (two setup, ten job skills) that run a hotel's daily, weekly and monthly work from pasted exports, installable in claude.ai (zip), Claude Code (plugin, npx) or by paste.
 
 **Architecture:** Markdown skills with one shared contract (six sections, under 150 lines) reading one `hotel-profile.md` and one `hotel-data.json`. A Python lint enforces the contract. A Node CLI and a shell script package zips. A GitHub Action lints and attaches zips on tag. A fictional Kuala Lumpur hotel provides every sample output. Spec: `docs/superpowers/specs/2026-09-22-open-conxi-design.md`.
 
@@ -103,8 +103,8 @@ Rules:
   "version": "0.1.0",
   "description": "Twelve free Claude skills that run the daily, weekly and monthly work of an independent hotel. By the Conxi team.",
   "keywords": ["claude", "claude-skills", "hotel", "hospitality", "revenue-management", "housekeeping"],
-  "homepage": "https://github.com/millia-labs/open-conxi",
-  "repository": { "type": "git", "url": "git+https://github.com/millia-labs/open-conxi.git" },
+  "homepage": "https://github.com/millia-labs/openconxi",
+  "repository": { "type": "git", "url": "git+https://github.com/millia-labs/openconxi.git" },
   "author": { "name": "Millia Labs Pte. Ltd.", "email": "mark@conxi.ai", "url": "https://conxi.ai" },
   "license": "MIT",
   "bin": { "open-conxi": "./bin/cli.js" },
@@ -121,8 +121,8 @@ Rules:
   "version": "0.1.0",
   "description": "Twelve free Claude skills that run the daily, weekly and monthly work of an independent hotel: setup, dashboard, morning flash, reviews, guest messages, turnover, work orders, rate check, group displacement, roster, OTA reconciliation, owner report.",
   "author": { "name": "Millia Labs Pte. Ltd.", "email": "mark@conxi.ai", "url": "https://conxi.ai" },
-  "homepage": "https://github.com/millia-labs/open-conxi",
-  "repository": "https://github.com/millia-labs/open-conxi",
+  "homepage": "https://github.com/millia-labs/openconxi",
+  "repository": "https://github.com/millia-labs/openconxi",
   "license": "MIT",
   "keywords": ["hotel", "hospitality", "claude-skills"],
   "skills": "./"
@@ -1616,7 +1616,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { execSync } = require("node:child_process");
 
-const REPO = "https://github.com/millia-labs/open-conxi.git";
+const REPO = "https://github.com/millia-labs/openconxi.git";
 const SKILLS = ["hotel-setup","hotel-dashboard","morning-flash","review-replies","guest-messages","turnover-board","work-orders","rate-check","group-displacement","staff-roster","ota-reconciliation","owner-report"];
 
 function home() {
@@ -1796,7 +1796,7 @@ Every skill has the same six sections: paste in, do, checklist, check yourself, 
 
 ## Install
 
-**claude.ai (no terminal).** Download a zip from the [latest release](https://github.com/millia-labs/open-conxi/releases/latest). In Claude, open Customize, then Skills, then the plus button, then Upload a skill. Upload `open-conxi-all.zip` or one skill at a time. Team and Enterprise admins can share a skill with the whole hotel. Then say: set up my hotel.
+**claude.ai (no terminal).** Download a zip from the [latest release](https://github.com/millia-labs/openconxi/releases/latest). In Claude, open Customize, then Skills, then the plus button, then Upload a skill. Upload `open-conxi-all.zip` or one skill at a time. Team and Enterprise admins can share a skill with the whole hotel. Then say: set up my hotel.
 
 **Claude Code.**
 ```bash
@@ -1804,7 +1804,7 @@ npx open-conxi install
 ```
 or
 ```bash
-git clone https://github.com/millia-labs/open-conxi.git && claude --plugin-dir ./open-conxi
+git clone https://github.com/millia-labs/openconxi.git && claude --plugin-dir ./open-conxi
 ```
 
 **Paste.** Open any `SKILL.md`, copy it into a Project's instructions.
@@ -1870,18 +1870,18 @@ git tag v0.1.0
 
 **Files:** none new.
 
-- [ ] **Step 1: Mark confirms the org and the name** (`millia-labs/open-conxi`, public).
+- [ ] **Step 1: Mark confirms the org and the name** (`millia-labs/openconxi`, public).
 
 - [ ] **Step 2: Create the repo and push**
 
 ```bash
-gh repo create millia-labs/open-conxi --public --source . --description "Twelve free Claude skills that run the daily, weekly and monthly work of an independent hotel. By the Conxi team." --push
+gh repo create millia-labs/openconxi --public --source . --description "Twelve free Claude skills that run the daily, weekly and monthly work of an independent hotel. By the Conxi team." --push
 git push origin v0.1.0
 ```
 
 - [ ] **Step 3: Verify**
 
-`gh run list -R millia-labs/open-conxi` shows lint green and release green; `gh release view v0.1.0 -R millia-labs/open-conxi` lists 13 zips. Download `open-conxi-all.zip`, upload one skill to claude.ai, run "set up my hotel", confirm it triggers.
+`gh run list -R millia-labs/openconxi` shows lint green and release green; `gh release view v0.1.0 -R millia-labs/openconxi` lists 13 zips. Download `open-conxi-all.zip`, upload one skill to claude.ai, run "set up my hotel", confirm it triggers.
 
 - [ ] **Step 4: npm publish** only if Mark wants the npx path live now: `npm publish --access public` from `$ROOT` (needs an npm login on this machine; otherwise skip and note it).
 
