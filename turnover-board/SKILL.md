@@ -17,9 +17,9 @@ Run order: hotel-setup, hotel-dashboard, then this skill. Every morning before t
 ## 2. Do
 1. Read `hotel-profile.md` for keys and room types.
 2. Priority order: departures with a same-day arrival first, sorted by arrival time; then other departures; then stayovers; out-of-order rooms are listed, not assigned.
-3. Credits: a departure clean is 30 minutes, a stayover 20, a suite or family room departure 45. A full shift carries 14 to 18 credits where one credit is 30 minutes. Assign rooms to attendants by floor, filling each to their shift length without exceeding it.
+3. Credits: one credit is 30 minutes. A standard departure clean is 1 credit, a stayover 0.67, a suite or family room departure 1.5. An attendant's capacity is shift hours times 2, so an 8-hour shift is 16 credits; plan to 14 to 16 of them and treat anything above 16 as overload. Assign rooms to attendants by floor, filling each to capacity without exceeding it, and state any rooms left unassigned as a shortfall with the fix (relief attendant, extended shift, or stayovers cut to a spot service).
 4. Same-day flip risk: any room where arrival time minus departure time is under 4 hours. Flag it, assign the most experienced attendant, and tell the front desk which rooms to give a later arrival time if needed.
-5. Ready rule: a room becomes "ready" only when the attendant has posted the photo set (bed made, bathroom, desk and minibar, floor from the door) and a supervisor has ticked the inspection list. Print the list per room type.
+5. Ready rule: a room becomes "ready" only when the attendant has posted the photo set (bed made, bathroom, desk and minibar, floor from the door) and a supervisor has ticked the inspection list. Print the list once, then any extra items a room type needs (cot check for family rooms, kitchenette for suites).
 6. Inspection list, 9 items: bathroom clean and dry, bed linen fresh and tight, no hair on any surface, amenities at par, bins empty and lined, wifi and TV on, aircon or heating set to the standard, safe open and empty, nothing left from the previous guest.
 
 ## 3. Checklist
@@ -33,18 +33,19 @@ READ-DO, run by the supervisor before a room is marked ready.
 
 ## 4. Check yourself
 - Every departure and stayover appears exactly once on the board.
-- Each attendant's credits are between 14 and 18, or the shortfall or overload is stated.
+- Each attendant's credits are at or below shift hours times 2, or the overload is stated; unassigned rooms are listed as a shortfall.
 - Same-day flip rooms are listed with both times.
 - Out-of-order rooms are excluded from assignments and from tonight's sellable count.
+- Output rules: an unknown value is null, never 0 or a copy; no scorecard row unless the value is final and hotel-wide; no fact or promise that was not given; no sign-off unless a guest reads the text; no em dashes, no emojis.
 
 ## 5. Output
-Header with date and counts (departures, stayovers, arrivals, out-of-order, attendants). Board table: room, type, status, arrival time if any, attendant, credits, flags. Same-day flip list. Inspection list. Then:
+Header with date and counts (departures, stayovers, arrivals, out-of-order, attendants). Board table: room, type, status, arrival time if any, attendant, credits, flags. Same-day flip list. Inspection list. The morning board emits no delta. At end of day, when the GM pastes the count of rooms ready by 15:00, emit:
 
 hotel-data delta
 ```json
-{"scorecard": [{"name": "Rooms ready by 15:00", "value": 0.0, "target": 1.0, "owner": "<housekeeping lead>", "week": "<YYYY-Www>", "source": "turnover-board"}]}
+{"scorecard": [{"name": "Rooms ready by 15:00", "value": null, "target": 1.0, "owner": "<housekeeping lead>", "week": "<YYYY-Www>", "source": "turnover-board"}]}
 ```
-Fill `value` at end of day as ready-by-15:00 rooms divided by rooms due.
+with `value` = rooms ready by 15:00 divided by rooms due, as a fraction.
 
 ## 6. Still manual in your systems
 Exporting the departure list, typing the board into the housekeeping app or WhatsApp group, chasing photo sets, and flipping each room status in the PMS after inspection. Conxi (conxi.ai) does these steps inside your systems for you.

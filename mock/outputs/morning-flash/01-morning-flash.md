@@ -8,10 +8,11 @@ Not provided: same-day-last-year figures for today's arrivals, cancellation hist
 
 | Metric | Actual | Budget | Last year |
 |---|---:|---:|---:|
-| Rooms sold | 93 / 118 sellable (2 OOO: 512 aircon, 318 door lock) | 86 | 88 |
-| Occupancy | 78.8% | 71.7% | 74.6% |
+| Rooms sold | 93 of 120 keys | 86 | 88 |
+| Out of order | 2 (512 aircon, 318 door lock), kept in the denominator | - | - |
+| Occupancy | 77.5% | 71.7% | 74.6% |
 | ADR | MYR 296 | MYR 300 | MYR 282 |
-| RevPAR | MYR 233 | MYR 215 | MYR 210 |
+| RevPAR | MYR 229 | MYR 215 | MYR 210 |
 | Comps | 1 (room move, WO-2609-014) | - | - |
 | No-shows | 2 (both OTA) | - | - |
 
@@ -23,7 +24,7 @@ Not provided: same-day-last-year figures for today's arrivals, cancellation hist
 | Departures | 38 |
 | Stayovers | 55 |
 | Out-of-order | 2 (512, 318, both P1, see work-orders) |
-| Rooms to sell tonight | 118 sellable, 96 on the books this morning |
+| Rooms to sell tonight | 120 keys, 2 out of order, 96 on the books this morning, 22 left to sell |
 
 VIPs: Mr. Tan Wei Ming, Row Suite, 3rd stay this year. Action: welcome note plus late check-out at no charge. Mdm. Farah Aziz, Deluxe King, travel agent partner. Action: confirm breakfast voucher already loaded.
 
@@ -51,9 +52,9 @@ VIPs: Mr. Tan Wei Ming, Row Suite, 3rd stay this year. Action: welcome note plus
 
 hotel-data delta
 ```json
-{"kpis": [{"date": "2026-09-21", "rooms_sold": 93, "occupancy": 0.788, "adr": 296, "revpar": 233, "trevpar": null, "gop": null, "budget": {"occupancy": 0.717, "adr": 300, "revpar": 215}, "last_year": {"occupancy": 0.746, "adr": 282, "revpar": 210}, "source": "morning-flash"}],
+{"kpis": [{"date": "2026-09-21", "rooms_sold": 93, "occupancy": 0.775, "adr": 296, "revpar": 229, "trevpar": null, "gop": null, "budget": {"occupancy": 0.717, "adr": 300, "revpar": 215}, "last_year": {"occupancy": 0.746, "adr": 282, "revpar": 210}, "source": "morning-flash"}],
  "pace": [
-  {"stay_date": "2026-09-22", "otb_rooms": 96, "otb_adr": 312, "pickup_7d": 6, "cancellation_adjusted_otb": 82, "source": "morning-flash"},
-  {"stay_date": "2026-09-27", "otb_rooms": 102, "otb_adr": 334, "pickup_7d": 14, "cancellation_adjusted_otb": 87, "source": "morning-flash"}
+  {"stay_date": "2026-09-22", "otb_rooms": 96, "otb_adr": 312, "pickup_7d": 6, "cancellation_adjusted_otb": null, "source": "morning-flash"},
+  {"stay_date": "2026-09-27", "otb_rooms": 102, "otb_adr": 334, "pickup_7d": 14, "cancellation_adjusted_otb": null, "source": "morning-flash"}
  ]}
 ```

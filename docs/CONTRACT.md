@@ -22,3 +22,13 @@ Under 150 lines. No em dashes, no en dashes, no emojis, straight quotes, sentenc
 
 ## Reading the profile
 Every skill opens with: read `hotel-profile.md` if present. If absent, proceed with defaults and list the assumptions at the top of the output.
+
+## Rules every output obeys
+These were added after the first cold-run QA, where a fresh model followed each skill exactly and the gaps below showed up.
+
+1. Unknown is null. A value the inputs do not support is written as `null` in the hotel-data delta, never as 0, never as a copy of a neighbouring field, never as a placeholder to fill later. In the output text it reads "not provided".
+2. A scorecard row is emitted only when its value is final and hotel-wide. A partial run (one department, one batch of reviews, one OTA) emits no scorecard row.
+3. Deltas carry achieved figures only. A recommended rate, a forecast, or an estimate never goes into a field that names an actual.
+4. Nothing invented, extended to people and promises: do not state a fact about a person or a situation that was not given (that a guest is calm, that a room is vacant), and do not promise a change nobody has approved (a menu change, a refund, a fix date).
+5. Output style: plain sentences, no em dashes, no en dashes, no emojis. Sign off with a name and title only in text a guest will read (guest-messages, review-replies). Reports and tables carry no sign-off.
+6. Regional words: write "lift (elevator)" and "aircon (HVAC)" on first use so the text reads in every market.

@@ -20,13 +20,12 @@ Dispatch message to Ravi (WhatsApp): "P1: Room 318, door lock not reading cards.
 | WO-2609-009 | P2 | Room 204, grout | 17 Sep 11:00 | 24 Sep 11:00 | open | 0 (not yet due) |
 | WO-2609-011 | P2 | Lift lobby L3, light | 18 Sep 14:20 | 25 Sep 14:20 | open | 0 (not yet due) |
 
-On-time rate this week: 0 of 1 closures on time (WO-2609-001, the Level 5 riser leak, closed 2 Sep within its 1-hour P0 window; no closures yet this week). WO-2609-014 is 25.8 hours past its P1 SLA and is the priority for today; escalated to Daniel (GM) per the checklist rule.
+On-time rate this week: no closures yet this week, so the rate is not computed and no scorecard row is emitted until the weekly list closes. WO-2609-014 is 25.8 hours past its P1 SLA and is the priority for today; escalated to Daniel (GM) per the checklist rule.
 
 ## Preventive maintenance calendar, next 90 days
 Aircon and chiller service: scheduled 6 Oct (low-occupancy midweek, per pace). Fire alarm and extinguisher annual: 12 Oct. Kitchen hood (F&B on site): 3 Oct, 3 Jan, 3 Apr, 3 Jul (quarterly). Generator monthly test: 1st of each month. Lifts: check local code, not yet confirmed with the hotel, flagged for Daniel. Pool: not applicable, hotel has no pool.
 
 hotel-data delta
 ```json
-{"work_orders": [{"id": "WO-2609-016", "priority": "P1", "opened": "2026-09-22T09:30", "sla_due": "2026-09-22T17:30", "status": "assigned", "location": "Room 318 door lock", "cost": 95, "source": "work-orders"}],
- "scorecard": [{"name": "Work orders closed on time", "value": 0.0, "target": 0.9, "owner": "Ravi", "week": "2026-W39", "source": "work-orders"}]}
+{"work_orders": [{"id": "WO-2609-016", "priority": "P1", "opened": "2026-09-22T09:30", "sla_due": "2026-09-22T17:30", "status": "assigned", "location": "Room 318 door lock", "cost": 95, "source": "work-orders"}]}
 ```

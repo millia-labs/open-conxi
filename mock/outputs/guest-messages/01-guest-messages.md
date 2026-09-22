@@ -30,6 +30,6 @@ Guest asked via WhatsApp: "Is parking free?"
 Reply: "Parking is MYR 12 a night, 40 bays on site. Let us know your arrival time and we'll hold a spot."
 
 ## Placeholders used
-[guest name], [check-in date], [review link] — filled per guest and per stay at send time.
+[guest name], [check-in date], [review link], filled per guest and per stay at send time.
 
 This skill emits no hotel-data delta.

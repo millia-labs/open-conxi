@@ -1,26 +1,46 @@
 # Eval results, v0.1.0
 
-Run 22 Sep 2026. Method: prompt 1 for every skill was executed for real against the mock hotel and its output saved to `mock/outputs/<skill>/`. Prompts 2 and 3 are edge-case checks; each was verified by confirming the skill's own text (section 1 or 2) contains the exact instruction the pass criterion depends on, quoted below. Any skill missing that instruction would be a fail; none were.
+Two passes on 22 Sep 2026.
 
-| Skill | Prompt 1 | Prompt 2 | Prompt 3 |
+Pass 1 checked that each skill's text contained the instruction each eval depends on. That is a contract check, not a performance test, and it found nothing wrong. It is kept only as a record of what a text inspection misses.
+
+Pass 2 was a cold run. For each skill, a fresh model instance received only the SKILL.md (plus its references folder), the mock hotel profile, and one realistic pasted input that carried a deliberate trap. No other context. The output was then graded against what a hotelier would expect. This is the pass that matters.
+
+## Cold-run results
+
+| Skill | Trap in the input | Result | What the run exposed |
 |---|---|---|---|
-| hotel-setup | pass, see `mock/outputs/hotel-setup/01-onboarding.md` | pass, section 3: "Room type counts sum to total keys" | pass, section 2 step 3: "Ask only for the gaps" |
-| hotel-dashboard | pass, see `mock/outputs/hotel-dashboard/` (rendered and QA'd in a browser, no console errors) | pass, section 1: "required; if missing, stop and run hotel-setup" | pass, template ships with an empty-state JSON, QA'd directly: five empty-panel messages render with no data |
-| morning-flash | pass, see `mock/outputs/morning-flash/01-morning-flash.md` | pass, section 1: "Missing any item: print the flash with that line marked not provided" | pass, section 4: "Inputs not provided are listed at the top" |
-| review-replies | pass, see `mock/outputs/review-replies/01-review-replies.md` (includes one escalated review) | pass, section 1: "if nothing is pasted, ask" pattern; section 2: reviews are the only required input | pass, section 2 step 2: escalation classification and "no drafted public reply, only a manager brief", demonstrated live in the sample (review 4) |
-| guest-messages | pass, see `mock/outputs/guest-messages/01-guest-messages.md` | pass, section 1: "Never include a door code, wifi password... in any message that goes out before the guest has checked in" | pass, section 1: "leave a bracketed placeholder... list every placeholder at the end" |
-| turnover-board | pass, see `mock/outputs/turnover-board/01-turnover-board.md` | pass, section 1: "Missing attendant list: build the board unassigned and say so" | pass, section 3 checklist and section 2 step 3 cap credits at 14 to 18; a shortfall is stated, not silently overloaded |
-| work-orders | pass, see `mock/outputs/work-orders/01-work-orders.md` | pass, section 2 step 1: "P0... Mitigate within 1 hour"; section 3: "a P0 was escalated to the GM at once" | pass, section 1: "Missing... aged list: ask... never estimate" pattern applies; missing list is asked for, not fabricated |
-| rate-check | pass, see `mock/outputs/rate-check/01-rate-check.md` | pass, section 2 step 4 cites the Enz Canina van der Rest evidence directly and treats cutting as "the last lever, not the first" | pass, section 1: "Missing comp data: run on pace alone and say the comp view is absent" |
-| group-displacement | pass, see `mock/outputs/group-displacement/01-group-displacement.md` | pass, section 1: "Missing pace: use last year alone and mark the answer low-confidence" | pass, section 2 step 5 marks group and event dates for override, not auto-decision |
-| staff-roster | pass, see `mock/outputs/staff-roster/01-staff-roster.md` | pass, section 1: "Missing rules: build the roster and mark it rules not provided, check before publishing" | pass, section 2 step 4 and checklist: breaches are listed, "never silently kept" |
-| ota-reconciliation | pass, see `mock/outputs/ota-reconciliation/01-ota-reconciliation.md` (one flagged variance, two unmatched lines) | pass, section 1: "Missing the bank lines: reconcile statement to PMS only and mark remittance unverified"; a missing PMS export falls under the same paste-in requirement | pass, section 3 checklist: "Remittance received equals expected within 1 percent or a dispute is opened", demonstrated live (Booking.com exception) |
-| owner-report | pass, see `mock/outputs/owner-report/01-owner-report.md` (GOP arithmetic verified to tie exactly) | pass, section 1: "Missing expenses: report revenue and RevPAR only, no GOP" | pass, section 1: "Missing budget or last year: report actuals and say the comparators are absent" |
+| hotel-setup | Room counts sum to 34 against a stated 36 keys; reporting standard and fiscal year missing | Pass | Caught the mismatch, asked only the four gaps. Exposed that the skill promised a YAML block "below" that did not exist, so a claude.ai install had no field list. Fixed: the block is now in the file. |
+| hotel-dashboard | A morning-flash delta carrying the same date as an existing kpis row, with different numbers | Fail on spec | The append-only merge rule stacked both rows and the headline tile became arbitrary. The model flagged it rather than hiding it. Fixed: rows are keyed and a later row replaces an earlier one; the skill reports replaced rows. |
+| morning-flash | No budget, no last year, no cancellation data, two rooms out of order into a near-sellout weekend | Pass | ADR and TRevPAR right, every comparator "not provided", nothing invented, sellout risk flagged. Exposed a wrong rule: excluding out-of-order rooms from the occupancy denominator breaks comparison to budget and comp set. Fixed: denominator is total keys, out-of-order shown on its own line. |
+| review-replies | One review alleging a duplicate charge and a bank dispute; one in Chinese; two past 48 hours; one about a room with an open work order | Pass | Escalated the dispute with no public draft, replied in Chinese, flagged the late ones, cross-referenced the work order. Exposed two defects: the reply promised a menu change nobody had approved, and the delta wrote a one-review batch as the platform's rating. Fixed: no unapproved promises; the delta carries the platform's displayed running rating and total count, pasted in. |
+| guest-messages | Guest asks for the wifi password and a 12:00 check-in before arrival; neither fact is in the house facts | Pass | Withheld the password, did not invent an early check-in price or a yes, 268 characters. |
+| turnover-board | 84 credits of work against 3 attendants; three 2-hour flips; two rooms out of order | Pass | Stated the shortfall, flagged all three flips, excluded the out-of-order rooms. Exposed that "14 to 18 credits" contradicts an 8-hour shift (16 credits) and that the inspection list printed three times. Fixed: capacity is shift hours times 2; list printed once; no scorecard row until end of day. |
+| work-orders | Lift entrapment reported at 10:42 | Pass | P0, due 11:42, GM escalation, what front desk does now, dispatch under 80 words. Exposed one invention: "guest is calm and on the intercom" was never reported. Fixed: dispatch text states only what was given. |
+| rate-check | GM asks for a 20 percent cut across October; two compression dates, two need dates | Pass | Refused the blanket cut with the evidence, offered channel and inventory levers, used no competitor data. Exposed two defects: the recommended 330 was written into the achieved-rate field, and a date at 80 percent on the books 12 days out was classed normal. Fixed: deltas carry achieved figures only; compression threshold is 75 percent with 10 or more days to go, or top-20-percent pickup. |
+| group-displacement | 96 rooms already on the books plus a 30-room group on a 120-key night, while the formula's forecast said 85 | Pass, model beat the spec | Used the larger of forecast and rooms on the books, 6 rooms displaced. Exposed that the skill's formula only used the forecast, and that no floor rate could be computed without a variable cost. Fixed: formula uses the larger figure; the profile gained an economics section with variable cost and F&B margin, with stated defaults. |
+| staff-roster | Saturday needs 6.4 attendant shifts with 4 people; occupied rooms not given | Pass on rules, fail on data | Honoured every rule, listed gaps with the cheapest fix. Invented rooms sold as departures plus stayovers and emitted a housekeeping-only figure to the hotel-wide scorecard. Fixed: occupied rooms = stayovers + arrivals or not computed; scorecard row only when every department is rostered. |
+| ota-reconciliation | A no-show charged commission on the statement, folio zero, remittance short by exactly that line | Fail on domain | Matched every line and tied the shortfall to the no-show, then advised posting the uncollected fee to the PMS, which overstates revenue. Fixed: folio is the truth, uncollected revenue is never posted, no-show commission goes to the dispute list; share is null without total revenue. |
+| owner-report | Budget and last year given only as totals; no rooms-sold count | Pass, best of the set | Every subtotal tied, no line variances invented, flow-through split refused for lack of inputs. Exposed zeros written for unknowns and a margin written as 23.47 not 0.2347. Fixed: unknowns null, ratios as fractions. Also exposed that the shipped sample had the wrong GOP margin (39.6 percent instead of 23.5). Fixed. |
 
-## Bugs found and fixed during this QA pass
-1. `hotel-dashboard/templates/dashboard.html`: the scorecard table rounded non-integer values (review ratings) to whole numbers because `fmt()` used `maximumFractionDigits: 0` unconditionally. A rating of 4.4 rendered as "4". Fixed with a dedicated `scoreNum()` formatter that keeps one decimal for non-integer, non-percentage values. Verified in a browser before and after: 4.4 against a 4.5 target now renders correctly.
-2. `.gitignore`: unanchored patterns for `hotel-profile.md`, `hotel-data.json` and `dashboard.html` (meant to keep a real hotel's working files out of the repo) matched the shipped template and every mock file with the same names, anywhere in the tree. Anchored with a leading slash so only root-level working files are ignored.
-3. `package.json` and the lint CI job: `node --test tests/` fails to discover `.test.js` files on Node v26 when the directory also holds non-JS fixtures (`tests/fixtures/*/SKILL.md`). Switched to the explicit glob `tests/*.test.js`, verified working.
+## Counts
+Twelve of twelve produced usable output. None invented a comparator. Three invented a fact or figure (a calm guest, a menu change, a rooms-sold count). Six wrote placeholder zeros or copied fields into hotel-data.json. Five skill rules were wrong or missing (occupancy denominator, credit range, compression threshold, displacement formula, no-show handling). One shipped sample had wrong arithmetic.
 
-## Automated checks, same run
-`python3 scripts/lint.py`: 12/12 skills pass. `python3 -m pytest tests/test_lint.py -q`: 7 passed. `node --test tests/*.test.js`: 3 passed. `bash scripts/build-zips.sh`: 13 zips built, `dist/hotel-setup.zip` spot-checked to unpack to `hotel-setup/SKILL.md` as claude.ai expects.
+## What changed as a result
+- `docs/CONTRACT.md` gained six output rules: unknown is null, scorecard rows only when final and hotel-wide, deltas carry achieved figures only, no invented facts or promises, plain output style with sign-off only in guest-facing text, regional word pairs.
+- `docs/SCHEMA.md` gained row keys with a replace rule, the top-level hotel object the template reads, an economics section in the profile, and the reviews field definition.
+- Every skill's section 5 delta now shows null where a value may be unknown.
+- The lint now scans every markdown file in the repo for dashes and emojis, not only SKILL.md.
+
+## Re-run after the fixes
+Same trap inputs, fresh model instances, the four skills whose rules changed most.
+
+| Skill | Result |
+|---|---|
+| hotel-dashboard | Pass. 31 kpis rows and 30 pace rows after the merge, one row per key, the newer delta replaced the older, and the reply named the two replaced keys. |
+| group-displacement | Pass. Used the larger of forecast and rooms on the books (6 rooms displaced), declared both defaults, gave a numeric floor rate, moved the cutoff to contract signing, no sign-off. |
+| ota-reconciliation | Pass. Nothing posted for the uncollected no-show, its commission on the dispute list, the remittance gap explained as expected, share written as null, commission labelled "commission only". |
+| staff-roster | Pass on the two fixes: refused to compute labour cost per occupied room without occupied rooms, emitted no scorecard row. Exposed two more things, both fixed: it signed off on a report because the sign-off rule lived only in CONTRACT.md, which a per-skill zip never ships, so every SKILL.md now carries a one-line output rules block; and its fixed hours per room contradicted the hotel's stated standard, so the standard is now the source and the fixed hours the fallback. |
+
+## Automated checks
+`python3 scripts/lint.py`: 12/12 skills pass, prose ok. `pytest tests/test_lint.py`: 7 passed. `node --test tests/*.test.js`: 3 passed. `bash scripts/build-zips.sh`: 13 zips.

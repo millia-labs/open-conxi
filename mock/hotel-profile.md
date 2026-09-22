@@ -33,6 +33,9 @@ people:
     front_desk: 100
     manager: 500
   service_recovery_budget_per_shift: 600
+economics:
+  variable_cost_per_occupied_room: 48
+  fnb_margin: 0.6
 ---
 
 # Notes

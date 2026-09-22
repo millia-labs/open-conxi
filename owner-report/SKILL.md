@@ -16,8 +16,8 @@ Run order: hotel-setup, hotel-dashboard, then this skill. Monthly, after the boo
 
 ## 2. Do
 1. Map lines to the profile's standard. USALI: departmental revenue and expense to departmental profit, undistributed expenses, gross operating profit (GOP), then fixed charges to EBITDA. Local: keep the hotel's headings and add GOP as a subtotal.
-2. For each line: actual, budget, last year, variance to each in currency and percent. Variance commentary only where the variance exceeds 5 percent or the larger of 1 percent of revenue; one sentence per line, naming the cause from the pasted data, not a guess.
-3. Flow-through = change in GOP divided by change in revenue versus last year. Report it and say whether the change came from rate or from occupancy, because the two flow through at different rates.
+2. For each line: actual, budget, last year, variance to each in currency and percent, only on lines where the comparator was pasted at that level; a total-only budget gives a total-only variance. Variance commentary only where the variance exceeds 5 percent or the larger of 1 percent of revenue; one sentence per line, naming the cause from the pasted data, not a guess.
+3. Flow-through = change in GOP divided by change in revenue versus last year. Split it into rate and occupancy only when last year's rooms sold and ADR were pasted; otherwise report the blended figure and say the split needs those two inputs.
 4. Outlook: next 60 days on the books versus the same point last year, in rooms and revenue.
 5. Three risks: the three items that could move next quarter's GOP by the most, each with an owner and a date.
 6. Scorecard: 5 to 15 numbers the GM tracks weekly, each with a target and an owner (occupancy, ADR, RevPAR, GOP percent, rooms ready by 15:00, review rating, work orders closed on time, labour cost per occupied room, effective OTA commission, direct share).
@@ -38,14 +38,15 @@ DO-CONFIRM, before the report goes to the owner.
 - Percentages are of total revenue unless labelled otherwise.
 - No line was added that was not in the pasted data.
 - Comparators absent are declared at the top.
+- Output rules: an unknown value is null, never 0 or a copy; no scorecard row unless the value is final and hotel-wide; no fact or promise that was not given; no sign-off unless a guest reads the text; no em dashes, no emojis.
 
 ## 5. Output
-Executive summary, P&L table, variance commentary, flow-through line, outlook table, risks, scorecard table. Then:
+Executive summary, P&L table, variance commentary, flow-through line, outlook table, risks, scorecard table. Then a delta where every field the paste did not support is null (rooms_sold, occupancy and ADR need a rooms-sold count; budget and last_year are null objects when only totals were given) and every ratio is a fraction (GOP margin 0.235, not 23.5). Scorecard rows only for measures with a final value this month; a measure with no value is left out, not written as 0.
 
 hotel-data delta
 ```json
-{"kpis": [{"date": "<month end>", "rooms_sold": 0, "occupancy": 0.0, "adr": 0, "revpar": 0, "trevpar": 0, "gop": 0, "budget": {"occupancy": 0.0, "adr": 0, "revpar": 0}, "last_year": {"occupancy": 0.0, "adr": 0, "revpar": 0}, "source": "owner-report"}],
- "scorecard": [{"name": "<measure>", "value": 0, "target": 0, "owner": "", "week": "<YYYY-Www>", "source": "owner-report"}]}
+{"kpis": [{"date": "<month end>", "rooms_sold": null, "occupancy": null, "adr": null, "revpar": 0, "trevpar": 0, "gop": 0, "budget": null, "last_year": null, "source": "owner-report"}],
+ "scorecard": [{"name": "GOP %", "value": 0.0, "target": null, "owner": "", "week": "<YYYY-Www>", "source": "owner-report"}]}
 ```
 
 ## 6. Still manual in your systems

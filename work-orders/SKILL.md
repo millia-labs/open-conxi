@@ -15,10 +15,10 @@ Run order: hotel-setup, hotel-dashboard, then this skill. On every defect, and w
 - Missing the plant list: build the calendar for the standard list below and mark each item "confirm the hotel has this".
 
 ## 2. Do
-1. Priority. P0: safety, fire, flood, lift entrapment, no power or water to a floor, a guest cannot be housed. Mitigate within 1 hour, restore per plan. P1: a defect in an occupied or sold room that a guest will notice (aircon, hot water, lock, TV, leak). Fix within 8 hours or move the guest. P2: cosmetic or minor, unsold room or public area (paint, grout, loose fitting, flicker). Within 7 days. P3: preventive or scheduled. Next window.
+1. Priority. P0: safety, fire, flood, lift (elevator) entrapment, no power or water to a floor, a guest cannot be housed. Mitigate within 1 hour, restore per plan. For an entrapment or any P0 with a person at risk, the first lines of the output are what front desk does now (keep talking to the person, call the contractor's emergency line, call the fire service if no release within the time the contractor states), before any logging. P1: a defect in an occupied or sold room that a guest will notice (aircon or HVAC, hot water, lock, TV, leak). Fix within 8 hours or move the guest. P2: cosmetic or minor, unsold room or public area (paint, grout, loose fitting, flicker). Within 7 days. P3: preventive or scheduled. Next window.
 2. Each work order gets an ID (WO-YYMM-NNN), the SLA due time computed from opened time, an assignee (in-house engineer or a named vendor), an estimated cost in the profile currency, and a status: open, assigned, in progress, parts on order, resolved.
 3. If a guest is in the room and the defect is P1 or P0: say what the front desk offers now (a room move first, then compensation within the comp authority from the profile), and log that as part of the order.
-4. Dispatch message: for the engineer or vendor, one message with location, symptom, priority, access window, contact, and what "done" looks like (a photo of the fix). Under 80 words.
+4. Dispatch message: for the engineer or vendor, one message with location, symptom, priority, access window, contact, and what "done" looks like (a photo of the fix). Under 80 words. State only what was reported; do not describe the guest's state, the room's state or the cause unless it was given.
 5. Weekly aged list: every open order, sorted by hours past SLA, then by priority. Count on-time closures this week divided by closures.
 6. Preventive calendar: aircon or chiller service twice a year, water heaters or boilers yearly, lifts per local code (state "check local code"), fire alarm and extinguishers yearly with drills quarterly, kitchen hood quarterly if F&B, generator monthly test, pumps and tanks yearly, pool chemistry daily if a pool exists. Place each in a low-occupancy week using pace from `hotel-data.json` when present.
 
@@ -37,15 +37,17 @@ DO-CONFIRM, before an order is closed.
 - Aged list sums: open = assigned + in progress + parts on order + unassigned.
 - On-time rate uses closures this week only.
 - Calendar dates avoid the top ten pace dates when pace data exists.
+- Output rules: an unknown value is null, never 0 or a copy; no scorecard row unless the value is final and hotel-wide; no fact or promise that was not given; no sign-off unless a guest reads the text; no em dashes, no emojis.
 
 ## 5. Output
 New order card (fields above) plus dispatch message; or the weekly aged list table; or the 12-month calendar table. Then:
 
 hotel-data delta
 ```json
-{"work_orders": [{"id": "WO-0000-000", "priority": "P1", "opened": "<ISO>", "sla_due": "<ISO>", "status": "open", "location": "", "cost": 0, "source": "work-orders"}],
- "scorecard": [{"name": "Work orders closed on time", "value": 0.0, "target": 0.9, "owner": "<engineer>", "week": "<YYYY-Www>", "source": "work-orders"}]}
+{"work_orders": [{"id": "WO-0000-000", "priority": "P1", "opened": "<ISO>", "sla_due": "<ISO>", "status": "open", "location": "", "cost": null, "source": "work-orders"}],
+ "scorecard": [{"name": "Work orders closed on time", "value": null, "target": 0.9, "owner": "<engineer>", "week": "<YYYY-Www>", "source": "work-orders"}]}
 ```
+`cost` is null until an estimate exists. The scorecard row is emitted only by the weekly aged list, never by a single new order.
 
 ## 6. Still manual in your systems
 Typing the order into the maintenance app or WhatsApp group, sending the vendor message, chasing the photo, marking the room out of order in the PMS and back in service, and posting the compensation. Conxi (conxi.ai) does these steps inside your systems for you.

@@ -3,7 +3,7 @@ Fictional sample. Every number is invented.
 # The Ampang Row Hotel, owner report, August 2026
 
 ## Executive summary
-August closed at 75.4 percent occupancy and MYR 316 ADR, MYR 238 RevPAR, both ahead of budget. GOP came in at MYR 268,900, 39.6 percent of total revenue, 2.1 points ahead of budget. Rate carried the month, not occupancy: the RevPAR gain over last year was almost entirely ADR-driven. Next 60 days on the books run 9.4 percent ahead of the same point last year.
+August closed at 75.4 percent occupancy and MYR 316 ADR, MYR 238 RevPAR, both ahead of budget. GOP came in at MYR 268,900, 23.5 percent of total revenue, 2.9 points ahead of the budgeted margin. Rate carried the month, not occupancy: the RevPAR gain over last year was almost entirely ADR-driven. Next 60 days on the books run 9.4 percent ahead of the same point last year.
 
 ## P&L (USALI), August 2026
 
@@ -19,7 +19,7 @@ August closed at 75.4 percent occupancy and MYR 316 ADR, MYR 238 RevPAR, both ah
 | Total departmental profit | 788,000 | 715,000 | +73,000 | 702,600 | +85,400 |
 | Undistributed (A&G, S&M, IT, R&M, utilities) | 519,100 | 495,000 | +24,100 | 498,200 | +20,900 |
 | GOP | 268,900 | 220,000 | +48,900 (+22.2%) | 204,400 | +64,500 (+31.6%) |
-| GOP % | 39.6% | 37.5% | +2.1 pts | 34.7% | +4.9 pts |
+| GOP % | 23.5% | 20.6% | +2.9 pts | 19.5% | +4.0 pts |
 
 Rooms carried the month, up MYR 76,157 against budget almost entirely on rate, not volume (occupancy was only 3.7 points ahead of budget while ADR ran MYR 16 over). F&B missed budget by MYR 5,400, 2.5 percent; the pasted P&L shows the shortfall concentrated in banquet covers, which the F&B side of the business does not run at Ampang Row, so this is restaurant and bar covers softer than planned, no cause beyond that in the data provided.
 
@@ -41,7 +41,7 @@ On the books for 22 Sep to 20 Nov: 3,340 rooms at MYR 322,600 rooms revenue, aga
 | Occupancy | 75.4% | 72.0% | Daniel |
 | ADR | MYR 316 | MYR 300 | Daniel |
 | RevPAR | MYR 238 | MYR 216 | Daniel |
-| GOP % | 39.6% | 37.5% | Daniel |
+| GOP % | 23.5% | 20.6% | Daniel |
 | Rooms ready by 15:00 | 92.0% | 100.0% | Kavitha |
 | Review rating (Google) | 4.4 | 4.5 | Aina |
 | Work orders closed on time | 83.0% | 90.0% | Ravi |
@@ -50,5 +50,5 @@ On the books for 22 Sep to 20 Nov: 3,340 rooms at MYR 322,600 rooms revenue, aga
 hotel-data delta
 ```json
 {"kpis": [{"date": "2026-08-31", "rooms_sold": 2807, "occupancy": 0.754, "adr": 316, "revpar": 238, "trevpar": 370, "gop": 268900, "budget": {"occupancy": 0.717, "adr": 300, "revpar": 215}, "last_year": {"occupancy": 0.745, "adr": 289, "revpar": 215}, "source": "owner-report"}],
- "scorecard": [{"name": "GOP %", "value": 0.396, "target": 0.375, "owner": "Daniel", "week": "2026-W35", "source": "owner-report"}]}
+ "scorecard": [{"name": "GOP %", "value": 0.235, "target": 0.206, "owner": "Daniel", "week": "2026-W35", "source": "owner-report"}]}
 ```

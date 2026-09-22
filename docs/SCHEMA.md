@@ -41,17 +41,32 @@ people:
     front_desk: 0        # in currency
     manager: 0
   service_recovery_budget_per_shift: 0
+economics:
+  variable_cost_per_occupied_room: null   # cleaning, amenities, utilities, commission-free; in currency. Used by group-displacement for the floor rate. If unknown, leave null and the skill states its default.
+  fnb_margin: null                        # fraction, e.g. 0.6. If unknown, leave null.
 ```
 
 ## hotel-data.json
 
-One JSON object. Each skill appends to its array and updates `updated_at`. `hotel-dashboard` reads the whole file.
+One JSON object. Each skill writes rows to its array and updates `updated_at`. `hotel-dashboard` reads the whole file.
+
+Every row has a key. A later row with the same key replaces the earlier one; that is how a corrected morning flash or a re-run rate check overwrites its own earlier numbers instead of stacking beside them.
+
+| Array | Key |
+|---|---|
+| kpis | date |
+| pace | stay_date |
+| channels | channel + period |
+| reviews | platform + period |
+| work_orders | id |
+| scorecard | name + week |
 
 ```json
 {
   "schema_version": 1,
   "profile_ref": "hotel-profile.md",
   "updated_at": "2026-09-22T09:00:00+08:00",
+  "hotel": {"name": "The Ampang Row Hotel", "currency": "MYR"},
   "kpis": [
     {"date": "2026-09-21", "rooms_sold": 0, "occupancy": 0.0, "adr": 0, "revpar": 0, "trevpar": null, "gop": null,
      "budget": {"occupancy": 0.0, "adr": 0, "revpar": 0}, "last_year": {"occupancy": 0.0, "adr": 0, "revpar": 0},
@@ -75,4 +90,4 @@ One JSON object. Each skill appends to its array and updates `updated_at`. `hote
 }
 ```
 
-Rules: currency values are plain numbers in the profile's currency. Percentages are fractions (0.86, not 86). Dates are ISO. A skill never rewrites another skill's rows.
+Rules: currency values are plain numbers in the profile's currency. Percentages are fractions (0.86, not 86; GOP margin 0.235, not 23.5). Dates are ISO. An unknown value is `null`, never 0 and never a copy of another field. A skill replaces rows that carry its own key and never touches rows another skill wrote under a different key. `reviews.rating` is the platform's displayed running rating on its own scale (Google 4.4 of 5, Agoda 8.6 of 10) and `reviews.count` is the platform's total review count, not the size of the batch replied to.

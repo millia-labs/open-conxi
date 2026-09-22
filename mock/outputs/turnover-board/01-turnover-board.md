@@ -16,7 +16,7 @@ Departures: 38. Stayovers: 55. Arrivals: 41. Out-of-order: 2 (512, 318). Attenda
 | 512 | DLX | Out-of-order | - | - | - | WO-2609-014, aircon, not assigned |
 | 318 | STD | Out-of-order | - | - | - | WO-2609-015, door lock, not assigned |
 
-Attendant load: Siti 16.0 credits, Mei 15.5, Farah 15.0, Amir 14.5. All within the 14 to 18 target.
+Attendant load: Siti 16.0 credits, Mei 15.5, Farah 15.0, Amir 14.5, against a capacity of 16 each (8 hours times 2). No overload.
 
 ## Same-day flip risk
 Room 214: departure 12:00, arrival 15:30, gap 3.5 hours. Assigned to Siti (most experienced). Front desk note: if running late, offer 215 (same type, already clean) as a swap.
@@ -28,8 +28,4 @@ Bathroom clean and dry. Bed linen fresh and tight. No hair on any surface. Ameni
 ## Ready rule
 No room is marked ready in Cloudbeds until the attendant has posted the four-photo set (bed, bathroom, desk and minibar, floor from the door) and a supervisor has ticked the nine-item list. Supervisor on duty today: Kavitha.
 
-hotel-data delta
-```json
-{"scorecard": [{"name": "Rooms ready by 15:00", "value": 0.0, "target": 1.0, "owner": "Kavitha", "week": "2026-W39", "source": "turnover-board"}]}
-```
-Value to be filled end of day as ready-by-15:00 rooms divided by 38 rooms due.
+The morning board emits no delta. At end of day, once Kavitha reports how many of the 38 rooms due were ready by 15:00, the skill emits the "Rooms ready by 15:00" scorecard row with that fraction.

@@ -16,15 +16,15 @@ Run order: hotel-setup, hotel-dashboard, then this skill. Every morning.
 
 ## 2. Do
 1. Read `hotel-profile.md` for keys, currency, comp authority.
-2. Yesterday: occupancy = rooms sold / rooms available (exclude out-of-order from available and say so). ADR = rooms revenue / rooms sold. RevPAR = rooms revenue / rooms available. Add TRevPAR if other revenue exists. Compare each to budget and last year when given.
+2. Yesterday: occupancy = rooms sold / total keys, the same denominator budget and the comp set use (USALI and STR keep short-term out-of-order rooms in available inventory). Show the out-of-order count on its own line. Only remove a room from the denominator when it has been out of service for 30 days or more, and say so. ADR = rooms revenue / rooms sold. RevPAR = rooms revenue / total keys. Add TRevPAR if other revenue exists. Compare each to budget and last year when given.
 3. Today: arrivals, departures, stayovers, VIPs and repeats with what is known about them, out-of-order count and reason, rooms to sell tonight.
-4. Next 7 days: on-the-books rooms and rate by date. If cancellations were given, show cancellation-adjusted on-the-books: multiply OTA rooms by (1 minus the hotel's OTA cancellation rate, default 0.22) and direct rooms by (1 minus 0.11), defaults from Cloudbeds' 90 million booking sample in `references/evidence.md`; replace defaults with the hotel's own rate as soon as 30 days of data exist.
+4. Next 7 days: on-the-books rooms and rate by date. If the hotel's own cancellation rate by channel was given, show cancellation-adjusted on-the-books: OTA rooms times (1 minus the OTA rate) plus direct rooms times (1 minus the direct rate). If no rate was given, leave the adjusted figure null and say the industry reference in `references/evidence.md` (OTA about 0.22, direct about 0.11) is available once the GM confirms it applies; never apply it silently.
 5. Risks: anything that costs money this week (oversell, group cutoff, staff gap, a VIP with an open complaint, a P0 work order).
 6. Three decisions the GM must make today, each a yes or no with the cost of each answer.
 
 ## 3. Checklist
 DO-CONFIRM, before sending the flash.
-- [ ] Occupancy denominator excludes out-of-order rooms and the flash says how many.
+- [ ] Occupancy denominator is total keys, and the out-of-order count is on its own line.
 - [ ] ADR uses rooms revenue net of tax and levies, consistent with how budget was set.
 - [ ] Every number has a comparison or the words "no comparator provided".
 - [ ] Each VIP line names one concrete action for today.
@@ -35,8 +35,10 @@ DO-CONFIRM, before sending the flash.
 ## 4. Check yourself
 - Rooms sold + vacant + out-of-order = total keys from the profile.
 - RevPAR = occupancy times ADR, within rounding.
+- Every unknown in the delta is null (budget and last_year are null objects when not provided), never 0.
 - No figure appears that was not in the pasted data or derived from it by a shown formula.
 - Inputs not provided are listed at the top.
+- Output rules: an unknown value is null, never 0 or a copy; no scorecard row unless the value is final and hotel-wide; no fact or promise that was not given; no sign-off unless a guest reads the text; no em dashes, no emojis.
 
 ## 5. Output
 Title with hotel name and date. Sections: Yesterday (table), Today (table plus VIP lines), Next 7 days (table), Risks (numbered), Three decisions (numbered). Then:

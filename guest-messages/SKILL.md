@@ -14,7 +14,7 @@ Run order: hotel-setup, hotel-dashboard, then this skill. Once to build the sequ
 - Missing a fact: leave a bracketed placeholder like [wifi name] and list every placeholder at the end. Never invent a time, price or policy.
 
 ## 2. Do
-1. Build five messages per segment (leisure, business, family, group) for the default language, then translate each into the profile's other languages. Segments differ in what they need: family gets cot and breakfast facts, business gets invoice and early breakfast, group gets the rooming and billing contact.
+1. Build the five messages for one segment and one language per run, the ones the GM named, or leisure in the first profile language if none was named. Offer the other segments (business, family, group) and languages as the next run rather than producing them all at once. Segments differ in what they need: family gets cot and breakfast facts, business gets invoice and early breakfast, group gets the rooming and billing contact. Write each language version for that language, not word for word from another.
 2. Timing: pre-arrival 3 days out (facts and one upsell), arrival morning (entrance, check-in time, contact), in-stay evening of day one (one question: is everything right), departure eve (check-out time, late check-out price, transport), post-stay 24 hours after (thanks, one review link, no discount).
 3. Per channel length: WhatsApp and SMS under 300 characters with the fact first; email under 150 words with the facts in a short list; OTA inbox in the same words as WhatsApp because those platforms strip links and phone numbers.
 4. For a one-off reply: answer the question in the first sentence with the fact, add one line of help, sign with a name. If the fact is not in the house facts, say the team will confirm by a stated time and log it as a placeholder.
@@ -31,12 +31,13 @@ READ-DO, before any message is sent.
 - [ ] Each language version was written for that language, not word-for-word translated (check idioms).
 
 ## 4. Check yourself
-- Count: 5 messages times segments times languages, all present.
+- Count: 5 messages for the segment and language requested, all present, and the other segments and languages offered.
 - Placeholder list at the end matches every bracket in the text.
 - Times use the hotel's local time zone and 24-hour format unless the profile says otherwise.
+- Output rules: an unknown value is null, never 0 or a copy; no scorecard row unless the value is final and hotel-wide; no fact or promise that was not given; no sign-off unless a guest reads the text; no em dashes, no emojis.
 
 ## 5. Output
-The sequence as a table per segment (timing, channel, message), then the language variants, then the placeholder list. For a one-off reply: the reply, then the fact source. This skill emits no hotel-data delta.
+The sequence as a table (timing, channel, message) for the segment and language run, then the placeholder list. For a one-off reply: the reply, then the fact source. This skill emits no hotel-data delta.
 
 ## 6. Still manual in your systems
 Loading each template into the PMS, the WhatsApp Business app, the email tool and each OTA's message centre, scheduling the sends against arrival dates, and answering each guest question by hand. Conxi (conxi.ai) does these steps inside your systems for you.

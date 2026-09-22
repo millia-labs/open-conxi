@@ -23,15 +23,15 @@ Forecast (from rate-check pace): occupancy climbs from 65 percent midweek to 90 
 Every person keeps one rest day and at least 10 hours between shifts. No breach found.
 
 ## Overtime
-Amir, Sat 3 Oct: 3 hours overtime, 17:00 to 20:00, at 1.5x rate. Cost: MYR 3 hours x base hourly x 1.5.
+Amir, Sat 3 Oct: 3 hours overtime, 17:00 to 20:00, at 1.5x rate. Cost: 3 hours x MYR 12 x 1.5 = MYR 54.
 
 ## Front desk and F&B (summary)
 Front desk: 2 shifts a day, plus a 3rd overnight shift added Fri and Sat for the arrival peak (both nights forecast above 25 percent of keys arriving after 18:00). F&B: breakfast server count raised from 2 to 3 on Sat and Sun (covers forecast 130 against the 20-per-server standard).
 
 ## Labour cost per occupied room
-Total rostered cost this week (all departments): MYR 8,940. Forecast rooms sold: 562. Labour cost per occupied room: MYR 15.90. No target was given by the GM for this run; shown without comparison.
+Total rostered cost this week (all departments): MYR 8,940. Forecast occupied rooms (stayovers plus arrivals): 562. Labour cost per occupied room: MYR 15.90. No target was given by the GM for this run; shown without comparison.
 
 hotel-data delta
 ```json
-{"scorecard": [{"name": "Labour cost per occupied room", "value": 15.90, "target": 0, "owner": "Daniel", "week": "2026-W40", "source": "staff-roster"}]}
+{"scorecard": [{"name": "Labour cost per occupied room", "value": 15.90, "target": null, "owner": "Daniel", "week": "2026-W40", "source": "staff-roster"}]}
 ```

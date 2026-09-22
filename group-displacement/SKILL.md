@@ -15,12 +15,12 @@ Run order: hotel-setup, hotel-dashboard, then this skill. On every group inquiry
 - Missing pace: use last year alone and mark the answer low-confidence.
 
 ## 2. Do
-1. For each night of the block, forecast transient demand without the group: last year rooms sold on that night adjusted by this year's pace ratio (rooms on books now divided by rooms on books at the same lead time last year, when known; otherwise 1.0).
-2. Displaced rooms per night = max(0, forecast transient rooms + group rooms minus keys). Displaced revenue per night = displaced rooms times the transient rate expected on that night.
+1. For each night of the block, forecast transient demand without the group: last year rooms sold on that night adjusted by this year's pace ratio (rooms on books now divided by rooms on books at the same lead time last year, when known; otherwise 1.0). Then take the larger of that forecast and the rooms already on the books tonight, because sold rooms cannot forecast lower than themselves.
+2. Displaced rooms per night = max(0, that larger figure + group rooms minus keys). Displaced revenue per night = displaced rooms times the transient rate expected on that night.
 3. Opportunity cost of the block = sum of displaced revenue across the nights. A night with spare rooms has zero opportunity cost. This is why a 4-night group at a lower rate can beat a 1-night at a higher one: the shoulder nights cost nothing.
-4. Group contribution = group rooms revenue net of commission plus F&B and meeting revenue at the profile's margin (default 60 percent on F&B if none given) minus the cost of any comp rooms and rebates.
-5. Decision: accept if contribution exceeds opportunity cost by a margin of 10 percent or more; counter with a floor rate if within 10 percent; decline or offer alternative dates if below. Show the floor rate that makes the block break even.
-6. Terms: attrition (rooms the group may release without penalty, default 10 percent), cutoff date (default 30 days out), deposit (default 25 percent at contract). State them.
+4. Group contribution = group rooms revenue net of commission, minus the variable cost per occupied room from the profile (`economics.variable_cost_per_occupied_room`; if null, use 15 percent of the group rate and say so), plus F&B and meeting revenue at the profile's `economics.fnb_margin` (if null, 60 percent, and say so), minus the cost of any comp rooms and rebates.
+5. Decision: accept if contribution exceeds opportunity cost by a margin of 10 percent or more; counter with a floor rate if within 10 percent; decline or offer alternative dates if below. Floor rate per room night = (opportunity cost plus variable cost for all group room nights minus F&B and meeting contribution) divided by group room nights, floored at the variable cost per occupied room. Show it as a number.
+6. Terms: attrition (rooms the group may release without penalty, default 10 percent), cutoff date (default 30 days before arrival, or at contract signing if that is later), deposit (default 25 percent at contract). State them and mark them as defaults until agreed.
 
 ## 3. Checklist
 READ-DO, before a group rate is quoted.
@@ -28,7 +28,7 @@ READ-DO, before a group rate is quoted.
 - [ ] Displacement was computed per night and summed, not averaged.
 - [ ] Commission on the group channel is deducted before comparison.
 - [ ] F&B and meeting revenue counted at margin, not at gross.
-- [ ] The floor rate is stated and is above the variable cost per occupied room.
+- [ ] The floor rate is stated as a number, and the variable cost it rests on is named as profile value or default.
 - [ ] Attrition, cutoff and deposit terms are stated.
 - [ ] The decision date is before the cutoff date the hotel would need.
 
@@ -36,6 +36,7 @@ READ-DO, before a group rate is quoted.
 - Sum of nightly displaced rooms is not above group rooms times nights.
 - Contribution minus opportunity cost equals the stated margin.
 - Confidence is marked low when pace was missing.
+- Output rules: an unknown value is null, never 0 or a copy; no scorecard row unless the value is final and hotel-wide; no fact or promise that was not given; no sign-off unless a guest reads the text; no em dashes, no emojis.
 
 ## 5. Output
 Per-night table (date, keys, forecast transient, group rooms, displaced rooms, transient rate, displaced revenue). Contribution table. Decision line with the floor rate and terms. This skill emits no hotel-data delta.

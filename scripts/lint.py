@@ -51,6 +51,21 @@ def lint(d: pathlib.Path):
             errs.append(f"checklist has {n} items, need 5 to 9")
     return errs
 
+def lint_prose():
+    """Dash and emoji scan for every other markdown file in the repo (references, docs, mock)."""
+    errs = []
+    for f in sorted(ROOT.rglob("*.md")):
+        rel = f.relative_to(ROOT)
+        if f.name == "SKILL.md" or rel.parts[0] in (".venv", "node_modules", "dist") or "superpowers" in rel.parts:
+            continue
+        for i, ln in enumerate(f.read_text(encoding="utf-8").splitlines(), 1):
+            for ch, label in DASHES.items():
+                if ch in ln:
+                    errs.append(f"{rel}:{i}: {label}")
+            if EMOJI.search(ln):
+                errs.append(f"{rel}:{i}: emoji")
+    return errs
+
 def main(argv):
     dirs = [pathlib.Path(a) for a in argv] or skill_dirs()
     bad = 0
@@ -62,6 +77,12 @@ def main(argv):
             print(f"     - {e}")
         bad += bool(errs)
     print(f"{len(dirs) - bad}/{len(dirs)} skills pass")
+    if not argv:
+        prose = lint_prose()
+        for e in prose:
+            print(f"     - {e}")
+        print("prose ok" if not prose else f"prose FAIL ({len(prose)})")
+        bad += bool(prose)
     return 1 if bad else 0
 
 if __name__ == "__main__":

@@ -8,7 +8,7 @@ description: Weekly rate and inventory review from a PMS pace export plus the fr
 Run order: hotel-setup, hotel-dashboard, then this skill. Weekly, same day each week.
 
 ## 1. Paste in
-- Pace by stay date for the next 90 days: rooms on the books, rate on the books, and the same two figures 7 days ago (OPERA Cloud: Reports, Reservation Forecast, run today and compare to last week's saved copy; Cloudbeds: Reports, Pace; Mews: Reports, Reservations by date).
+- Pace by stay date for whatever horizon the GM has, 90 days is ideal and 14 is fine: rooms on the books, rate on the books, and the same two figures 7 days ago (OPERA Cloud: Reports, Reservation Forecast, run today and compare to last week's saved copy; Cloudbeds: Reports, Pace; Mews: Reports, Reservations by date). State the horizon covered at the top of the output.
 - Same dates last year: rooms sold and ADR, if available.
 - Comp-set data that is free and public to the hotel: Booking.com extranet, Analytics (Booking window, Pace, Ranking); Expedia Partner Central, Rev+ (Comp set price calendar, Market occupancy forecast). Paste the tables.
 - Current published rates and restrictions by date.
@@ -17,7 +17,7 @@ Run order: hotel-setup, hotel-dashboard, then this skill. Weekly, same day each 
 ## 2. Do
 1. Read `hotel-profile.md` for keys, currency, OTAs.
 2. Pickup: for each date, rooms now minus rooms 7 days ago. Rank dates by pickup and by rooms remaining.
-3. Classify each date. Compression: on the books above 85 percent of keys with 14 or more days to go, or pickup in the top decile. Need: below last year or below the 90-day average pace with pickup in the bottom decile. Normal: everything else.
+3. Classify each date. Compression: on the books at or above 75 percent of keys with 10 or more days to go, or pickup in the top 20 percent of the dates pasted. Need: below the same date last year, or below the average on-the-books of the dates pasted with pickup in the bottom 20 percent. Normal: everything else. Show the threshold numbers used.
 4. Recommend per date. Compression: raise 5 to 10 percent, close discount rate plans, consider a 2-night minimum on the peak night only. Normal: hold. Need: hold rate and open more inventory and cheaper channels first; do not cut below the comp set. The evidence in `references/evidence.md` is that hotels pricing 15 to 30 percent below their comp set gained 5.9 occupancy points and lost 16.7 percent of RevPAR across 4,120 hotels. Cutting is the last lever, not the first, and only for dates inside 7 days with rooms unsold.
 5. Overrides: the algorithmic-looking rule above is for transient dates. For group and event dates, mark the date and let the GM's knowledge override; the evidence is that human overrides improve accuracy for group and event periods and worsen it for routine transient dates.
 6. Competitor data rule: use only what the OTA shows the hotel in its own extranet, or public rates. Never ask another hotel for its rates or occupancy, never enter another hotel's non-public figures, and never accept a pricing tool that does. This is the mechanism named in the DOJ RealPage settlement and the Caesars appeal.
@@ -38,13 +38,14 @@ READ-DO, before any rate or restriction is changed in the channel manager.
 - Percentages are of sellable keys from the profile.
 - Any date labelled compression has the numbers to prove it.
 - The word "discount" appears only with a date inside 7 days.
+- Output rules: an unknown value is null, never 0 or a copy; no scorecard row unless the value is final and hotel-wide; no fact or promise that was not given; no sign-off unless a guest reads the text; no em dashes, no emojis.
 
 ## 5. Output
-A 90-day table (date, on the books, pickup 7d, last year, comp median if any, class, action). Then the ten-action list for the channel manager. Then the override dates. Then:
+A table for the horizon pasted (date, on the books, pickup 7d, last year, comp median if any, class, action). Then the ten-action list for the channel manager. Then the override dates. Then a delta of achieved figures only: `otb_adr` is the rate on the books as pasted, never the recommended rate or the BAR; `cancellation_adjusted_otb` is null unless the hotel's cancellation rate was given; any field not in the paste is null.
 
 hotel-data delta
 ```json
-{"pace": [{"stay_date": "<date>", "otb_rooms": 0, "otb_adr": 0, "pickup_7d": 0, "cancellation_adjusted_otb": 0, "source": "rate-check"}]}
+{"pace": [{"stay_date": "<date>", "otb_rooms": 0, "otb_adr": null, "pickup_7d": 0, "cancellation_adjusted_otb": null, "source": "rate-check"}]}
 ```
 
 ## 6. Still manual in your systems
