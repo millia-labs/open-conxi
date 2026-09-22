@@ -1,0 +1,1120 @@
+{
+ "schema_version": 1,
+ "profile_ref": "hotel-profile.md",
+ "updated_at": "2026-09-22T09:00:00+08:00",
+ "hotel": {
+  "name": "The Ampang Row Hotel",
+  "currency": "MYR"
+ },
+ "kpis": [
+  {
+   "date": "2026-08-01",
+   "rooms_sold": 95,
+   "occupancy": 0.795,
+   "adr": 326,
+   "revpar": 258,
+   "trevpar": 305,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.765,
+    "adr": 312,
+    "revpar": 239
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-02",
+   "rooms_sold": 102,
+   "occupancy": 0.851,
+   "adr": 323,
+   "revpar": 275,
+   "trevpar": 324,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.821,
+    "adr": 309,
+    "revpar": 254
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-03",
+   "rooms_sold": 86,
+   "occupancy": 0.716,
+   "adr": 293,
+   "revpar": 210,
+   "trevpar": 248,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.686,
+    "adr": 279,
+    "revpar": 191
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-04",
+   "rooms_sold": 76,
+   "occupancy": 0.63,
+   "adr": 298,
+   "revpar": 189,
+   "trevpar": 223,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.6,
+    "adr": 284,
+    "revpar": 170
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-05",
+   "rooms_sold": 75,
+   "occupancy": 0.627,
+   "adr": 295,
+   "revpar": 184,
+   "trevpar": 218,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.597,
+    "adr": 281,
+    "revpar": 168
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-06",
+   "rooms_sold": 76,
+   "occupancy": 0.633,
+   "adr": 283,
+   "revpar": 179,
+   "trevpar": 211,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.603,
+    "adr": 269,
+    "revpar": 162
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-07",
+   "rooms_sold": 97,
+   "occupancy": 0.812,
+   "adr": 353,
+   "revpar": 285,
+   "trevpar": 337,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.782,
+    "adr": 339,
+    "revpar": 265
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-08",
+   "rooms_sold": 91,
+   "occupancy": 0.761,
+   "adr": 329,
+   "revpar": 249,
+   "trevpar": 294,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.731,
+    "adr": 315,
+    "revpar": 230
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-09",
+   "rooms_sold": 102,
+   "occupancy": 0.847,
+   "adr": 358,
+   "revpar": 304,
+   "trevpar": 359,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.817,
+    "adr": 344,
+    "revpar": 281
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-10",
+   "rooms_sold": 87,
+   "occupancy": 0.724,
+   "adr": 294,
+   "revpar": 213,
+   "trevpar": 252,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.694,
+    "adr": 280,
+    "revpar": 194
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-11",
+   "rooms_sold": 96,
+   "occupancy": 0.796,
+   "adr": 282,
+   "revpar": 226,
+   "trevpar": 266,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.766,
+    "adr": 268,
+    "revpar": 205
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-12",
+   "rooms_sold": 93,
+   "occupancy": 0.775,
+   "adr": 290,
+   "revpar": 225,
+   "trevpar": 265,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.745,
+    "adr": 276,
+    "revpar": 206
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-13",
+   "rooms_sold": 78,
+   "occupancy": 0.646,
+   "adr": 284,
+   "revpar": 185,
+   "trevpar": 218,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.616,
+    "adr": 270,
+    "revpar": 166
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-14",
+   "rooms_sold": 95,
+   "occupancy": 0.792,
+   "adr": 353,
+   "revpar": 279,
+   "trevpar": 330,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.762,
+    "adr": 339,
+    "revpar": 258
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-15",
+   "rooms_sold": 93,
+   "occupancy": 0.771,
+   "adr": 343,
+   "revpar": 266,
+   "trevpar": 314,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.741,
+    "adr": 329,
+    "revpar": 244
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-16",
+   "rooms_sold": 102,
+   "occupancy": 0.849,
+   "adr": 335,
+   "revpar": 285,
+   "trevpar": 336,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.819,
+    "adr": 321,
+    "revpar": 263
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-17",
+   "rooms_sold": 86,
+   "occupancy": 0.719,
+   "adr": 282,
+   "revpar": 202,
+   "trevpar": 238,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.689,
+    "adr": 268,
+    "revpar": 185
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-18",
+   "rooms_sold": 76,
+   "occupancy": 0.631,
+   "adr": 287,
+   "revpar": 182,
+   "trevpar": 214,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.601,
+    "adr": 273,
+    "revpar": 164
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-19",
+   "rooms_sold": 89,
+   "occupancy": 0.742,
+   "adr": 295,
+   "revpar": 219,
+   "trevpar": 258,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.712,
+    "adr": 281,
+    "revpar": 200
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-20",
+   "rooms_sold": 81,
+   "occupancy": 0.677,
+   "adr": 300,
+   "revpar": 202,
+   "trevpar": 239,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.647,
+    "adr": 286,
+    "revpar": 185
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-21",
+   "rooms_sold": 98,
+   "occupancy": 0.817,
+   "adr": 332,
+   "revpar": 271,
+   "trevpar": 320,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.787,
+    "adr": 318,
+    "revpar": 250
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-22",
+   "rooms_sold": 105,
+   "occupancy": 0.875,
+   "adr": 348,
+   "revpar": 304,
+   "trevpar": 359,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.845,
+    "adr": 334,
+    "revpar": 282
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-23",
+   "rooms_sold": 94,
+   "occupancy": 0.781,
+   "adr": 343,
+   "revpar": 269,
+   "trevpar": 317,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.751,
+    "adr": 329,
+    "revpar": 247
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-24",
+   "rooms_sold": 86,
+   "occupancy": 0.715,
+   "adr": 311,
+   "revpar": 223,
+   "trevpar": 263,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.685,
+    "adr": 297,
+    "revpar": 203
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-25",
+   "rooms_sold": 90,
+   "occupancy": 0.751,
+   "adr": 290,
+   "revpar": 218,
+   "trevpar": 257,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.721,
+    "adr": 276,
+    "revpar": 199
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-26",
+   "rooms_sold": 96,
+   "occupancy": 0.796,
+   "adr": 284,
+   "revpar": 227,
+   "trevpar": 268,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.766,
+    "adr": 270,
+    "revpar": 207
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-27",
+   "rooms_sold": 83,
+   "occupancy": 0.695,
+   "adr": 306,
+   "revpar": 212,
+   "trevpar": 250,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.665,
+    "adr": 292,
+    "revpar": 194
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-28",
+   "rooms_sold": 92,
+   "occupancy": 0.766,
+   "adr": 340,
+   "revpar": 261,
+   "trevpar": 308,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.736,
+    "adr": 326,
+    "revpar": 240
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-29",
+   "rooms_sold": 90,
+   "occupancy": 0.747,
+   "adr": 347,
+   "revpar": 260,
+   "trevpar": 307,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.717,
+    "adr": 333,
+    "revpar": 239
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-30",
+   "rooms_sold": 104,
+   "occupancy": 0.87,
+   "adr": 343,
+   "revpar": 297,
+   "trevpar": 351,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.84,
+    "adr": 329,
+    "revpar": 276
+   },
+   "source": "morning-flash"
+  },
+  {
+   "date": "2026-08-31",
+   "rooms_sold": 93,
+   "occupancy": 0.778,
+   "adr": 291,
+   "revpar": 226,
+   "trevpar": 266,
+   "gop": null,
+   "budget": {
+    "occupancy": 0.72,
+    "adr": 300,
+    "revpar": 216
+   },
+   "last_year": {
+    "occupancy": 0.748,
+    "adr": 277,
+    "revpar": 207
+   },
+   "source": "morning-flash"
+  }
+ ],
+ "pace": [
+  {
+   "stay_date": "2026-10-01",
+   "otb_rooms": 82,
+   "otb_adr": 307,
+   "pickup_7d": 11,
+   "cancellation_adjusted_otb": 70,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-02",
+   "otb_rooms": 69,
+   "otb_adr": 322,
+   "pickup_7d": 14,
+   "cancellation_adjusted_otb": 59,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-03",
+   "otb_rooms": 67,
+   "otb_adr": 289,
+   "pickup_7d": 3,
+   "cancellation_adjusted_otb": 57,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-04",
+   "otb_rooms": 55,
+   "otb_adr": 315,
+   "pickup_7d": 13,
+   "cancellation_adjusted_otb": 47,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-05",
+   "otb_rooms": 80,
+   "otb_adr": 289,
+   "pickup_7d": 2,
+   "cancellation_adjusted_otb": 68,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-06",
+   "otb_rooms": 84,
+   "otb_adr": 329,
+   "pickup_7d": 6,
+   "cancellation_adjusted_otb": 71,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-07",
+   "otb_rooms": 79,
+   "otb_adr": 321,
+   "pickup_7d": 12,
+   "cancellation_adjusted_otb": 67,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-08",
+   "otb_rooms": 90,
+   "otb_adr": 313,
+   "pickup_7d": 6,
+   "cancellation_adjusted_otb": 76,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-09",
+   "otb_rooms": 83,
+   "otb_adr": 309,
+   "pickup_7d": 12,
+   "cancellation_adjusted_otb": 71,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-10",
+   "otb_rooms": 60,
+   "otb_adr": 286,
+   "pickup_7d": 9,
+   "cancellation_adjusted_otb": 51,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-11",
+   "otb_rooms": 60,
+   "otb_adr": 295,
+   "pickup_7d": 11,
+   "cancellation_adjusted_otb": 51,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-12",
+   "otb_rooms": 45,
+   "otb_adr": 316,
+   "pickup_7d": 2,
+   "cancellation_adjusted_otb": 38,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-13",
+   "otb_rooms": 51,
+   "otb_adr": 334,
+   "pickup_7d": 6,
+   "cancellation_adjusted_otb": 43,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-14",
+   "otb_rooms": 46,
+   "otb_adr": 332,
+   "pickup_7d": 5,
+   "cancellation_adjusted_otb": 39,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-15",
+   "otb_rooms": 63,
+   "otb_adr": 310,
+   "pickup_7d": 9,
+   "cancellation_adjusted_otb": 54,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-16",
+   "otb_rooms": 43,
+   "otb_adr": 295,
+   "pickup_7d": 9,
+   "cancellation_adjusted_otb": 37,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-17",
+   "otb_rooms": 63,
+   "otb_adr": 320,
+   "pickup_7d": 6,
+   "cancellation_adjusted_otb": 54,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-18",
+   "otb_rooms": 94,
+   "otb_adr": 293,
+   "pickup_7d": 8,
+   "cancellation_adjusted_otb": 80,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-19",
+   "otb_rooms": 93,
+   "otb_adr": 320,
+   "pickup_7d": 6,
+   "cancellation_adjusted_otb": 79,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-20",
+   "otb_rooms": 83,
+   "otb_adr": 311,
+   "pickup_7d": 7,
+   "cancellation_adjusted_otb": 71,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-21",
+   "otb_rooms": 81,
+   "otb_adr": 341,
+   "pickup_7d": 8,
+   "cancellation_adjusted_otb": 69,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-22",
+   "otb_rooms": 52,
+   "otb_adr": 294,
+   "pickup_7d": 3,
+   "cancellation_adjusted_otb": 44,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-23",
+   "otb_rooms": 49,
+   "otb_adr": 294,
+   "pickup_7d": 5,
+   "cancellation_adjusted_otb": 42,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-24",
+   "otb_rooms": 80,
+   "otb_adr": 299,
+   "pickup_7d": 2,
+   "cancellation_adjusted_otb": 68,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-25",
+   "otb_rooms": 69,
+   "otb_adr": 338,
+   "pickup_7d": 11,
+   "cancellation_adjusted_otb": 59,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-26",
+   "otb_rooms": 49,
+   "otb_adr": 301,
+   "pickup_7d": 6,
+   "cancellation_adjusted_otb": 42,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-27",
+   "otb_rooms": 38,
+   "otb_adr": 294,
+   "pickup_7d": 8,
+   "cancellation_adjusted_otb": 32,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-28",
+   "otb_rooms": 72,
+   "otb_adr": 308,
+   "pickup_7d": 11,
+   "cancellation_adjusted_otb": 61,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-29",
+   "otb_rooms": 74,
+   "otb_adr": 305,
+   "pickup_7d": 4,
+   "cancellation_adjusted_otb": 63,
+   "source": "rate-check"
+  },
+  {
+   "stay_date": "2026-10-30",
+   "otb_rooms": 82,
+   "otb_adr": 339,
+   "pickup_7d": 10,
+   "cancellation_adjusted_otb": 70,
+   "source": "rate-check"
+  }
+ ],
+ "channels": [
+  {
+   "channel": "Direct",
+   "share": 0.35,
+   "effective_commission": 0.03,
+   "period": "2026-08",
+   "source": "ota-reconciliation"
+  },
+  {
+   "channel": "Agoda",
+   "share": 0.24,
+   "effective_commission": 0.19,
+   "period": "2026-08",
+   "source": "ota-reconciliation"
+  },
+  {
+   "channel": "Booking.com",
+   "share": 0.21,
+   "effective_commission": 0.17,
+   "period": "2026-08",
+   "source": "ota-reconciliation"
+  },
+  {
+   "channel": "Trip.com",
+   "share": 0.12,
+   "effective_commission": 0.15,
+   "period": "2026-08",
+   "source": "ota-reconciliation"
+  },
+  {
+   "channel": "Expedia",
+   "share": 0.08,
+   "effective_commission": 0.2,
+   "period": "2026-08",
+   "source": "ota-reconciliation"
+  }
+ ],
+ "reviews": [
+  {
+   "platform": "Google",
+   "rating": 4.4,
+   "count": 61,
+   "period": "2026-08",
+   "top_positive": [
+    "breakfast",
+    "location",
+    "staff"
+   ],
+   "top_negative": [
+    "aircon noise",
+    "slow check-in"
+   ],
+   "source": "review-replies"
+  },
+  {
+   "platform": "Agoda",
+   "rating": 8.6,
+   "count": 48,
+   "period": "2026-08",
+   "top_positive": [
+    "breakfast",
+    "location",
+    "staff"
+   ],
+   "top_negative": [
+    "aircon noise",
+    "slow check-in"
+   ],
+   "source": "review-replies"
+  },
+  {
+   "platform": "Booking.com",
+   "rating": 8.5,
+   "count": 52,
+   "period": "2026-08",
+   "top_positive": [
+    "breakfast",
+    "location",
+    "staff"
+   ],
+   "top_negative": [
+    "aircon noise",
+    "slow check-in"
+   ],
+   "source": "review-replies"
+  },
+  {
+   "platform": "Trip.com",
+   "rating": 4.5,
+   "count": 23,
+   "period": "2026-08",
+   "top_positive": [
+    "breakfast",
+    "location",
+    "staff"
+   ],
+   "top_negative": [
+    "aircon noise",
+    "slow check-in"
+   ],
+   "source": "review-replies"
+  },
+  {
+   "platform": "TripAdvisor",
+   "rating": 4.3,
+   "count": 17,
+   "period": "2026-08",
+   "top_positive": [
+    "breakfast",
+    "location",
+    "staff"
+   ],
+   "top_negative": [
+    "aircon noise",
+    "slow check-in"
+   ],
+   "source": "review-replies"
+  }
+ ],
+ "work_orders": [
+  {
+   "id": "WO-2609-001",
+   "priority": "P0",
+   "opened": "2026-09-02T06:40",
+   "sla_due": "2026-09-02T07:40",
+   "status": "resolved",
+   "location": "Level 5 riser, water leak",
+   "cost": 2400,
+   "source": "work-orders"
+  },
+  {
+   "id": "WO-2609-014",
+   "priority": "P1",
+   "opened": "2026-09-21T07:10",
+   "sla_due": "2026-09-21T15:10",
+   "status": "in progress",
+   "location": "Room 512 aircon",
+   "cost": 180,
+   "source": "work-orders"
+  },
+  {
+   "id": "WO-2609-015",
+   "priority": "P1",
+   "opened": "2026-09-21T09:30",
+   "sla_due": "2026-09-21T17:30",
+   "status": "assigned",
+   "location": "Room 318 door lock",
+   "cost": 95,
+   "source": "work-orders"
+  },
+  {
+   "id": "WO-2609-009",
+   "priority": "P2",
+   "opened": "2026-09-17T11:00",
+   "sla_due": "2026-09-24T11:00",
+   "status": "open",
+   "location": "Room 204 grout",
+   "cost": 150,
+   "source": "work-orders"
+  },
+  {
+   "id": "WO-2609-011",
+   "priority": "P2",
+   "opened": "2026-09-18T14:20",
+   "sla_due": "2026-09-25T14:20",
+   "status": "open",
+   "location": "Lift lobby L3 light",
+   "cost": 40,
+   "source": "work-orders"
+  },
+  {
+   "id": "WO-2609-012",
+   "priority": "P2",
+   "opened": "2026-09-19T08:00",
+   "sla_due": "2026-09-26T08:00",
+   "status": "parts on order",
+   "location": "Row Kitchen fridge seal",
+   "cost": 220,
+   "source": "work-orders"
+  }
+ ],
+ "scorecard": [
+  {
+   "name": "Occupancy",
+   "value": 0.81,
+   "target": 0.72,
+   "owner": "Daniel",
+   "week": "2026-W38",
+   "source": "owner-report"
+  },
+  {
+   "name": "ADR",
+   "value": 318,
+   "target": 300,
+   "owner": "Daniel",
+   "week": "2026-W38",
+   "source": "owner-report"
+  },
+  {
+   "name": "RevPAR",
+   "value": 258,
+   "target": 216,
+   "owner": "Daniel",
+   "week": "2026-W38",
+   "source": "owner-report"
+  },
+  {
+   "name": "Rooms ready by 15:00",
+   "value": 0.92,
+   "target": 1.0,
+   "owner": "Kavitha",
+   "week": "2026-W38",
+   "source": "turnover-board"
+  },
+  {
+   "name": "Work orders closed on time",
+   "value": 0.83,
+   "target": 0.9,
+   "owner": "Ravi",
+   "week": "2026-W38",
+   "source": "work-orders"
+  },
+  {
+   "name": "Review rating (Google)",
+   "value": 4.4,
+   "target": 4.5,
+   "owner": "Aina",
+   "week": "2026-W38",
+   "source": "review-replies"
+  },
+  {
+   "name": "Labour cost per occupied room",
+   "value": 62,
+   "target": 60,
+   "owner": "Daniel",
+   "week": "2026-W38",
+   "source": "staff-roster"
+  },
+  {
+   "name": "Direct share",
+   "value": 0.35,
+   "target": 0.4,
+   "owner": "Daniel",
+   "week": "2026-W38",
+   "source": "ota-reconciliation"
+  }
+ ]
+}

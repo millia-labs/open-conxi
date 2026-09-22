@@ -3,6 +3,7 @@ node_modules/
 __pycache__/
 .pytest_cache/
 .DS_Store
-hotel-profile.md
-hotel-data.json
-dashboard.html
+/hotel-profile.md
+/hotel-data.json
+/dashboard.html
+.venv/

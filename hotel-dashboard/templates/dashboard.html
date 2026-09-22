@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hotel dashboard</title>
+<style>
+:root{--bg:#f7f6f3;--card:#ffffff;--ink:#1a1a1a;--muted:#6b6b6b;--line:#e4e1db;--good:#2f7d5b;--bad:#b3432b;--accent:#3d5c56;--font:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+@media (prefers-color-scheme:dark){:root{--bg:#141614;--card:#1d201e;--ink:#ecebe7;--muted:#a3a39d;--line:#2c302d;--good:#6fbf95;--bad:#e0836b;--accent:#8fb3ab}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 var(--font);padding:16px}
+header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+h1{font-size:20px;margin:0}h2{font-size:14px;margin:0 0 8px;color:var(--muted);font-weight:600;text-transform:none}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}
+.kpi .v{font-size:26px;font-weight:700;line-height:1.1}.kpi .d{font-size:12px;color:var(--muted);margin-top:4px}
+.up{color:var(--good)}.down{color:var(--bad)}
+section{margin-top:18px}table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:600}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+svg{width:100%;height:180px;display:block}.axis{stroke:var(--line)}.series{fill:none;stroke:var(--accent);stroke-width:2}.bar{fill:var(--accent)}
+.empty{color:var(--muted);font-size:13px}
+footer{margin-top:24px;font-size:12px;color:var(--muted)}
+</style></head><body>
+<header><h1 id="title">Hotel dashboard</h1><div id="asof" class="d"></div></header>
+<div class="grid" id="kpis"></div>
+<section class="card"><h2>Next 30 days on the books</h2><svg id="pace" viewBox="0 0 600 180" role="img" aria-label="On-the-books rooms by stay date"></svg><div id="pace-empty" class="empty"></div></section>
+<section class="card"><h2>Channel mix and effective commission</h2><svg id="channels" viewBox="0 0 600 180" role="img" aria-label="Channel share"></svg><div id="ch-empty" class="empty"></div></section>
+<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+<section class="card"><h2>Reviews</h2><table id="reviews"></table></section>
+<section class="card"><h2>Open work orders</h2><table id="wo"></table></section>
+</div>
+<section class="card"><h2>Scorecard</h2><table id="score"></table></section>
+<footer>Built with Open Conxi. Data stays in this file. Re-run hotel-dashboard after any skill to refresh.</footer>
+<script id="hotel-data" type="application/json">{"schema_version":1,"hotel":{"name":"","currency":""},"kpis":[],"pace":[],"channels":[],"reviews":[],"work_orders":[],"scorecard":[]}</script>
+<script>
+const D=JSON.parse(document.getElementById('hotel-data').textContent);
+const cur=D.hotel&&D.hotel.currency||'';const fmt=n=>n==null?'n/a':(typeof n==='number'?n.toLocaleString(undefined,{maximumFractionDigits:0}):n);
+const pct=x=>x==null?'n/a':(x*100).toFixed(1)+'%';
+document.getElementById('title').textContent=(D.hotel&&D.hotel.name)||'Hotel dashboard';
+document.getElementById('asof').textContent=D.updated_at?('Updated '+D.updated_at):'';
+const k=D.kpis.slice().sort((a,b)=>a.date<b.date?1:-1)[0];
+const kp=document.getElementById('kpis');
+function tile(label,v,cmp,isPct){const el=document.createElement('div');el.className='card kpi';let d='';
+ if(cmp!=null&&v!=null){const diff=isPct?((v-cmp)*100).toFixed(1)+' pts':fmt(v-cmp);const cls=v>=cmp?'up':'down';d=`<span class="${cls}">${v>=cmp?'+':''}${diff}</span> vs budget`;}
+ el.innerHTML=`<div class="d">${label}</div><div class="v">${isPct?pct(v):(cur+' '+fmt(v))}</div><div class="d">${d}</div>`;kp.appendChild(el);}
+if(k){tile('Occupancy',k.occupancy,k.budget&&k.budget.occupancy,true);tile('ADR',k.adr,k.budget&&k.budget.adr);tile('RevPAR',k.revpar,k.budget&&k.budget.revpar);
+ if(k.trevpar!=null)tile('TRevPAR',k.trevpar,null);if(k.gop!=null)tile('GOP',k.gop,null);}else kp.innerHTML='<div class="card empty">No KPIs yet. Run morning-flash.</div>';
+function line(svgId,emptyId,rows,x,y){const s=document.getElementById(svgId);if(!rows.length){document.getElementById(emptyId).textContent='No data yet.';return;}
+ const W=600,H=180,p=28;const ys=rows.map(y);const mx=Math.max(...ys,1);const step=(W-2*p)/Math.max(rows.length-1,1);
+ let d='';rows.forEach((r,i)=>{const px=p+i*step,py=H-p-(y(r)/mx)*(H-2*p);d+=(i?'L':'M')+px+','+py;});
+ s.innerHTML=`<line class="axis" x1="${p}" y1="${H-p}" x2="${W-p}" y2="${H-p}"/><path class="series" d="${d}"/><text x="${p}" y="12" font-size="11" fill="currentColor">${rows[0][x]}</text><text x="${W-p}" y="12" font-size="11" text-anchor="end" fill="currentColor">${rows[rows.length-1][x]}</text><text x="${W-p}" y="${H-p-4}" font-size="11" text-anchor="end" fill="currentColor">max ${fmt(mx)}</text>`;}
+line('pace','pace-empty',D.pace.slice().sort((a,b)=>a.stay_date<b.stay_date?-1:1).slice(0,30),'stay_date',r=>r.cancellation_adjusted_otb??r.otb_rooms??0);
+(function(){const s=document.getElementById('channels');const rows=D.channels;if(!rows.length){document.getElementById('ch-empty').textContent='No data yet. Run ota-reconciliation.';return;}
+ const latest=rows.filter(r=>r.period===rows.map(x=>x.period).sort().pop());const W=600,H=180,p=28,bw=(W-2*p)/latest.length-8;let h='';
+ latest.forEach((r,i)=>{const x=p+i*(bw+8),bh=(r.share||0)*(H-2*p);h+=`<rect class="bar" x="${x}" y="${H-p-bh}" width="${bw}" height="${bh}"/><text x="${x+bw/2}" y="${H-p+14}" font-size="10" text-anchor="middle" fill="currentColor">${r.channel}</text><text x="${x+bw/2}" y="${H-p-bh-4}" font-size="10" text-anchor="middle" fill="currentColor">${pct(r.share)} at ${pct(r.effective_commission)}</text>`;});s.innerHTML=h;})();
+function table(id,cols,rows,empty){const t=document.getElementById(id);if(!rows.length){t.innerHTML=`<tr><td class="empty">${empty}</td></tr>`;return;}
+ t.innerHTML='<tr>'+cols.map(c=>`<th class="${c.n?'n':''}">${c.h}</th>`).join('')+'</tr>'+rows.map(r=>'<tr>'+cols.map(c=>`<td class="${c.n?'n':''}">${c.f(r)}</td>`).join('')+'</tr>').join('');}
+table('reviews',[{h:'Platform',f:r=>r.platform},{h:'Period',f:r=>r.period},{h:'Rating',n:1,f:r=>r.rating},{h:'Count',n:1,f:r=>r.count},{h:'Top negative',f:r=>(r.top_negative||[]).join(', ')}],D.reviews,'No reviews yet. Run review-replies.');
+table('wo',[{h:'ID',f:r=>r.id},{h:'P',f:r=>r.priority},{h:'Where',f:r=>r.location},{h:'Due',f:r=>r.sla_due},{h:'Status',f:r=>r.status}],D.work_orders.filter(r=>r.status!=='resolved'),'No open work orders. Run work-orders.');
+function scoreNum(v){if(typeof v!=='number')return v;if(v<=1)return pct(v);return Number.isInteger(v)?fmt(v):v.toLocaleString(undefined,{maximumFractionDigits:1});}
+table('score',[{h:'Measure',f:r=>r.name},{h:'Week',f:r=>r.week},{h:'Value',n:1,f:r=>scoreNum(r.value)},{h:'Target',n:1,f:r=>scoreNum(r.target)},{h:'Owner',f:r=>r.owner}],D.scorecard,'No scorecard yet. Run owner-report.');
+</script></body></html>
