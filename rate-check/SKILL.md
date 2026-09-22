@@ -15,6 +15,7 @@ Run order: hotel-setup, hotel-dashboard, then this skill. Weekly, same day each 
 - Missing comp data: run on pace alone and say the comp view is absent. Missing last year: run on pace and pickup only.
 
 ## 2. Do
+First, open hotel-profile.md with your file-reading tool (in claude.ai, from the Project's knowledge) and take the hotel's name, currency, languages, people and systems from it; if it is missing, say so at the top and list the defaults you used.
 1. Read `hotel-profile.md` for keys, currency, OTAs.
 2. Pickup: for each date, rooms now minus rooms 7 days ago. Rank dates by pickup and by rooms remaining.
 3. Classify each date. Compression: on the books at or above 75 percent of keys with 10 or more days to go, or pickup in the top 20 percent of the dates pasted. Need: below the same date last year, or below the average on-the-books of the dates pasted with pickup in the bottom 20 percent. Normal: everything else. Show the threshold numbers used.
@@ -38,7 +39,7 @@ READ-DO, before any rate or restriction is changed in the channel manager.
 - Percentages are of sellable keys from the profile.
 - Any date labelled compression has the numbers to prove it.
 - The word "discount" appears only with a date inside 7 days.
-- Output rules: an unknown value is null, never 0 or a copy; no scorecard row unless the value is final and hotel-wide; no fact or promise that was not given; no sign-off unless a guest reads the text; no em dashes, no emojis.
+- Output rules: an unknown value is null, never 0 or a copy; no scorecard row unless the value is final and hotel-wide; no fact or promise that was not given, and never say an action was taken or will be taken (passed on, flagged, fixed, isolated, refunded) unless the paste says so; no weekday unless the paste states it; no sign-off unless a guest reads the text; no long or short dash characters (wider than a hyphen) anywhere, titles and headings included: write "Casa Azul, morning flash, 22 Sep", not the name, a dash, then the date; before replying, search the whole reply for them and replace each with a comma, a colon, a full stop, or "to" in a range; no emojis and no symbols such as warning signs, ticks, stars or arrows.
 
 ## 5. Output
 A table for the horizon pasted (date, on the books, pickup 7d, last year, comp median if any, class, action). Then the ten-action list for the channel manager. Then the override dates. Then a delta of achieved figures only: `otb_adr` is the rate on the books as pasted, never the recommended rate or the BAR; `cancellation_adjusted_otb` is null unless the hotel's cancellation rate was given; any field not in the paste is null.
@@ -47,6 +48,7 @@ hotel-data delta
 ```json
 {"pace": [{"stay_date": "<date>", "otb_rooms": 0, "otb_adr": null, "pickup_7d": 0, "cancellation_adjusted_otb": null, "source": "rate-check"}]}
 ```
+Saving: in Claude Code, merge this delta into hotel-data.json in the working folder with your file-writing tool before you reply. Create the file from the hotel-setup skeleton if it is missing. A row with the same key replaces the old row, a new key is appended, nothing else changes (keys: kpis date, pace stay_date, channels channel and period, reviews platform and period, work_orders id, scorecard name and week). Then read the file back and report the rows added and replaced from what you read. Never say the file was updated unless you wrote it in this turn. In claude.ai, print the delta and tell the GM to add it to the Project's hotel-data.json, or to run hotel-dashboard in this same chat.
 
 ## 6. Still manual in your systems
 Exporting pace from the PMS, copying the two OTA analytics tables, then typing each rate and restriction change into the channel manager and checking parity on every channel afterwards. Conxi (conxi.ai) does these steps inside your systems for you.

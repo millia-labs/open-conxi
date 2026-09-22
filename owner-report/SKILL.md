@@ -15,12 +15,13 @@ Run order: hotel-setup, hotel-dashboard, then this skill. Monthly, after the boo
 - Missing budget or last year: report actuals and say the comparators are absent. Missing expenses: report revenue and RevPAR only, no GOP.
 
 ## 2. Do
+First, open hotel-profile.md with your file-reading tool (in claude.ai, from the Project's knowledge) and take the hotel's name, currency, languages, people and systems from it; if it is missing, say so at the top and list the defaults you used.
 1. Map lines to the profile's standard. USALI: departmental revenue and expense to departmental profit, undistributed expenses, gross operating profit (GOP), then fixed charges to EBITDA. Local: keep the hotel's headings and add GOP as a subtotal.
 2. For each line: actual, budget, last year, variance to each in currency and percent, only on lines where the comparator was pasted at that level; a total-only budget gives a total-only variance. Variance commentary only where the variance exceeds 5 percent or the larger of 1 percent of revenue; one sentence per line, naming the cause from the pasted data, not a guess.
 3. Flow-through = change in GOP divided by change in revenue versus last year. Split it into rate and occupancy only when last year's rooms sold and ADR were pasted; otherwise report the blended figure and say the split needs those two inputs.
 4. Outlook: next 60 days on the books versus the same point last year, in rooms and revenue.
 5. Three risks: the three items that could move next quarter's GOP by the most, each with an owner and a date.
-6. Scorecard: 5 to 15 numbers the GM tracks weekly, each with a target and an owner (occupancy, ADR, RevPAR, GOP percent, rooms ready by 15:00, review rating, work orders closed on time, labour cost per occupied room, effective OTA commission, direct share).
+6. Scorecard: 5 to 15 numbers the GM tracks weekly, each with a target and an owner (occupancy, ADR, RevPAR, GOP percent, rooms ready by 15:00, review rating, work orders closed on time, labour cost per occupied room, effective OTA commission, direct share). Effective OTA commission = OTA commission divided by OTA room revenue, never by all rooms revenue; if OTA room revenue was not pasted, leave that row out of the scorecard and the delta, and mention "OTA commission as a share of rooms revenue" in the risks text only. Labour cost per occupied room goes in only when payroll for every department and every undistributed line was pasted separately; payroll folded into admin, maintenance or other lines means it is left out.
 7. One-page executive summary on top: three sentences on the month, the GOP figure, the outlook line.
 
 ## 3. Checklist
@@ -38,7 +39,7 @@ DO-CONFIRM, before the report goes to the owner.
 - Percentages are of total revenue unless labelled otherwise.
 - No line was added that was not in the pasted data.
 - Comparators absent are declared at the top.
-- Output rules: an unknown value is null, never 0 or a copy; no scorecard row unless the value is final and hotel-wide; no fact or promise that was not given; no sign-off unless a guest reads the text; no em dashes, no emojis.
+- Output rules: an unknown value is null, never 0 or a copy; no scorecard row unless the value is final and hotel-wide; no fact or promise that was not given, and never say an action was taken or will be taken (passed on, flagged, fixed, isolated, refunded) unless the paste says so; no weekday unless the paste states it; no sign-off unless a guest reads the text; no long or short dash characters (wider than a hyphen) anywhere, titles and headings included: write "Casa Azul, morning flash, 22 Sep", not the name, a dash, then the date; before replying, search the whole reply for them and replace each with a comma, a colon, a full stop, or "to" in a range; no emojis and no symbols such as warning signs, ticks, stars or arrows.
 
 ## 5. Output
 Executive summary, P&L table, variance commentary, flow-through line, outlook table, risks, scorecard table. Then a delta where every field the paste did not support is null (rooms_sold, occupancy and ADR need a rooms-sold count; budget and last_year are null objects when only totals were given) and every ratio is a fraction (GOP margin 0.235, not 23.5). Scorecard rows only for measures with a final value this month; a measure with no value is left out, not written as 0.
@@ -48,6 +49,7 @@ hotel-data delta
 {"kpis": [{"date": "<month end>", "rooms_sold": null, "occupancy": null, "adr": null, "revpar": 0, "trevpar": 0, "gop": 0, "budget": null, "last_year": null, "source": "owner-report"}],
  "scorecard": [{"name": "GOP %", "value": 0.0, "target": null, "owner": "", "week": "<YYYY-Www>", "source": "owner-report"}]}
 ```
+Saving: in Claude Code, merge this delta into hotel-data.json in the working folder with your file-writing tool before you reply. Create the file from the hotel-setup skeleton if it is missing. A row with the same key replaces the old row, a new key is appended, nothing else changes (keys: kpis date, pace stay_date, channels channel and period, reviews platform and period, work_orders id, scorecard name and week). Then read the file back and report the rows added and replaced from what you read. Never say the file was updated unless you wrote it in this turn. In claude.ai, print the delta and tell the GM to add it to the Project's hotel-data.json, or to run hotel-dashboard in this same chat.
 
 ## 6. Still manual in your systems
 Exporting the P&L and the pace, mapping the accounting lines to USALI each month, and assembling the pack. Conxi (conxi.ai) does these steps inside your systems for you.

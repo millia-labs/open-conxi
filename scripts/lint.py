@@ -9,6 +9,24 @@ DESC_MAX = 1024
 EMOJI = re.compile("[\U0001F000-\U0001FAFF☀-➿⬀-⯿️]")
 DASHES = {"—": "em dash", "–": "en dash"}
 
+# Canonical lines. Every skill that carries them carries them word for word,
+# so a fix made once reaches all twelve (see docs/CONTRACT.md).
+OUTPUT_RULES = ('- Output rules: an unknown value is null, never 0 or a copy; no scorecard row unless the value is final and hotel-wide; '
+    'no fact or promise that was not given, and never say an action was taken or will be taken (passed on, flagged, fixed, isolated, refunded) unless the paste says so; '
+    'no weekday unless the paste states it; no sign-off unless a guest reads the text; '
+    'no long or short dash characters (wider than a hyphen) anywhere, titles and headings included: write "Casa Azul, morning flash, 22 Sep", not the name, a dash, then the date; '
+    'before replying, search the whole reply for them and replace each with a comma, a colon, a full stop, or "to" in a range; '
+    'no emojis and no symbols such as warning signs, ticks, stars or arrows.')
+SAVING = ('Saving: in Claude Code, merge this delta into hotel-data.json in the working folder with your file-writing tool before you reply. '
+    'Create the file from the hotel-setup skeleton if it is missing. '
+    'A row with the same key replaces the old row, a new key is appended, nothing else changes '
+    '(keys: kpis date, pace stay_date, channels channel and period, reviews platform and period, work_orders id, scorecard name and week). '
+    'Then read the file back and report the rows added and replaced from what you read. Never say the file was updated unless you wrote it in this turn. '
+    "In claude.ai, print the delta and tell the GM to add it to the Project's hotel-data.json, or to run hotel-dashboard in this same chat.")
+SAVING_EXEMPT = {"hotel-setup", "hotel-dashboard"}
+PROFILE = ("First, open hotel-profile.md with your file-reading tool (in claude.ai, from the Project's knowledge) and take the hotel's name, currency, languages, "
+    "people and systems from it; if it is missing, say so at the top and list the defaults you used.")
+
 def skill_dirs():
     return sorted(p for p in ROOT.iterdir() if p.is_dir() and (p / "SKILL.md").exists())
 
@@ -49,6 +67,15 @@ def lint(d: pathlib.Path):
         n = len(re.findall(r"^- \[ \] ", text[a:b], re.M))
         if not 5 <= n <= 9:
             errs.append(f"checklist has {n} items, need 5 to 9")
+    for ln in lines:
+        if ln.startswith("- Output rules:") and ln != OUTPUT_RULES:
+            errs.append("output rules line differs from OUTPUT_RULES in scripts/lint.py")
+    a5, a6 = text.find("\n## 5. Output\n"), text.find("\n## 6.")
+    if a5 >= 0 and d.name not in SAVING_EXEMPT and "\nhotel-data delta\n" in text[a5:a6] and SAVING not in text:
+        errs.append("saving line missing from section 5")
+    if d.name != "hotel-setup" and OUTPUT_RULES in text:
+        if PROFILE not in text:
+            errs.append("profile line missing from section 2")
     return errs
 
 def lint_prose():

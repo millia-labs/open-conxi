@@ -51,3 +51,41 @@ def test_too_long_fails(tmp_path):
     (d / "SKILL.md").write_text(src + ("filler\n" * 140))
     r = run(d)
     assert r.returncode == 1 and "lines" in r.stdout
+
+def _skill(tmp_path, name, extra_check="", extra_output=""):
+    d = tmp_path / name; d.mkdir()
+    src = (FIX / "good-skill" / "SKILL.md").read_text().replace("name: good-skill", f"name: {name}")
+    src = src.replace("## 4. Check yourself\nText.\n", "## 4. Check yourself\nText.\n" + extra_check, 1)
+    src = src.replace("## 5. Output\nText.\n", "## 5. Output\nText.\n" + extra_output, 1)
+    (d / "SKILL.md").write_text(src)
+    return d
+
+def test_output_rules_line_must_be_canonical(tmp_path):
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("lint", LINT); m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+    ok = _skill(tmp_path, "rules-ok", extra_check=m.OUTPUT_RULES + "\n")
+    (ok / "SKILL.md").write_text((ok / "SKILL.md").read_text().replace("## 2. Do\n", "## 2. Do\n" + m.PROFILE + "\n", 1))
+    assert run(ok).returncode == 0, run(ok).stdout
+    bad = _skill(tmp_path, "rules-bad", extra_check="- Output rules: be nice.\n")
+    r = run(bad)
+    assert r.returncode == 1 and "output rules line differs" in r.stdout
+
+def test_delta_skill_needs_saving_line(tmp_path):
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("lint", LINT); m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+    delta = "\nhotel-data delta\n```json\n{}\n```\n"
+    bad = _skill(tmp_path, "nosave", extra_output=delta)
+    r = run(bad)
+    assert r.returncode == 1 and "saving line missing" in r.stdout
+    ok = _skill(tmp_path, "saves", extra_output=delta + m.SAVING + "\n")
+    assert run(ok).returncode == 0, run(ok).stdout
+
+def test_skill_must_read_profile(tmp_path):
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("lint", LINT); m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+    bad = _skill(tmp_path, "noprofile", extra_check=m.OUTPUT_RULES + "\n")
+    r = run(bad)
+    assert r.returncode == 1 and "profile line missing" in r.stdout
+    src = (bad / "SKILL.md").read_text().replace("## 2. Do\n", "## 2. Do\n" + m.PROFILE + "\n", 1)
+    (bad / "SKILL.md").write_text(src)
+    assert run(bad).returncode == 0, run(bad).stdout

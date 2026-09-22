@@ -16,9 +16,10 @@ Run order: hotel-setup, hotel-dashboard, then this skill. Daily, or whenever rev
 - Missing the voice note: reply in plain, warm, specific language and say the voice note was absent.
 
 ## 2. Do
+First, open hotel-profile.md with your file-reading tool (in claude.ai, from the Project's knowledge) and take the hotel's name, currency, languages, people and systems from it; if it is missing, say so at the top and list the defaults you used.
 1. Sort by date, oldest first. Anything older than 48 hours goes first.
 2. Classify each review: praise, service miss, facility miss, value complaint, or escalate. Escalate means safety, injury, theft, discrimination, legal or regulator mention, refund or chargeback demand, or a named staff accusation. Escalated reviews get no drafted public reply, only a manager brief.
-3. For each non-escalated review write a reply in the reviewer's language: thank by first name, name one specific thing they mentioned, state what was done about a miss (a fact from the pasted trace or work order, not a promise to "look into it"), one sentence inviting them back, sign with a real name and title from the profile. Under 120 words. No discounts or compensation in public. Never promise a change (menu, policy, fix date) that the GM has not confirmed; if nothing was done yet, say the note has been passed to the named owner.
+3. For each non-escalated review write a reply in the reviewer's language: thank by first name, name one specific thing they mentioned, state what was done about a miss (a fact from the pasted trace or work order, not a promise to "look into it"), one sentence inviting them back, sign with a real name and title from the profile. Under 120 words. No discounts or compensation in public. Never promise a change (menu, policy, fix date) that the GM has not confirmed. If the paste does not say something was done, the reply names the problem and apologises and says nothing about action (not "passed on", not "flagged"); the follow-up goes in the private note.
 4. For a miss, add a private note: the internal follow-up, the owner, the date.
 5. Tally the batch: count, rating per platform in this batch, top three positive themes, top three negative themes, counted from the text. This tally stays in the reply text; the delta carries the platform's running figures, not the batch.
 
@@ -37,7 +38,7 @@ READ-DO, before any reply is posted.
 - No reply exceeds 120 words.
 - Theme counts are computed from the text, with the review numbers listed under each theme.
 - Any review older than 48 hours is marked late at the top.
-- Output rules: an unknown value is null, never 0 or a copy; no scorecard row unless the value is final and hotel-wide; no fact or promise that was not given; no sign-off unless a guest reads the text; no em dashes, no emojis.
+- Output rules: an unknown value is null, never 0 or a copy; no scorecard row unless the value is final and hotel-wide; no fact or promise that was not given, and never say an action was taken or will be taken (passed on, flagged, fixed, isolated, refunded) unless the paste says so; no weekday unless the paste states it; no sign-off unless a guest reads the text; no long or short dash characters (wider than a hyphen) anywhere, titles and headings included: write "Casa Azul, morning flash, 22 Sep", not the name, a dash, then the date; before replying, search the whole reply for them and replace each with a comma, a colon, a full stop, or "to" in a range; no emojis and no symbols such as warning signs, ticks, stars or arrows.
 
 ## 5. Output
 Per review: platform, date, rating, classification, the reply, the private note. Then the escalation briefs. Then the batch tally. Then, only for platforms whose displayed overall rating and total count were pasted (rating on the platform's own scale, count is the platform total, themes from this batch):
@@ -46,6 +47,7 @@ hotel-data delta
 ```json
 {"reviews": [{"platform": "<name>", "rating": null, "count": null, "period": "<YYYY-MM>", "top_positive": [], "top_negative": [], "source": "review-replies"}]}
 ```
+Saving: in Claude Code, merge this delta into hotel-data.json in the working folder with your file-writing tool before you reply. Create the file from the hotel-setup skeleton if it is missing. A row with the same key replaces the old row, a new key is appended, nothing else changes (keys: kpis date, pace stay_date, channels channel and period, reviews platform and period, work_orders id, scorecard name and week). Then read the file back and report the rows added and replaced from what you read. Never say the file was updated unless you wrote it in this turn. In claude.ai, print the delta and tell the GM to add it to the Project's hotel-data.json, or to run hotel-dashboard in this same chat.
 
 ## 6. Still manual in your systems
 Copying each review out of six platforms, pasting each reply back into the right one, and logging the private follow-ups. Conxi (conxi.ai) does these steps inside your systems for you.

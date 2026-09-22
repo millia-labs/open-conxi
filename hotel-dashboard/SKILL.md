@@ -9,10 +9,11 @@ Run order: hotel-setup first, this skill second, then any job skill. Re-run this
 
 ## 1. Paste in
 - `hotel-profile.md` (required; if missing, stop and run hotel-setup).
-- `hotel-data.json` if it exists, plus any `hotel-data delta` blocks printed by skills earlier in this conversation.
+- `hotel-data.json` from the working folder. In Claude Code every job skill saves its own rows there, so the file is the source of truth. Also any `hotel-data delta` blocks printed earlier in this conversation (in claude.ai these may not be saved yet; in Claude Code they usually are, and merging them again changes nothing).
 - Optional on first run: yesterday's night audit or manager's report (OPERA Cloud: Reports, Manager Report; Cloudbeds: Reports, Daily Summary; Mews: Reports, Accounting Summary) so the first dashboard is not empty. Take rooms sold, revenue, occupancy, ADR from it and write one `kpis` row.
 
 ## 2. Do
+First, open hotel-profile.md with your file-reading tool (in claude.ai, from the Project's knowledge) and take the hotel's name, currency, languages, people and systems from it; if it is missing, say so at the top and list the defaults you used.
 1. Merge: start from `hotel-data.json`, apply each delta in order. Rows are keyed (kpis by date, pace by stay_date, channels by channel and period, reviews by platform and period, work_orders by id, scorecard by name and week, see `docs/SCHEMA.md`). A delta row with the same key as an existing row replaces it; a new key is appended; nothing is deleted. Count the rows replaced and say so in the reply. Set `updated_at` to now. Set `hotel.name` and `hotel.currency` from the profile.
 2. Load `templates/dashboard.html` from this skill folder. Replace the contents of `<script id="hotel-data" type="application/json">` with the merged JSON. Change nothing else.
 3. In Claude Code: write `dashboard.html` and the merged `hotel-data.json` to the working folder, then open `dashboard.html`. In claude.ai: render the HTML as an artifact and print the merged `hotel-data.json` for the GM to save.
@@ -33,7 +34,7 @@ DO-CONFIRM, after rendering.
 - Row counts per array equal the file's rows plus the deltas' new keys; no two rows share a key.
 - The template was not edited beyond the JSON block.
 - If the profile is missing, the output is one line: run hotel-setup.
-- Output rules: an unknown value is null, never 0 or a copy; no scorecard row unless the value is final and hotel-wide; no fact or promise that was not given; no sign-off unless a guest reads the text; no em dashes, no emojis.
+- Output rules: an unknown value is null, never 0 or a copy; no scorecard row unless the value is final and hotel-wide; no fact or promise that was not given, and never say an action was taken or will be taken (passed on, flagged, fixed, isolated, refunded) unless the paste says so; no weekday unless the paste states it; no sign-off unless a guest reads the text; no long or short dash characters (wider than a hyphen) anywhere, titles and headings included: write "Casa Azul, morning flash, 22 Sep", not the name, a dash, then the date; before replying, search the whole reply for them and replace each with a comma, a colon, a full stop, or "to" in a range; no emojis and no symbols such as warning signs, ticks, stars or arrows.
 
 ## 5. Output
 The rendered dashboard (artifact or `dashboard.html`), the merged `hotel-data.json` in a fenced block, and a five-line panel status list. This skill emits no delta of its own.

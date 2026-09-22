@@ -29,3 +29,23 @@ Triggering: 12 of 12 skills fired from plain phrasing.
 
 ## Held up
 Agoda (not live yet) kept off the OTA list; WhatsApp chosen over Slack; allergy plus lawyer review escalated with no public reply; water through a light fitting made P0 with power isolation first; van parking not invented; OTA reconciliation found all three exceptions; owner report arithmetic all correct; roster covered every constraint and priced the real 20h gap; rate-check refused the 99 cut with evidence; group-displacement caught that the free-cancellation window lapses before the decision date.
+
+## Re-run after v0.1.2 (same inputs, fresh sessions, Sonnet 5)
+
+| # | Finding | Result |
+|---|---|---|
+| 1 | Data lost between chats | Fixed. Setup writes both files. Morning flash, review replies and OTA reconciliation each saved rows in separate chats; a fifth chat's dashboard refresh showed all of them. |
+| 2 | Dashes and symbols | Improved, not solved. Zero in review replies, guest messages and vendor dispatches, the text other people read. Still some in internal headings of review-replies, work-orders and guest-messages. No symbols. |
+| 3 | Displacement floor | Fixed. Floor 161, matching the worked check. Opportunity cost netted of variable cost; commission not netted when channel shares are unknown, labelled an upper bound. |
+| 4 | Comp rooms | Fixed. 33 paid rooms, occupancy 78.6 percent, ADR 148.36, comp on its own line. |
+| 5 | Roster scorecard row | Fixed. No row written; says why. |
+| 6 | Rooms left to sell | Fixed. 3, with the sum shown. |
+| 7 | Turnover weekday, 206, 208 | Fixed. Tuesday, 206 flagged as a conflict, 208 a Double. |
+| 8 | Guest count | Fixed. 4 guests, 2 rooms. |
+| 9 | Effective OTA commission | Fixed. Row left out of the scorecard; labour cost row left out because payroll was not complete. |
+| 10 | Invented actions in replies | Fixed. Replies name the problem and apologise; follow-up only in private notes. |
+| 11 | Dispatch language, power isolated | Fixed. Dispatch in Portuguese, no claim that power was cut. |
+| 12 | Fiscal year format | Fixed. 01-01. |
+| 13 | Priority drift | Fixed by rule. 402 drain P1 with "drops to P2 once confirmed unsold". |
+
+New in the re-run, also fixed: review-replies once claimed a save it had not written (the saving line now requires writing, reading back, and reporting from what was read); six skills never opened hotel-profile.md (a canonical read-the-profile line is now in every skill and enforced by the lint); group-displacement did not open hotel-data.json for commission (now explicit).
