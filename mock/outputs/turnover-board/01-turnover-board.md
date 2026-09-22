@@ -4,58 +4,53 @@ Fictional sample. Every number is invented.
 
 Departures 38. Stayovers 55. Arrivals 41. Out of order 2. Attendants 4.
 
-## Data conflicts, resolve before assigning
-
-- Room 214 appears twice in the paste with contradicting facts: listed as a stayover (213 to 224 range) and separately flagged as a departure checking out at 12:00 with a 15:30 arrival. A room cannot be a continuing stayover and a same-day checkout at once. It is held on the board below as a stayover per the room list, but it is excluded from Farah's confirmed credit total until this is checked against Cloudbeds.
-- Room 227 is named as an arrival with a departure checking out at 12:00, but 227 does not appear in the departures, stayovers, or out-of-order room numbers given. There is no confirmed room to attach that departure clean to. Flagged in the same-day flip list below, not assigned.
-- The credit rule names two departure tiers: standard at 1.00 and suite or family at 1.50. Deluxe King is not named in either. Deluxe departures below are credited at the standard 1.00 rate since no exception is given for them. Confirm with Kavitha before relying on this for staffing.
+Note: room 318 was given in both the stayover paste (311-320) and the out-of-order list (door lock, WO-2609-015). Held as out of order below, so the working stayover count is 54, not 55. Note: only two of the 41 arrivals (214, 227) came with a room number and time in this paste. The other 39 have no room or time given, so they carry no flip-risk check here, that value is null, not zero.
 
 ## Attendants
 
 | Attendant | Shift | Capacity (credits) | Assigned credits | Assigned rooms |
 |---|---|---|---|---|
-| Siti | 07:00 to 15:00 | 16.00 | 15.36 | 18 |
-| Mei | 07:00 to 15:00 | 16.00 | 15.37 | 19 |
-| Farah | 08:00 to 16:00 | 16.00 | 15.04 | 19 |
-| Amir | 09:00 to 17:00 | 16.00 | 15.20 | 18 |
+| Siti (most experienced) | 07:00 to 15:00 | 16.00 | 15.34 | 16 |
+| Mei | 07:00 to 15:00 | 16.00 | 15.36 | 18 |
+| Farah | 08:00 to 16:00 | 16.00 | 15.36 | 18 |
+| Amir | 09:00 to 17:00 | 16.00 | 15.38 | 18 |
 
-Total demand across departures and stayovers: 77.85 credits (41.00 departure + 36.85 stayover). Total attendant capacity: 64.00 credits. Assigned above: 60.97 credits, 74 rooms, kept to contiguous floors per attendant so nobody backtracks. Unassigned shortfall: 16.88 credits, 19 rooms, floors 4 and 5. Squeezing all four attendants to their hard cap of 16.00 instead of the 15.0 to 15.4 shown would trim the shortfall to the theoretical floor of 13.85 credits, at the cost of sending someone back to floors 1 to 3 for a handful of extra stayovers. Kavitha's call.
+Total demand: 76.18 credits across 92 assignable rooms (40.00 credits, 38 rooms departure; 36.18 credits, 54 rooms stayover). Total attendant capacity at the 16.00 hard cap: 64.00 credits. All 38 departures are placed first, then each attendant is filled with same-floor stayovers up to capacity. Assigned above: 61.44 credits, 70 rooms. Unassigned shortfall: 14.74 credits, 22 stayover rooms, all held back only after every departure was covered.
 
-Shortfall fix: 402-406, 407-414, and 501-506 (19 rooms, 16.88 credits, about one more 8-hour attendant) are unassigned. Options: bring in a relief attendant for roughly a full shift, extend one of today's four shifts, or cut the floor 4 and 5 stayovers to a spot service (trash and towels, no full turn) until someone frees up this afternoon.
+Shortfall: 119-126, 216-226, 320, 505-506 (22 rooms, 14.74 credits, close to one more 8-hour attendant). Fix, pick one: bring in a relief attendant for roughly a full shift, extend one of today's four shifts by about an hour each, or cut these 22 stayovers to a spot service (trash, towels, bed check, no full turn) until capacity frees up.
 
 ## Board
 
 | Room(s) | Type | Status | Arrival | Attendant | Credits | Flags |
 |---|---|---|---|---|---|---|
-| 101-110 | Standard | Departure | - | Siti | 1.00 ea | - |
-| 111-118 | Standard | Stayover | - | Siti | 0.67 ea | - |
-| 119-120 | Standard | Stayover | - | Mei | 0.67 ea | - |
-| 121-129 | Standard | Stayover | - | Mei | 0.67 ea | - |
-| 201-208 | Standard | Departure | - | Mei | 1.00 ea | - |
-| 209-212 | Standard | Departure | - | Farah | 1.00 ea | - |
-| 213 | Standard | Stayover | - | Farah | 0.67 | - |
-| 214 | Standard | Stayover | - | Farah | 0.67 | Conflict, see note above, verify before turning |
-| 215-224 | Standard | Stayover | - | Farah | 0.67 ea | - |
-| 301-303 | Deluxe | Departure | - | Farah | 1.00 ea | Deluxe credited at standard tier, see note |
-| 304-310 | Deluxe | Departure | - | Amir | 1.00 ea | Deluxe credited at standard tier, see note |
-| 311-320 | Deluxe | Stayover | - | Amir | 0.67 ea | - |
-| 401 | Family Twin | Departure | - | Amir | 1.50 | - |
-| 402-406 | Family Twin | Departure | - | Unassigned | 1.50 ea | Shortfall |
-| 407-414 | Family Twin | Stayover | - | Unassigned | 0.67 ea | Shortfall |
-| 501-506 | Row Suite | Stayover | - | Unassigned | 0.67 ea | Shortfall |
-| 318 | Deluxe | Out of order | - | - | - | Door lock, WO-2609-015, excluded from assignment and tonight's sellable count |
-| 512 | Row Suite | Out of order | - | - | - | Aircon, WO-2609-014, excluded from assignment and tonight's sellable count |
+| 201-212 | Standard | Departure | - | Siti | 1.00 ea | - |
+| 214 | Standard | Departure | 15:30 | Siti | 1.00 | Same-day flip risk, see below |
+| 227 | Standard | Departure | 16:00 | Siti | 1.00 | Gap exactly 4h, see below |
+| 213, 215 | Standard | Stayover | - | Siti | 0.67 ea | - |
+| 216-226 | Standard | Stayover | - | Unassigned | 0.67 ea | Shortfall |
+| 101-110 | Standard | Departure | - | Mei | 1.00 ea | - |
+| 111-118 | Standard | Stayover | - | Mei | 0.67 ea | - |
+| 119-126 | Standard | Stayover | - | Unassigned | 0.67 ea | Shortfall |
+| 301-310 | Deluxe | Departure | - | Farah | 1.00 ea | Deluxe credited at standard tier |
+| 311-317, 319 | Deluxe | Stayover | - | Farah | 0.67 ea | - |
+| 320 | Deluxe | Stayover | - | Unassigned | 0.67 | Shortfall |
+| 401-404 | Family Twin | Departure | - | Amir | 1.50 ea | - |
+| 405-414 | Family Twin | Stayover | - | Amir | 0.67 ea | 405: cot for tonight's arrival, see checklist |
+| 501-504 | Row Suite | Stayover | - | Amir | 0.67 ea | - |
+| 505-506 | Row Suite | Stayover | - | Unassigned | 0.67 ea | Shortfall |
+| 318 | Deluxe | Out of order | - | - | - | Door lock, WO-2609-015. Excluded from assignment and tonight's sellable count. |
+| 512 | Row Suite | Out of order | - | - | - | Aircon, WO-2609-014. Excluded from assignment and tonight's sellable count. |
 
 ## Same-day flip risk
 
 Rule: arrival time minus departure time under 4 hours.
 
-| Room | Departure | Arrival | Gap | Flagged | Note |
-|---|---|---|---|---|---|
-| 214 | 12:00 | 15:30 | 3h30 | Yes | Under 4 hours. Most experienced attendant to take this one, name not given, ask Kavitha to nominate. Also carries the stayover/departure conflict above, confirm the room's real status first. |
-| 227 | 12:00 | 16:00 | 4h00 | No, at the threshold | Exactly 4 hours, the rule as written only catches under 4 hours. Worth a heads up to front desk since it's this close, and the room does not appear in the departures list given, so the 12:00 checkout side of this is unconfirmed. |
+| Room | Departure | Arrival | Gap | Flagged |
+|---|---|---|---|---|
+| 214 | 12:00 | 15:30 | 3h30 | Yes, under 4 hours. Assigned to Siti, most experienced on shift today. |
+| 227 | 12:00 | 16:00 | 4h00 | No, exactly 4 hours, not under. Worth a heads up to front desk since it is this tight. |
 
-Front desk: if 214 needs the standard turn time, consider pushing the 15:30 arrival back.
+Front desk: if 214 runs behind, push that 15:30 arrival later rather than rush the clean.
 
 ## Inspection list
 
@@ -71,7 +66,7 @@ Nine items, checked by the supervisor before any room is marked ready:
 8. Safe open and empty
 9. Nothing left from the previous guest
 
-No special requests were given in today's paste, so no extra items are added. Family Twin and Row Suite rooms would normally pick up a cot check or kitchenette check on top of the nine if a request calls for it. None was given today.
+Extra items today: room 405, cot check for the family arriving tonight (special request from the GM's paste). Family Twin and Row Suite rooms otherwise take the standard nine only, no other special request was given.
 
 ## Checklist
 
@@ -83,16 +78,6 @@ READ-DO, run by the supervisor before a room is marked ready.
 - [ ] Maintenance defect seen during the clean logged as a work order, not left as a note
 - [ ] Minibar or amenities restocked and posted if charged
 - [ ] Room status in the PMS set by the supervisor, not the attendant
-
-## Check yourself
-
-- Every departure and stayover room number from the paste appears once above, except 214, which appears once on the board and is separately flagged for its conflicting status.
-- Room 227's departure claim does not match any room in the departures list given. Not assigned, flagged above.
-- Each attendant sits at 15.04 to 15.37 credits, inside the 14 to 16 target band, none over the 16.00 cap.
-- 19 rooms (402-406, 407-414, 501-506, 16.88 credits) are unassigned and stated as a shortfall with three fix options.
-- 214 and 227 are listed with both times in the same-day flip section.
-- 318 and 512 are excluded from the assignment table and from tonight's sellable count.
-- No em dashes, no emojis. No fact above was invented beyond what the GM's paste and the hotel profile gave; the Deluxe credit tier and the two room conflicts are flagged, not resolved, since neither was confirmed in the input.
 
 ## Still manual in your systems
 
