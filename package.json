@@ -1,13 +1,57 @@
 {
   "name": "open-conxi",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Twelve free Claude skills that run the daily, weekly and monthly work of an independent hotel. By the Conxi team.",
-  "keywords": ["claude", "claude-skills", "hotel", "hospitality", "revenue-management", "housekeeping"],
-  "homepage": "https://github.com/millia-labs/openconxi",
-  "repository": { "type": "git", "url": "git+https://github.com/millia-labs/openconxi.git" },
-  "author": { "name": "Millia Labs Pte. Ltd.", "email": "mark@conxi.ai", "url": "https://conxi.ai" },
+  "keywords": [
+    "claude",
+    "claude-skills",
+    "hotel",
+    "hospitality",
+    "revenue-management",
+    "housekeeping"
+  ],
+  "homepage": "https://github.com/millia-labs/open-conxi",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/millia-labs/open-conxi.git"
+  },
+  "author": {
+    "name": "Millia Labs Pte. Ltd.",
+    "email": "mark@conxi.ai",
+    "url": "https://conxi.ai"
+  },
   "license": "MIT",
-  "bin": { "open-conxi": "./bin/cli.js" },
-  "scripts": { "test": "node --test tests/*.test.js" },
-  "files": ["bin/", ".claude-plugin/", "docs/", "hotel-setup/", "hotel-dashboard/", "morning-flash/", "review-replies/", "guest-messages/", "turnover-board/", "work-orders/", "rate-check/", "group-displacement/", "staff-roster/", "ota-reconciliation/", "owner-report/", "CLAUDE.md", "LICENSE", "README.md"]
+  "bin": {
+    "open-conxi": "./bin/cli.js"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  },
+  "files": [
+    "bin/",
+    ".claude-plugin/",
+    "docs/CONTRACT.md",
+    "docs/SCHEMA.md",
+    "hotel-setup/",
+    "hotel-dashboard/",
+    "morning-flash/",
+    "review-replies/",
+    "guest-messages/",
+    "turnover-board/",
+    "work-orders/",
+    "rate-check/",
+    "group-displacement/",
+    "staff-roster/",
+    "ota-reconciliation/",
+    "owner-report/",
+    "CLAUDE.md",
+    "LICENSE",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "bugs": {
+    "url": "https://github.com/millia-labs/open-conxi/issues"
+  }
 }

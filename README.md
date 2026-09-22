@@ -39,15 +39,17 @@ Every skill has the same six sections: paste in, do, checklist, check yourself, 
 
 ## Install
 
-**claude.ai (no terminal).** Download a zip from the [latest release](https://github.com/millia-labs/openconxi/releases/latest). In Claude, open Customize, then Skills, then the plus button, then Upload a skill. Upload `open-conxi-all.zip` or one skill at a time. Team and Enterprise admins can share a skill with the whole hotel. Then say: set up my hotel.
+**claude.ai (no terminal).** Download a zip from the [latest release](https://github.com/millia-labs/open-conxi/releases/latest). In Claude, open Customize, then Skills, then the plus button, then Upload a skill. Upload `open-conxi-all.zip` or one skill at a time. Team and Enterprise admins can share a skill with the whole hotel. Then say: set up my hotel.
 
-**Claude Code.**
+**Claude Code.** Needs Node 18 or later. No git needed.
 ```bash
 npx open-conxi install
 ```
-or
+This copies the twelve skills into `~/.claude/skills`. Restart Claude Code and say: set up my hotel. Later, `npx open-conxi@latest update` gets new versions and `npx open-conxi uninstall` removes them. A skill of yours with the same name is never overwritten unless you add `--force`.
+
+Or load the repo as a plugin:
 ```bash
-git clone https://github.com/millia-labs/openconxi.git && claude --plugin-dir ./openconxi
+git clone https://github.com/millia-labs/open-conxi.git && claude --plugin-dir ./open-conxi
 ```
 
 **Paste.** Open any `SKILL.md`, copy it into a Project's instructions.

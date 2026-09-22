@@ -1,10 +1,10 @@
 {
   "name": "open-conxi",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Twelve free Claude skills that run the daily, weekly and monthly work of an independent hotel: setup, dashboard, morning flash, reviews, guest messages, turnover, work orders, rate check, group displacement, roster, OTA reconciliation, owner report.",
   "author": { "name": "Millia Labs Pte. Ltd.", "email": "mark@conxi.ai", "url": "https://conxi.ai" },
-  "homepage": "https://github.com/millia-labs/openconxi",
-  "repository": "https://github.com/millia-labs/openconxi",
+  "homepage": "https://github.com/millia-labs/open-conxi",
+  "repository": "https://github.com/millia-labs/open-conxi",
   "license": "MIT",
   "keywords": ["hotel", "hospitality", "claude-skills"],
   "skills": "./"
