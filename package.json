@@ -8,6 +8,6 @@
   "author": { "name": "Millia Labs Pte. Ltd.", "email": "mark@conxi.ai", "url": "https://conxi.ai" },
   "license": "MIT",
   "bin": { "open-conxi": "./bin/cli.js" },
-  "scripts": { "test": "node --test tests/" },
+  "scripts": { "test": "node --test tests/*.test.js" },
   "files": ["bin/", ".claude-plugin/", "docs/", "hotel-setup/", "hotel-dashboard/", "morning-flash/", "review-replies/", "guest-messages/", "turnover-board/", "work-orders/", "rate-check/", "group-displacement/", "staff-roster/", "ota-reconciliation/", "owner-report/", "CLAUDE.md", "LICENSE", "README.md"]
 }
