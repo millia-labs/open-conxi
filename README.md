@@ -1,6 +1,6 @@
 # Open Conxi
 
-Thirteen free Claude skills that run the daily, weekly and monthly work of an independent hotel. Any country, any PMS, no setup beyond one profile file. MIT.
+Fourteen free Claude skills that run the daily, weekly and monthly work of an independent hotel. Any country, any PMS, no setup beyond one profile file. MIT.
 
 > Meet Conxi the AI brain for your hotels. Staff texts are on whatsapp, guests send emails or chat on the OTAs, and revenue managers use obsolete pricing software to update the PMS manually.
 >
@@ -16,7 +16,7 @@ Open Conxi is the free part. The founders ran a 106-room hospitality operation a
 
 1. `hotel-setup` builds `hotel-profile.md`. Once.
 2. `hotel-dashboard` builds `dashboard.html`. Re-run after any skill.
-3. Then any of the ten job skills, whenever the job comes up, or say "run my morning" and `hotel-routine` runs the day's jobs in order.
+3. Then any of the ten job skills, whenever the job comes up (they follow the 20 SOPs in `hotel-sops`), or say "run my morning" and `hotel-routine` runs the day's jobs in order.
 
 ## The skills
 
@@ -35,8 +35,17 @@ Open Conxi is the free part. The founders ran a 106-room hospitality operation a
 | Monthly | `ota-reconciliation` | OTA statements, PMS stays | Variances, disputes, effective commission |
 | Monthly | `owner-report` | P&L, budget, last year | USALI or local report, outlook, scorecard |
 | Daily | `hotel-routine` | Whatever today's jobs need, asked for once | Every due job run in order, cross-checked, one team message per staff chat |
+| Any time | `hotel-sops` | A question ("what do we do if a ceiling leaks") | The hotel's own SOP, a filled-in copy, or a five-question staff quiz |
 
 Every skill has the same six sections: paste in, do, checklist, check yourself, output, still manual in your systems. See `docs/CONTRACT.md`. Every benchmark is sourced in that skill's `references/evidence.md`.
+
+## Your SOPs
+
+Twenty one-page standard operating procedures ship with the skills: check-in, check-out, walking a guest, VIP arrival, service recovery, night audit, key control, departure and stayover cleaning, inspection, lost and found, shift handover, work orders, out-of-order rooms, preventive maintenance, water leaks, rate review, group inquiries, fire alarm and medical emergency. Each has a standard you can measure, 5 to 9 steps, a check before the costly moment, and its sources.
+
+`npx open-conxi sops` copies them into a `sops` folder next to your profile, and hotel-setup does it for you. Edit any file to match how your hotel works; the skills read your copy, and the command never overwrites it. Say "adapt our SOPs" to fill in the blanks for your building. The board, the work orders and the morning routine name the SOP for what they flag, so the team message says what to do, not only what is wrong.
+
+The fire alarm and medical emergency SOPs never replace your fire plan, your first aid training or local law.
 
 ## Install
 
