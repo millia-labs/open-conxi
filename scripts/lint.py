@@ -38,10 +38,11 @@ TEAM = ('Team message: end with a block headed "Team message" in plain text for 
     'today, even when you are also asking the GM for missing inputs. In Claude Code, if hotel-profile.md names a '
     '{role} chat under team_chats, save the block to team-message.txt and run `npx open-conxi team send --to {role} '
     '--file team-message.txt`, which puts it in that Beeper chat as a draft for a person to check and send. Add '
-    '`--send` only when the GM says "send it straight away", "send it now" or "no need to check"; for "just send '
-    'it" or anything vaguer, draft it and add one line: "It is a draft. Say send it straight away and I will send '
-    'it." Report what the command printed, in its own words, and never say the message was drafted or sent unless '
-    'it printed so. Otherwise, and in claude.ai, print the block for the GM to paste into the staff chat.')
+    '`--send` only when the GM says "send it straight away", "send it now" or "no need to check"; "just send it", '
+    '"send it to the team" or "send it to the group" are not enough, so for those and anything vaguer, draft it and '
+    'add one line: "It is a draft. Say send it straight away and I will send it." Report what the command printed, '
+    'in its own words, and never say the message was drafted or sent unless it printed so. Otherwise, and in '
+    'claude.ai, print the block for the GM to paste into the staff chat.')
 PROFILE = ("First, open hotel-profile.md with your file-reading tool (in claude.ai, from the Project's knowledge) and take the hotel's name, currency, languages, "
     "people and systems from it; if it is missing, say so at the top and list the defaults you used.")
 
