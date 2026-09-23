@@ -63,3 +63,16 @@ test("team with no Beeper token explains how to connect", () => {
   catch (e) { err = String(e.stderr); }
   assert.match(err, /npx open-conxi team connect/);
 });
+
+test("team send never takes another flag as the message", () => {
+  let err = "";
+  try { execFileSync("node", [CLI, "team", "send", "--to", "x", "--text", "--send"], { stdio: "pipe", env: { ...process.env, BEEPER_TOKEN: "t", BEEPER_URL: "http://127.0.0.1:9" } }); }
+  catch (e) { err = String(e.stderr); }
+  assert.match(err, /--text needs a value/);
+});
+
+test("a typo gets a did-you-mean", () => {
+  let err = "";
+  try { execFileSync("node", [CLI, "instal"], { stdio: "pipe" }); } catch (e) { err = String(e.stderr); }
+  assert.match(err, /Did you mean: npx open-conxi install/);
+});

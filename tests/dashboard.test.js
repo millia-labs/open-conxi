@@ -22,10 +22,20 @@ test("render falls back to the template's empty block when the file is missing",
   assert.deepEqual(JSON.parse(block(render(tmp(), TPL))).kpis, []);
 });
 
-test("render keeps the empty block when the file does not parse", () => {
+test("a broken file shows a plain warning, not an empty hotel", () => {
   const dir = tmp();
   fs.writeFileSync(path.join(dir, "hotel-data.json"), "{ half written");
-  assert.deepEqual(JSON.parse(block(render(dir, TPL))).kpis, []);
+  const html = render(dir, TPL);
+  assert.deepEqual(JSON.parse(block(html)).kpis, []);
+  assert.match(html, /has a mistake in it/);
+});
+
+test("a broken file keeps showing the last good data", () => {
+  const dir = tmp();
+  fs.writeFileSync(path.join(dir, "hotel-data.json"), "{ half written");
+  const html = render(dir, TPL, { hotel: { name: "Casa Azul" } });
+  assert.equal(JSON.parse(block(html)).hotel.name, "Casa Azul");
+  assert.match(html, /Showing the last good version/);
 });
 
 test("render escapes </script> inside the data", () => {

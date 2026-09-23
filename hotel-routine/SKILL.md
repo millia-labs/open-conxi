@@ -36,10 +36,11 @@ First, open hotel-profile.md with your file-reading tool (in claude.ai, from the
    - The flash's arrivals count matches the rooms the board marks for arrival.
    - A P0 or P1 work order appears in the flash's risks.
    - A review that names a room defect has an open work order, or the routine lists it as needing one.
+   - A count is taken from the pasted list, never worked out from other figures. If a count someone would derive (stayovers from rooms sold minus departures) disagrees with the pasted list, the list stands and the gap is a missing input to ask about, never an oversell or a shortfall to act on.
    Fix the output that is wrong, and say what changed.
 5. Team messages: each job ends with a team message for one chat. Merge all messages for the same chat into one, highest priority first, under 900 characters. Managers get the flash decisions and review escalations; housekeeping gets the board; maintenance gets new and overdue orders; all staff gets the roster only.
 6. Deliver each merged message with the team message rule in section 5, one chat at a time.
-7. Dashboard: in Claude Code, the jobs have already saved hotel-data.json, so if `npx open-conxi dashboard` is running the page has updated itself; say so. Otherwise follow hotel-dashboard to rebuild dashboard.html.
+7. Dashboard: in Claude Code, the jobs have already saved hotel-data.json, so if `npx open-conxi dashboard` is running the page has updated itself; say so. Otherwise follow hotel-dashboard to rebuild dashboard.html. Name a panel as empty only after counting its rows in hotel-data.json.
 8. End with the day sheet in section 5.
 
 ## 3. Checklist
@@ -56,15 +57,15 @@ READ-DO, before the first team message is drafted.
 - The day sheet lists every due job exactly once, as done or skipped.
 - Numbers quoted in team messages match the job outputs they came from, digit for digit.
 - No job was run twice, and no job ran that was not due.
-- Output rules: an unknown value is null, never 0 or a copy; no scorecard row unless the value is final and hotel-wide; no fact or promise that was not given, and never say an action was taken or will be taken (passed on, flagged, fixed, isolated, refunded) unless the paste says so; no weekday unless the paste states it; no sign-off unless a guest reads the text; no long or short dash characters (wider than a hyphen) anywhere, titles and headings included: write "Casa Azul, morning flash, 22 Sep", not the name, a dash, then the date; before replying, search the whole reply for them and replace each with a comma, a colon, a full stop, or "to" in a range; no emojis and no symbols such as warning signs, ticks, stars or arrows.
+- Output rules: an unknown value is null, never 0 or a copy; no scorecard row unless the value is final and hotel-wide; no fact or promise that was not given, and never say an action was taken or will be taken (passed on, flagged, fixed, isolated, refunded, dispatched, called, contacted, shared, posted) unless the paste says so; no weekday unless the paste states it; no sign-off unless a guest reads the text; names exactly as given, in the same script, with no title that assumes gender; no long or short dash characters (wider than a hyphen) anywhere, titles, headings and table cells included: write "Casa Azul, morning flash, 22 Sep", not the name, a dash, then the date, and write "none" in an empty cell; search every reply for them before you send it, a one-line question or a stop included, and replace each with a comma, a colon, a full stop, or "to" in a range; no emojis and no symbols such as warning signs, ticks, stars or arrows.
 
 ## 5. Output
-1. Day sheet at the top: a table of job, status (done, or skipped with the export needed), the one number that matters from it, and where its team message went.
+1. Day sheet at the top: a table of job, status (done, or skipped with the export needed), the one number that matters from it, and what the team send command printed for its chat, in the command's own words ("Draft is waiting in ..."). A draft is never called sent.
 2. Cross-check fixes, one line each.
 3. Each job's output under its own heading, as its skill prints it.
 4. The merged team messages, one per chat.
 
-Team messages: in Claude Code, for each merged message, save it to team-message.txt and run `npx open-conxi team send --to <role> --file team-message.txt`, where role is managers, housekeeping, maintenance or all_staff from team_chats in hotel-profile.md. It lands in that Beeper chat as a draft for a person to check and send; add `--send` only when the GM asks for it to go straight out. Report what the command printed, and never say a message was drafted or sent unless it printed so. If the profile names no chat for a role, or in claude.ai, print the message for the GM to paste.
+Team messages: in Claude Code, for each merged message, save it to team-message.txt and run `npx open-conxi team send --to <role> --file team-message.txt`, where role is managers, housekeeping, maintenance or all_staff from team_chats in hotel-profile.md. Count each message first with `wc -m team-message.txt` and cut it until it is under 900 characters. It lands in that Beeper chat as a draft for a person to check and send. Add `--send` only when the GM says "send it straight away", "send it now" or "no need to check"; for "just send it" or anything vaguer, draft it and add one line: "It is a draft. Say send it straight away and I will send it." Report what the command printed, in its own words, and never say a message was drafted or sent unless it printed so. If the profile names no chat for a role, or in claude.ai, print the message for the GM to paste.
 
 This skill emits no delta of its own. Each job saves its own, as its skill says.
 

@@ -9,25 +9,37 @@ const { execFile } = require("node:child_process");
 
 const BLOCK = /(<script id="hotel-data" type="application\/json">)([\s\S]*?)(<\/script>)/;
 
-function readData(dir) {
-  try { return JSON.parse(fs.readFileSync(path.join(dir, "hotel-data.json"), "utf8")); }
-  catch { return null; }
+// { data } when the file parses, { error } when it exists but does not, {} when missing.
+function readState(dir) {
+  let text;
+  try { text = fs.readFileSync(path.join(dir, "hotel-data.json"), "utf8"); } catch { return {}; }
+  try { return { data: JSON.parse(text) }; } catch (e) { return { error: e.message }; }
 }
+const readData = (dir) => readState(dir).data || null;
 
-function render(dir, templatePath) {
+const esc = (t) => String(t).replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+
+function render(dir, templatePath, lastGood) {
   const tpl = fs.readFileSync(templatePath, "utf8");
-  const data = readData(dir);
-  if (!data) return tpl;
-  const json = JSON.stringify(data).replace(/</g, "\\u003c");
-  return tpl.replace(BLOCK, (_, a, _b, c) => a + json + c);
+  const st = readState(dir);
+  const data = st.data || (st.error ? lastGood : null);
+  let html = data ? tpl.replace(BLOCK, (_, a, _b, c) => a + JSON.stringify(data).replace(/</g, "\\u003c") + c) : tpl;
+  if (st.error) {
+    const note = `hotel-data.json has a mistake in it and cannot be read (${esc(st.error)}). ${lastGood ? "Showing the last good version." : ""} Ask Claude: fix my hotel-data.json.`;
+    html = html.replace('<div class="wrap">', `<div class="wrap"><div class="card" style="border-color:#a65a2e;color:#a65a2e;margin-bottom:24px">${note}</div>`);
+  }
+  return html;
 }
 
 function createServer({ dir, templatePath }) {
   const clients = new Set();
   let timer = null;
   let watcher = null;
+  let lastGood = readData(dir);
   const push = () => {
-    if (!readData(dir)) return; // mid-write or broken: wait for the next save
+    const st = readState(dir);
+    if (st.error) { console.log(`hotel-data.json cannot be read right now: ${st.error}`); return; } // mid-write or broken
+    lastGood = st.data;
     for (const res of clients) res.write("event: update\ndata: 1\n\n");
   };
   try {
@@ -42,7 +54,7 @@ function createServer({ dir, templatePath }) {
     const url = req.url.split("?")[0];
     if (url === "/" || url === "/index.html") {
       res.writeHead(200, { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" });
-      return res.end(render(dir, templatePath));
+      return res.end(render(dir, templatePath, lastGood));
     }
     if (url === "/events") {
       res.writeHead(200, { "content-type": "text/event-stream", "cache-control": "no-store", connection: "keep-alive" });
@@ -98,4 +110,4 @@ function start({ dir = process.cwd(), port = 4747, open = true } = {}) {
   return srv;
 }
 
-module.exports = { render, readData, createServer, start };
+module.exports = { render, readData, readState, createServer, start };

@@ -118,3 +118,18 @@ test("a message over 900 characters is refused before touching Beeper", async ()
   b.srv.close();
   assert.equal(b.writes.length, 0);
 });
+
+test("a role with no chat in the profile stops without searching Beeper", async () => {
+  const b = await fakeBeeper();
+  const dir = tmp();
+  fs.writeFileSync(path.join(dir, "hotel-profile.md"), 'team_chats: {managers: "", housekeeping: "", maintenance: "", all_staff: "Housekeeping team"}\n');
+  await assert.rejects(deliver({ url: b.url, token: "good" }, { to: "housekeeping", text: "x", dir }), /names no housekeeping chat/);
+  b.srv.close();
+  assert.equal(b.writes.length, 0);
+});
+
+test("a misspelt chat name suggests the right one", async () => {
+  const b = await fakeBeeper();
+  await assert.rejects(resolveChat({ url: b.url, token: "good" }, "Housekeepng team"), /Closest:\n  Housekeeping team/);
+  b.srv.close();
+});

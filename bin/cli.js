@@ -86,5 +86,10 @@ function team() {
 }
 
 const fns = { install, dashboard, team, update: install, uninstall, list, help: usage, "--help": usage, "-h": usage, "--version": () => console.log(VERSION), "-v": () => console.log(VERSION) };
-if (!fns[cmd]) { console.error(`Unknown command: ${cmd}\n`); usage(); process.exit(1); }
+if (!fns[cmd]) {
+  const guess = Object.keys(fns).find((k) => !k.startsWith("-") && (k.startsWith(cmd.slice(0, 3)) || cmd.startsWith(k.slice(0, 3))));
+  console.error(`Unknown command: ${cmd}${guess ? `. Did you mean: npx open-conxi ${guess}` : ""}\n`);
+  usage();
+  process.exit(1);
+}
 fns[cmd]();
