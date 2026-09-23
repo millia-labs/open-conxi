@@ -12,7 +12,7 @@ Run order: hotel-setup, hotel-dashboard, then this skill. Every morning before t
 - Out-of-order and out-of-inventory rooms with reason.
 - Attendants on shift today with start and end times.
 - Optional: special requests (allergy, cot, early arrival, connecting rooms), VIP arrivals.
-- Missing attendant list or hours: build the board anyway, rooms unassigned or credits not calculated, and say what is missing. The board always prints, even when the GM only asked for the team message.
+- Missing attendant list or hours: build the board anyway, rooms unassigned or credits not calculated, and say what is missing. The board always prints in full in the reply, even when the GM only asked for the team message or it was sent straight away.
 
 ## 2. Do
 First, open hotel-profile.md with your file-reading tool (in claude.ai, from the Project's knowledge) and take the hotel's name, currency, languages, people and systems from it; if it is missing, say so at the top and list the defaults you used.
