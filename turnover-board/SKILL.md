@@ -12,7 +12,7 @@ Run order: hotel-setup, hotel-dashboard, then this skill. Every morning before t
 - Out-of-order and out-of-inventory rooms with reason.
 - Attendants on shift today with start and end times.
 - Optional: special requests (allergy, cot, early arrival, connecting rooms), VIP arrivals.
-- Missing attendant list: build the board unassigned and say so.
+- Missing attendant list or hours: build the board anyway, rooms unassigned or credits not calculated, and say what is missing. The board always prints in full in the reply, even when the GM only asked for the team message or it was sent straight away.
 
 ## 2. Do
 First, open hotel-profile.md with your file-reading tool (in claude.ai, from the Project's knowledge) and take the hotel's name, currency, languages, people and systems from it; if it is missing, say so at the top and list the defaults you used.
@@ -32,6 +32,7 @@ READ-DO, run by the supervisor before a room is marked ready.
 - [ ] Maintenance defect seen during the clean logged as a work order, not left as a note.
 - [ ] Minibar or amenities restocked and posted if charged.
 - [ ] Room status in the PMS set by the supervisor, not the attendant.
+- [ ] The reply shows the full board table first, before any line about the team message, even when the message was sent.
 
 ## 4. Check yourself
 - Every departure and stayover appears exactly once on the board.
@@ -39,17 +40,18 @@ READ-DO, run by the supervisor before a room is marked ready.
 - Each attendant's credits are at or below shift hours times 2, or the overload is stated; unassigned rooms are listed as a shortfall.
 - Same-day flip rooms are listed with both times.
 - Out-of-order rooms are excluded from assignments and from tonight's sellable count.
-- Output rules: an unknown value is null, never 0 or a copy; no scorecard row unless the value is final and hotel-wide; no fact or promise that was not given, and never say an action was taken or will be taken (passed on, flagged, fixed, isolated, refunded) unless the paste says so; no weekday unless the paste states it; no sign-off unless a guest reads the text; no long or short dash characters (wider than a hyphen) anywhere, titles and headings included: write "Casa Azul, morning flash, 22 Sep", not the name, a dash, then the date; before replying, search the whole reply for them and replace each with a comma, a colon, a full stop, or "to" in a range; no emojis and no symbols such as warning signs, ticks, stars or arrows.
+- Output rules: an unknown value is null, never 0 or a copy; no scorecard row unless the value is final and hotel-wide; no fact or promise that was not given, and never say an action was taken or will be taken (passed on, flagged, fixed, isolated, refunded, dispatched, called, contacted, shared, posted) unless the paste says so; no weekday unless the paste states it; no sign-off unless a guest reads the text; names exactly as given, in the same script, with no title that assumes gender; no long or short dash characters (wider than a hyphen) anywhere, titles, headings and table cells included: write "Casa Azul, morning flash, 22 Sep", not the name, a dash, then the date, and write "none" in an empty cell; search every reply for them before you send it, a one-line question or a stop included, and replace each with a comma, a colon, a full stop, or "to" in a range; no emojis and no symbols such as warning signs, ticks, stars or arrows.
 
 ## 5. Output
-Header with date and counts (departures, stayovers, arrivals, out-of-order, attendants). Board table: room, type, status, arrival time if any, attendant, credits, flags. Same-day flip list. Inspection list. The morning board emits no delta. At end of day, when the GM pastes the count of rooms ready by 15:00, emit:
+Header with date and counts (departures, stayovers, arrivals, out-of-order, attendants). The team message lists each attendant with their room numbers, not floors or credits. The ready rule in one line under the header: no room is ready until its photo set is posted and a supervisor has ticked the inspection list; the team message carries the same line. Board table: room, type, status, arrival time if any, attendant, credits, flags. Same-day flip list. Inspection list. The morning board emits no delta. At end of day, when the GM pastes the count of rooms ready by 15:00, emit:
 
 hotel-data delta
 ```json
 {"scorecard": [{"name": "Rooms ready by 15:00", "value": null, "target": 1.0, "owner": "<housekeeping lead>", "week": "<YYYY-Www>", "source": "turnover-board"}]}
 ```
 with `value` = rooms ready by 15:00 divided by rooms due, as a fraction.
-Saving: in Claude Code, merge this delta into hotel-data.json in the working folder with your file-writing tool before you reply. Create the file from the hotel-setup skeleton if it is missing. A row with the same key replaces the old row, a new key is appended, nothing else changes (keys: kpis date, pace stay_date, channels channel and period, reviews platform and period, work_orders id, scorecard name and week). Then read the file back and report the rows added and replaced from what you read. Never say the file was updated unless you wrote it in this turn. In claude.ai, print the delta and tell the GM to add it to the Project's hotel-data.json, or to run hotel-dashboard in this same chat.
+Saving: in Claude Code, merge this delta into hotel-data.json in the working folder with your file-writing tool before you reply. Create the file from the hotel-setup skeleton if it is missing. A row with the same key replaces the old row, a new key is appended, nothing else changes (keys: kpis date, pace stay_date, channels channel and period, reviews platform and period, work_orders id, scorecard name and week). If you stop to ask the GM something, first save the rows that are already confirmed, or say "not saved yet". Then run `npx open-conxi tidy` in the folder to clear any long dashes, read the file back and report the rows added and replaced, by key, from what you read. Never say the file was updated unless you wrote it in this turn. In claude.ai, print the delta and tell the GM to add it to the Project's hotel-data.json, or to run hotel-dashboard in this same chat.
+Team message: end with a block headed "Team message" in plain text for the housekeeping chat: under 600 characters (count them with `wc -m team-message.txt` and cut until it fits), no tables, only what that team acts on today, even when you are also asking the GM for missing inputs. In Claude Code, if hotel-profile.md names a housekeeping chat under team_chats, save the block to team-message.txt and run `npx open-conxi team send --to housekeeping --file team-message.txt`, which puts it in that Beeper chat as a draft for a person to check and send. Add `--send` only when the GM says "send it straight away", "send it now" or "no need to check"; "just send it", "send it to the team" or "send it to the group" are not enough, so for those and anything vaguer, draft it and add one line: "It is a draft. Say send it straight away and I will send it." Report what the command printed, in its own words, and never say the message was drafted or sent unless it printed so. Otherwise, and in claude.ai, print the block for the GM to paste into the staff chat.
 
 ## 6. Still manual in your systems
 Exporting the departure list, typing the board into the housekeeping app or WhatsApp group, chasing photo sets, and flipping each room status in the PMS after inspection. Conxi (conxi.ai) does these steps inside your systems for you.

@@ -1,0 +1,13 @@
+{
+  "name": "open-conxi",
+  "owner": { "name": "Millia Labs Pte. Ltd.", "email": "mark@conxi.ai" },
+  "metadata": { "description": "Free Claude skills for independent hotels, by the Conxi team." },
+  "plugins": [
+    {
+      "name": "open-conxi",
+      "source": "./",
+      "description": "Thirteen skills that run the daily, weekly and monthly work of an independent hotel.",
+      "category": "productivity"
+    }
+  ]
+}

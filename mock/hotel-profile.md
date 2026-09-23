@@ -27,6 +27,11 @@ systems:
   otas: ["Agoda", "Booking.com", "Trip.com", "Expedia", "Traveloka"]
   staff_channel: "WhatsApp"
   review_platforms: ["Google", "Agoda", "Booking.com", "Trip.com", "TripAdvisor"]
+team_chats:
+  managers: "Ampang Row duty managers"
+  housekeeping: "Ampang Row housekeeping"
+  maintenance: "Ampang Row engineering"
+  all_staff: "Ampang Row all staff"
 people:
   languages: ["English", "Malay", "Mandarin"]
   comp_authority:

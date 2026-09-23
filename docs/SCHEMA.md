@@ -35,6 +35,11 @@ systems:
   otas: []               # Booking.com, Expedia, Agoda, Trip.com, Traveloka, other
   staff_channel: ""      # WhatsApp, Line, Slack, email
   review_platforms: []   # Google, Booking.com, Agoda, Trip.com, TripAdvisor
+team_chats:              # staff group chats by role, named exactly as they show in the staff app; leave "" if none
+  managers: ""
+  housekeeping: ""
+  maintenance: ""
+  all_staff: ""
 people:
   languages: []
   comp_authority:        # who may give what without approval
@@ -54,7 +59,7 @@ Every row has a key. A later row with the same key replaces the earlier one; tha
 
 | Array | Key |
 |---|---|
-| kpis | date |
+| kpis | date (YYYY-MM-DD for a day; YYYY-MM with "grain": "month" for a month) |
 | pace | stay_date |
 | channels | channel + period |
 | reviews | platform + period |

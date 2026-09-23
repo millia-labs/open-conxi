@@ -1,6 +1,6 @@
 # Open Conxi, agent rules
 
-This repo is twelve Claude skills for hotels. Deliverables are markdown, one HTML template, and small scripts. No build step for the skills.
+This repo is thirteen Claude skills for hotels. Deliverables are markdown, one HTML template, and small scripts. No build step for the skills.
 
 Rules:
 - Every skill follows `docs/CONTRACT.md` exactly: frontmatter `name` equals the folder name, six sections in order, under 150 lines. `python3 scripts/lint.py` must pass before any commit.
