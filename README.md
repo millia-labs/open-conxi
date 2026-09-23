@@ -12,6 +12,26 @@ Fourteen free Claude skills that run the daily, weekly and monthly work of an in
 
 Open Conxi is the free part. The founders ran a 106-room hospitality operation and launched Conxi in June 2026. These skills are the procedures that operation ran on, written so any hotel can run them in Claude today. Each skill ends with the list of steps a person still has to do inside the PMS and the extranets. That list is what [Conxi](https://conxi.ai) does for you.
 
+## What it looks like
+
+These come from a real run on the mock hotel in `mock/` (The Ampang Row, 120 rooms, fictional numbers): one "run my morning" in Claude Code with yesterday's exports pasted in.
+
+**Run my morning.** Every due job runs in order, skipped jobs name the export they need, and the cross-checks name the SOP to follow.
+
+![Day sheet from run my morning](docs/screenshots/run-my-morning.png)
+
+**One draft per staff chat.** The three messages that landed in the managers, housekeeping and engineering chats as Beeper drafts, word for word. Nothing is sent until a person presses send.
+
+![Team message drafts](docs/screenshots/team-drafts.png)
+
+**The live dashboard.** `npx open-conxi dashboard` keeps this page current as each skill saves its numbers.
+
+![Hotel dashboard](docs/screenshots/dashboard.png)
+
+**An SOP.** One of the 20. The highlighted blanks are filled in once, when you say "adapt our SOPs".
+
+![SOP 16, water leak](docs/screenshots/sop.png)
+
 ## Run order
 
 1. `hotel-setup` builds `hotel-profile.md`. Once.
