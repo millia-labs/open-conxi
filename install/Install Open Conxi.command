@@ -1,10 +1,10 @@
 #!/bin/bash
-# Double-click installer for macOS. Copies the thirteen Open Conxi skills into
+# Double-click installer for macOS. Copies the fourteen Open Conxi skills into
 # ~/.claude/skills, where Claude Code finds them. Needs nothing else installed.
 cd "$(dirname "$0")" || exit 1
 DEST="$HOME/.claude/skills"
 VERSION="$(cat VERSION 2>/dev/null || echo unknown)"
-SKILLS="hotel-setup hotel-dashboard morning-flash review-replies guest-messages turnover-board work-orders rate-check group-displacement staff-roster ota-reconciliation owner-report hotel-routine"
+SKILLS="hotel-setup hotel-dashboard morning-flash review-replies guest-messages turnover-board work-orders rate-check group-displacement staff-roster ota-reconciliation owner-report hotel-routine hotel-sops"
 mkdir -p "$DEST"
 done=0; skipped=""
 for s in $SKILLS; do
@@ -16,7 +16,7 @@ for s in $SKILLS; do
   done=$((done+1))
 done
 echo ""
-echo "Open Conxi $VERSION: installed $done of 13 skills into $DEST"
+echo "Open Conxi $VERSION: installed $done of 14 skills into $DEST"
 if [ -n "$skipped" ]; then echo "Left alone, you already have your own skill with this name:$skipped"; fi
 echo ""
 echo "Next: quit and reopen Claude Code, then type: set up my hotel"

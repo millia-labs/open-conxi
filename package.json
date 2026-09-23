@@ -1,7 +1,7 @@
 {
   "name": "open-conxi",
-  "version": "0.2.0",
-  "description": "Thirteen free Claude skills that run the daily, weekly and monthly work of an independent hotel. By the Conxi team.",
+  "version": "0.3.0",
+  "description": "Fourteen free Claude skills that run the daily, weekly and monthly work of an independent hotel. By the Conxi team.",
   "keywords": [
     "claude",
     "claude-skills",
@@ -45,6 +45,7 @@
     "ota-reconciliation/",
     "owner-report/",
     "hotel-routine/",
+    "hotel-sops/",
     "CLAUDE.md",
     "LICENSE",
     "README.md"

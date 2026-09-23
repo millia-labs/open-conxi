@@ -114,6 +114,42 @@ def lint_prose():
                 errs.append(f"{rel}:{i}: emoji")
     return errs
 
+SOP_HEADS = ["Owner:", "Used by:", "When:", "## Standard", "## Steps", "## Pause point", "## Escalate to the GM when", "## Your hotel", "## Sources"]
+
+def lint_sops():
+    """Format check for hotel-sops/sops/*.md, and every SOP must be named by at least one skill."""
+    errs = []
+    folder = ROOT / "hotel-sops" / "sops"
+    files = sorted(folder.glob("[0-9][0-9]-*.md")) if folder.exists() else []
+    if len(files) != 20:
+        errs.append(f"hotel-sops/sops has {len(files)} SOPs, expected 20")
+    skills_text = "\n".join((d / "SKILL.md").read_text(encoding="utf-8") for d in skill_dirs() if d.name != "hotel-sops")
+    for f in files:
+        rel, text = f.relative_to(ROOT), f.read_text(encoding="utf-8")
+        lines, nn = text.splitlines(), f.name[:2]
+        if len(lines) > 60:
+            errs.append(f"{rel}: {len(lines)} lines, limit 60")
+        if not lines or not lines[0].startswith(f"# SOP {nn}: "):
+            errs.append(f"{rel}: first line must be '# SOP {nn}: <name>'")
+        pos = 0
+        for h in SOP_HEADS:
+            p = text.find(h, pos)
+            if p < 0:
+                errs.append(f"{rel}: '{h}' missing or out of order")
+            else:
+                pos = p
+        s, e = text.find("## Steps"), text.find("## Pause point")
+        steps = len(re.findall(r"^\d+\. ", text[s:e], re.M)) if s >= 0 and e > s else 0
+        if not 5 <= steps <= 9:
+            errs.append(f"{rel}: {steps} steps, need 5 to 9")
+        e2 = text.find("## Escalate")
+        checks = len(re.findall(r"^- \[ \] ", text[e:e2], re.M)) if e >= 0 and e2 > e else 0
+        if not 3 <= checks <= 5:
+            errs.append(f"{rel}: pause point has {checks} items, need 3 to 5")
+        if f"SOP {nn}" not in skills_text:
+            errs.append(f"{rel}: no skill names SOP {nn}")
+    return errs
+
 def main(argv):
     dirs = [pathlib.Path(a) for a in argv] or skill_dirs()
     bad = 0
@@ -131,6 +167,11 @@ def main(argv):
             print(f"     - {e}")
         print("prose ok" if not prose else f"prose FAIL ({len(prose)})")
         bad += bool(prose)
+        sops = lint_sops()
+        for e in sops:
+            print(f"     - {e}")
+        print("sops ok" if not sops else f"sops FAIL ({len(sops)})")
+        bad += bool(sops)
     return 1 if bad else 0
 
 if __name__ == "__main__":

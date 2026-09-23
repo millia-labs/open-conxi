@@ -8,7 +8,7 @@ const os = require("node:os");
 
 const PKG_ROOT = path.join(__dirname, "..");
 const VERSION = require(path.join(PKG_ROOT, "package.json")).version;
-const SKILLS = ["hotel-setup","hotel-dashboard","morning-flash","review-replies","guest-messages","turnover-board","work-orders","rate-check","group-displacement","staff-roster","ota-reconciliation","owner-report","hotel-routine"];
+const SKILLS = ["hotel-setup","hotel-dashboard","morning-flash","review-replies","guest-messages","turnover-board","work-orders","rate-check","group-displacement","staff-roster","ota-reconciliation","owner-report","hotel-routine","hotel-sops"];
 const MARKER = ".open-conxi";
 
 function skillsDir() {
@@ -21,14 +21,15 @@ const ours = (dir) => fs.existsSync(path.join(dir, MARKER));
 
 function usage() {
   console.log(`open-conxi ${VERSION}\n`);
-  console.log("Usage: npx open-conxi <install|update|uninstall|list|dashboard|team|tidy|help>\n");
-  console.log("  install    copy the thirteen skills into ~/.claude/skills");
+  console.log("Usage: npx open-conxi <install|update|uninstall|list|dashboard|team|tidy|sops|help>\n");
+  console.log("  install    copy the fourteen skills into ~/.claude/skills");
   console.log("  update     same as install, replaces older Open Conxi copies");
   console.log("  uninstall  remove the Open Conxi skills, nothing else");
   console.log("  list       print the skills in run order");
   console.log("  dashboard  open the hotel dashboard for this folder; it updates after every skill run");
   console.log("  team       send a skill's team message to a staff chat through Beeper Desktop");
   console.log("  tidy       clean long dashes out of this folder's hotel files");
+  console.log("  sops       copy the 20 SOPs into this folder's sops/ (never overwrites yours)");
   console.log("\nAdd --force to replace a same-named skill that Open Conxi did not install.");
 }
 function list() {
@@ -91,7 +92,11 @@ function tidy() {
   console.log(out.length ? out.join("\n") : "Nothing to tidy.");
 }
 
-const fns = { install, dashboard, team, tidy, update: install, uninstall, list, help: usage, "--help": usage, "-h": usage, "--version": () => console.log(VERSION), "-v": () => console.log(VERSION) };
+function sops() {
+  require("./sops.js").cli();
+}
+
+const fns = { install, dashboard, team, tidy, sops, update: install, uninstall, list, help: usage, "--help": usage, "-h": usage, "--version": () => console.log(VERSION), "-v": () => console.log(VERSION) };
 if (!fns[cmd]) {
   const guess = Object.keys(fns).find((k) => !k.startsWith("-") && (k.startsWith(cmd.slice(0, 3)) || cmd.startsWith(k.slice(0, 3))));
   console.error(`Unknown command: ${cmd}${guess ? `. Did you mean: npx open-conxi ${guess}` : ""}\n`);

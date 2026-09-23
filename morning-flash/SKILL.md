@@ -17,12 +17,13 @@ Run order: hotel-setup, hotel-dashboard, then this skill. Every morning.
 
 ## 2. Do
 First, open hotel-profile.md with your file-reading tool (in claude.ai, from the Project's knowledge) and take the hotel's name, currency, languages, people and systems from it; if it is missing, say so at the top and list the defaults you used.
+SOPs: this skill follows SOP 01, SOP 03, SOP 04 and SOP 06 from `sops/` in the working folder (in claude.ai, the Project's knowledge). Where the hotel's copy sets a different time, limit or step, follow the hotel's copy. If `sops/` is missing, carry on with this page and add one line: run `npx open-conxi sops` to add your SOPs.
 1. Read `hotel-profile.md` for keys, currency, comp authority.
 2. Yesterday: rooms sold means paid rooms. Complimentary rooms (owner, staff, family, a free night in a package or group) are taken out of rooms sold and shown on their own line, as STR's reporting guidelines require. If the report does not say whether comps are inside its rooms sold, say that the figure is taken as paid. Occupancy = paid rooms sold / total keys, the same denominator budget and the comp set use (USALI and STR keep short-term out-of-order rooms in available inventory). Show the out-of-order count on its own line. Only remove a room from the denominator when it has been out of service for 30 days or more, and say so. ADR = rooms revenue / paid rooms sold. RevPAR = rooms revenue / total keys. Add TRevPAR if other revenue exists. Compare each to budget and last year when given.
 3. Today: arrivals, departures, stayovers, VIPs and repeats with what is known about them, out-of-order count and reason. Rooms left to sell tonight = total keys minus rooms out of order tonight minus rooms on the books tonight; show the sum. Rooms on the books is not rooms to sell.
 4. Next 7 days: on-the-books rooms and rate by date. If the hotel's own cancellation rate by channel was given, show cancellation-adjusted on-the-books: OTA rooms times (1 minus the OTA rate) plus direct rooms times (1 minus the direct rate). If no rate was given, leave the adjusted figure null and say the industry reference in `references/evidence.md` (OTA about 0.22, direct about 0.11) is available once the GM confirms it applies; never apply it silently.
 5. Risks: anything that costs money this week (oversell, group cutoff, staff gap, a VIP with an open complaint, a P0 work order).
-6. Three decisions the GM must make today, each a yes or no with the cost of each answer.
+6. A guest, VIP or not, booked into an out-of-order room is a decision under SOP 03 (move or walk), named by number, and a VIP arrival names SOP 04. Three decisions the GM must make today, each a yes or no with the cost of each answer.
 
 ## 3. Checklist
 DO-CONFIRM, before sending the flash.

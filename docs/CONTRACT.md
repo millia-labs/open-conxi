@@ -35,6 +35,7 @@ These were added after the first cold-run QA, where a fresh model followed each 
 7. Saving. In Claude Code a job skill merges its own delta into `hotel-data.json` before it replies, so the dashboard sees the data in any later conversation. In claude.ai it prints the delta for the GM to save. The live run on 22 Sep 2026 showed that printing alone loses the data between chats.
 
 8. Team message. A skill whose output a staff team acts on (managers, housekeeping, maintenance, all staff) ends with one plain-text block for that team's chat. In Claude Code, `npx open-conxi team send` puts it in the Beeper chat named under `team_chats` in the profile, as a draft unless the GM asks for it to go straight out. The skill reports what the command printed and never claims a message went out on its own say-so.
+9. SOPs. A skill that follows an SOP names it by number (SOP 16), reads the hotel's copy in `sops/`, and never changes a standard in it. The hotel's copy wins where it sets a different time, limit or step.
 
 The team-message line (section 5) is canonical too: `scripts/lint.py` holds it as `TEAM` and checks it in every skill listed in `TEAM_ROLES`.
 
