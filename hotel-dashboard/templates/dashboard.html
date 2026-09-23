@@ -86,7 +86,7 @@ function when(s,withTime){if(!s)return'n/a';const m=String(s).match(/^(\d{4})-(\
 const title=(D.hotel&&D.hotel.name)||'Hotel dashboard';
 document.getElementById('title').textContent=title;document.title=title;
 document.getElementById('asof').textContent=D.updated_at?'Updated '+when(D.updated_at,true):'Not updated yet';
-const k=D.kpis.slice().sort((a,b)=>a.date<b.date?1:-1)[0];
+const k=D.kpis.filter(r=>r.grain!=='month').slice().sort((a,b)=>a.date<b.date?1:-1)[0];
 const kp=document.getElementById('kpis');
 function delta(v,cmp,isPct){if(cmp==null||v==null)return null;const up=v>=cmp;const diff=isPct?Math.abs((v-cmp)*100).toFixed(1)+' pts':fmt(Math.abs(v-cmp));return (up?'+':'-')+diff;}
 function tile(label,v,budget,ly,isPct,dark){const el=document.createElement('div');el.className='card kpi'+(dark?' dark':'');

@@ -59,7 +59,7 @@ Every row has a key. A later row with the same key replaces the earlier one; tha
 
 | Array | Key |
 |---|---|
-| kpis | date |
+| kpis | date (YYYY-MM-DD for a day; YYYY-MM with "grain": "month" for a month) |
 | pace | stay_date |
 | channels | channel + period |
 | reviews | platform + period |

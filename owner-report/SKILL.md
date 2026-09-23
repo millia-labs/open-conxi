@@ -13,6 +13,8 @@ Run order: hotel-setup, hotel-dashboard, then this skill. Monthly, after the boo
 - Next 60 days on the books by month.
 - `hotel-profile.md` for currency, reporting standard, fiscal year, keys.
 - Missing budget or last year: report actuals and say the comparators are absent. Missing expenses: report revenue and RevPAR only, no GOP.
+- One expense line missing (utilities not billed yet, say): show GOP, EBITDA and flow-through only as "before <line>", each compared with budget and last year before that same line. Never put budget, last year or an estimate in place of a missing actual, and never say GOP beats or misses budget "either way".
+- Numbers already in hotel-data.json are quoted only after reading the row they come from.
 
 ## 2. Do
 First, open hotel-profile.md with your file-reading tool (in claude.ai, from the Project's knowledge) and take the hotel's name, currency, languages, people and systems from it; if it is missing, say so at the top and list the defaults you used.
@@ -21,14 +23,14 @@ First, open hotel-profile.md with your file-reading tool (in claude.ai, from the
 3. Flow-through = change in GOP divided by change in revenue versus last year. Split it into rate and occupancy only when last year's rooms sold and ADR were pasted; otherwise report the blended figure and say the split needs those two inputs.
 4. Outlook: next 60 days on the books versus the same point last year, in rooms and revenue.
 5. Three risks: the three items that could move next quarter's GOP by the most, each with an owner and a date.
-6. Scorecard: 5 to 15 numbers the GM tracks weekly, each with a target and an owner (occupancy, ADR, RevPAR, GOP percent, rooms ready by 15:00, review rating, work orders closed on time, labour cost per occupied room, effective OTA commission, direct share). Effective OTA commission = OTA commission divided by OTA room revenue, never by all rooms revenue; if OTA room revenue was not pasted, leave that row out of the scorecard and the delta, and mention "OTA commission as a share of rooms revenue" in the risks text only. Labour cost per occupied room goes in only when payroll for every department and every undistributed line was pasted separately; payroll folded into admin, maintenance or other lines means it is left out.
+6. Scorecard: 5 to 15 numbers the GM tracks weekly, each with a target and an owner (occupancy, ADR, RevPAR, GOP percent, rooms ready by 15:00, review rating, work orders closed on time, labour cost per occupied room, effective OTA commission, direct share). Effective OTA commission = OTA commission divided by OTA room revenue, never by all rooms revenue, and only from pasted commission and OTA room revenue, never from the channels rows in hotel-data.json; if OTA room revenue was not pasted, leave that row out of the scorecard and the delta, and mention "OTA commission as a share of rooms revenue" in the risks text only. Labour cost per occupied room goes in only when payroll for every department and every undistributed line was pasted separately; payroll folded into admin, maintenance or other lines means it is left out.
 7. One-page executive summary on top: three sentences on the month, the GOP figure, the outlook line.
 
 ## 3. Checklist
 DO-CONFIRM, before the report goes to the owner.
 - [ ] Departmental profits sum to total departmental profit; minus undistributed equals GOP; minus fixed charges equals EBITDA. Show the arithmetic.
 - [ ] Every variance sentence names a cause found in the data.
-- [ ] Rooms revenue ties to the sum of the month's daily rooms revenue from morning-flash where available.
+- [ ] Rooms revenue ties to the sum of the month's daily rooms revenue from morning-flash where available; a gap over 0.5 percent goes on the risks list with its cause stated as unknown, not called rounding.
 - [ ] Flow-through is stated with its rate versus occupancy split.
 - [ ] Outlook uses the same point in time last year, not last year's final.
 - [ ] Each risk has an owner and a date.
@@ -46,9 +48,10 @@ Executive summary, P&L table, variance commentary, flow-through line, outlook ta
 
 hotel-data delta
 ```json
-{"kpis": [{"date": "<month end>", "rooms_sold": null, "occupancy": null, "adr": null, "revpar": 0, "trevpar": 0, "gop": 0, "budget": null, "last_year": null, "source": "owner-report"}],
- "scorecard": [{"name": "GOP %", "value": 0.0, "target": null, "owner": "", "week": "<YYYY-Www>", "source": "owner-report"}]}
+{"kpis": [{"date": "<YYYY-MM>", "grain": "month", "rooms_sold": null, "occupancy": null, "adr": null, "revpar": 0, "trevpar": 0, "gop": 0, "budget": null, "last_year": null, "source": "owner-report"}],
+ "scorecard": [{"name": "GOP %", "value": 0.0, "target": null, "owner": "", "week": "<YYYY-Www of the month's last day>", "source": "owner-report"}]}
 ```
+The month row is keyed by the month alone (2026-08), never by its last day, so it can never replace that day's morning-flash row.
 Saving: in Claude Code, merge this delta into hotel-data.json in the working folder with your file-writing tool before you reply. Create the file from the hotel-setup skeleton if it is missing. A row with the same key replaces the old row, a new key is appended, nothing else changes (keys: kpis date, pace stay_date, channels channel and period, reviews platform and period, work_orders id, scorecard name and week). Then read the file back and report the rows added and replaced from what you read. Never say the file was updated unless you wrote it in this turn. In claude.ai, print the delta and tell the GM to add it to the Project's hotel-data.json, or to run hotel-dashboard in this same chat.
 
 ## 6. Still manual in your systems

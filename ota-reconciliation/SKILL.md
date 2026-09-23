@@ -13,6 +13,8 @@ Run order: hotel-setup, hotel-dashboard, then this skill. Monthly, after each OT
 - Bank or payment processor lines for OTA remittances and virtual card settlements.
 - `hotel-profile.md` for currency and OTAs.
 - Missing the bank lines: reconcile statement to PMS only and mark remittance unverified.
+- Only one OTA or only a question ("is the commission right"): still open hotel-profile.md first, then reconcile what was pasted and name the other statements the month needs.
+- A statement in another currency: convert at the rate the statement or remittance shows, and say which rate was used; if none is shown, reconcile in the statement currency and say so.
 
 ## 2. Do
 First, open hotel-profile.md with your file-reading tool (in claude.ai, from the Project's knowledge) and take the hotel's name, currency, languages, people and systems from it; if it is missing, say so at the top and list the defaults you used.
@@ -23,6 +25,7 @@ First, open hotel-profile.md with your file-reading tool (in claude.ai, from the
 4. Effective commission per channel = (commission plus promotion costs plus payment fees) divided by gross. This is the number to compare channels on, not the headline rate. If promotion costs or payment fees were not pasted, report commission over gross and label it "commission only". Channel share needs total revenue across all channels for the period; if that was not pasted, share is null.
 5. Chargebacks and virtual card failures: list each with amount, reason, and the evidence to submit.
 6. Exceptions list with a next action for each: dispute with the OTA, correct the PMS, write off with a reason and a name.
+7. OTA programme terms (Genius, Preferred, VIP levels, extra points for visibility) come only from the paste or `references/evidence.md`; never state one from memory.
 
 ## 3. Checklist
 DO-CONFIRM, before the month is closed.
@@ -46,10 +49,10 @@ Per-OTA summary table (stays, gross, commission, effective commission, adjustmen
 
 hotel-data delta
 ```json
-{"channels": [{"channel": "<OTA>", "share": null, "effective_commission": 0.0, "period": "<YYYY-MM>", "source": "ota-reconciliation"}]}
+{"channels": [{"channel": "<OTA>", "share": null, "effective_commission": 0.0, "basis": "all_costs", "period": "<YYYY-MM>", "source": "ota-reconciliation"}]}
 ```
 Saving: in Claude Code, merge this delta into hotel-data.json in the working folder with your file-writing tool before you reply. Create the file from the hotel-setup skeleton if it is missing. A row with the same key replaces the old row, a new key is appended, nothing else changes (keys: kpis date, pace stay_date, channels channel and period, reviews platform and period, work_orders id, scorecard name and week). Then read the file back and report the rows added and replaced from what you read. Never say the file was updated unless you wrote it in this turn. In claude.ai, print the delta and tell the GM to add it to the Project's hotel-data.json, or to run hotel-dashboard in this same chat.
-`share` stays null unless total revenue by channel for the period was pasted.
+Write the whole row, not just the changed field: a row with the same channel and period replaces the old one completely, so `share` is null unless total revenue by channel for the period was pasted, even if the old row had one. `basis` is "all_costs" when promotion costs and payment fees were included, "commission_only" when they were not. Always print the per-OTA summary table and the delta block, even when only one OTA was pasted.
 
 ## 6. Still manual in your systems
 Downloading each statement, exporting the PMS list, matching line by line, raising each dispute in the OTA's finance portal, and posting corrections in the PMS. Conxi (conxi.ai) does these steps inside your systems for you.
