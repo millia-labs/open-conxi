@@ -104,6 +104,7 @@ function distance(a, b) {
 
 async function deliver(cfg, { to, text, send = false, dir }) {
   if (!text || !text.trim()) throw new Error("The message is empty, nothing to send.");
+  if (/[\u2013\u2014]/.test(text)) throw new Error("The message has long dashes in it. Rewrite those spots with a comma, a full stop or \"to\", then try again.");
   if (text.length > MAX_CHARS) throw new Error(`The message is ${text.length} characters. Keep it under ${MAX_CHARS} so staff read it on a phone: cut it down and try again.`);
   const roles = dir ? readTeamChats(dir) : {};
   if (ROLES.includes(to) && !roles[to]) throw new Error(`hotel-profile.md in this folder names no ${to} chat under team_chats. Add the chat name exactly as Beeper shows it, or use --to "Chat name".`);

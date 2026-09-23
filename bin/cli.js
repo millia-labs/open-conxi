@@ -21,13 +21,14 @@ const ours = (dir) => fs.existsSync(path.join(dir, MARKER));
 
 function usage() {
   console.log(`open-conxi ${VERSION}\n`);
-  console.log("Usage: npx open-conxi <install|update|uninstall|list|dashboard|team|help>\n");
+  console.log("Usage: npx open-conxi <install|update|uninstall|list|dashboard|team|tidy|help>\n");
   console.log("  install    copy the thirteen skills into ~/.claude/skills");
   console.log("  update     same as install, replaces older Open Conxi copies");
   console.log("  uninstall  remove the Open Conxi skills, nothing else");
   console.log("  list       print the skills in run order");
   console.log("  dashboard  open the hotel dashboard for this folder; it updates after every skill run");
   console.log("  team       send a skill's team message to a staff chat through Beeper Desktop");
+  console.log("  tidy       clean long dashes out of this folder's hotel files");
   console.log("\nAdd --force to replace a same-named skill that Open Conxi did not install.");
 }
 function list() {
@@ -85,7 +86,12 @@ function team() {
   require("./team.js").cli(process.argv.slice(3)).catch((e) => { console.error(e.message); process.exit(1); });
 }
 
-const fns = { install, dashboard, team, update: install, uninstall, list, help: usage, "--help": usage, "-h": usage, "--version": () => console.log(VERSION), "-v": () => console.log(VERSION) };
+function tidy() {
+  const out = require("./tidy.js").tidy();
+  console.log(out.length ? out.join("\n") : "Nothing to tidy.");
+}
+
+const fns = { install, dashboard, team, tidy, update: install, uninstall, list, help: usage, "--help": usage, "-h": usage, "--version": () => console.log(VERSION), "-v": () => console.log(VERSION) };
 if (!fns[cmd]) {
   const guess = Object.keys(fns).find((k) => !k.startsWith("-") && (k.startsWith(cmd.slice(0, 3)) || cmd.startsWith(k.slice(0, 3))));
   console.error(`Unknown command: ${cmd}${guess ? `. Did you mean: npx open-conxi ${guess}` : ""}\n`);

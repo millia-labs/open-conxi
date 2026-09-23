@@ -133,3 +133,10 @@ test("a misspelt chat name suggests the right one", async () => {
   await assert.rejects(resolveChat({ url: b.url, token: "good" }, "Housekeepng team"), /Closest:\n  Housekeeping team/);
   b.srv.close();
 });
+
+test("a message with long dashes is sent back to be rewritten", async () => {
+  const b = await fakeBeeper();
+  await assert.rejects(deliver({ url: b.url, token: "good" }, { to: "Maintenance", text: "Room 512 — aircon" }), /long dashes/);
+  b.srv.close();
+  assert.equal(b.writes.length, 0);
+});
