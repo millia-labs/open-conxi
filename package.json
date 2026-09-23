@@ -22,7 +22,7 @@
   },
   "license": "MIT",
   "bin": {
-    "open-conxi": "./bin/cli.js"
+    "open-conxi": "bin/cli.js"
   },
   "scripts": {
     "test": "node --test tests/*.test.js"
