@@ -4,7 +4,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 python3 scripts/lint.py
 rm -rf dist && mkdir -p dist
-SKILLS=(hotel-setup hotel-dashboard morning-flash review-replies guest-messages turnover-board work-orders rate-check group-displacement staff-roster ota-reconciliation owner-report)
+SKILLS=(hotel-setup hotel-dashboard morning-flash review-replies guest-messages turnover-board work-orders rate-check group-displacement staff-roster ota-reconciliation owner-report hotel-routine)
 for s in "${SKILLS[@]}"; do
   zip -qr "dist/$s.zip" "$s" -x '*.DS_Store'
 done

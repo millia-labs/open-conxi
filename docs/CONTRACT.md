@@ -34,4 +34,8 @@ These were added after the first cold-run QA, where a fresh model followed each 
 6. Regional words: write "lift (elevator)" and "aircon (HVAC)" on first use so the text reads in every market.
 7. Saving. In Claude Code a job skill merges its own delta into `hotel-data.json` before it replies, so the dashboard sees the data in any later conversation. In claude.ai it prints the delta for the GM to save. The live run on 22 Sep 2026 showed that printing alone loses the data between chats.
 
+8. Team message. A skill whose output a staff team acts on (managers, housekeeping, maintenance, all staff) ends with one plain-text block for that team's chat. In Claude Code, `npx open-conxi team send` puts it in the Beeper chat named under `team_chats` in the profile, as a draft unless the GM asks for it to go straight out. The skill reports what the command printed and never claims a message went out on its own say-so.
+
+The team-message line (section 5) is canonical too: `scripts/lint.py` holds it as `TEAM` and checks it in every skill listed in `TEAM_ROLES`.
+
 The output-rules line (section 4) and the saving line (section 5) are canonical: `scripts/lint.py` holds the exact text as `OUTPUT_RULES` and `SAVING` and fails any skill whose copy differs.

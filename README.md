@@ -1,6 +1,6 @@
 # Open Conxi
 
-Twelve free Claude skills that run the daily, weekly and monthly work of an independent hotel. Any country, any PMS, no setup beyond one profile file. MIT.
+Thirteen free Claude skills that run the daily, weekly and monthly work of an independent hotel. Any country, any PMS, no setup beyond one profile file. MIT.
 
 > Meet Conxi the AI brain for your hotels. Staff texts are on whatsapp, guests send emails or chat on the OTAs, and revenue managers use obsolete pricing software to update the PMS manually.
 >
@@ -16,7 +16,7 @@ Open Conxi is the free part. The founders ran a 106-room hospitality operation a
 
 1. `hotel-setup` builds `hotel-profile.md`. Once.
 2. `hotel-dashboard` builds `dashboard.html`. Re-run after any skill.
-3. Then any of the ten job skills, whenever the job comes up.
+3. Then any of the ten job skills, whenever the job comes up, or say "run my morning" and `hotel-routine` runs the day's jobs in order.
 
 ## The skills
 
@@ -34,25 +34,48 @@ Open Conxi is the free part. The founders ran a 106-room hospitality operation a
 | Weekly | `staff-roster` | Forecast, staff list, your rules | Roster, breaches, labour cost per room |
 | Monthly | `ota-reconciliation` | OTA statements, PMS stays | Variances, disputes, effective commission |
 | Monthly | `owner-report` | P&L, budget, last year | USALI or local report, outlook, scorecard |
+| Daily | `hotel-routine` | Whatever today's jobs need, asked for once | Every due job run in order, cross-checked, one team message per staff chat |
 
 Every skill has the same six sections: paste in, do, checklist, check yourself, output, still manual in your systems. See `docs/CONTRACT.md`. Every benchmark is sourced in that skill's `references/evidence.md`.
 
 ## Install
 
-**claude.ai (no terminal).** Download a zip from the [latest release](https://github.com/millia-labs/open-conxi/releases/latest). In Claude, open Customize, then Skills, then the plus button, then Upload a skill. Upload `open-conxi-all.zip` or one skill at a time. Team and Enterprise admins can share a skill with the whole hotel. Then say: set up my hotel.
+Pick the line that matches you.
 
-**Claude Code.** Needs Node 18 or later. No git needed.
+**I use Claude Code and never open a terminal.** Download `open-conxi-installer.zip` from the [latest release](https://github.com/millia-labs/open-conxi/releases/latest) and unzip it. On a Mac, double-click `Install Open Conxi.command` (the first time, right-click it and choose Open, because the Mac cannot check who made it). On Windows, double-click `Install Open Conxi.cmd`. Quit and reopen Claude Code, then say: set up my hotel.
+
+**I use Claude Code and a terminal.** Needs Node 18 or later.
 ```bash
 npx open-conxi install
 ```
-This copies the twelve skills into `~/.claude/skills`. Restart Claude Code and say: set up my hotel. Later, `npx open-conxi@latest update` gets new versions and `npx open-conxi uninstall` removes them. A skill of yours with the same name is never overwritten unless you add `--force`.
-
-Or load the repo as a plugin:
-```bash
-git clone https://github.com/millia-labs/open-conxi.git && claude --plugin-dir ./open-conxi
+Or from inside Claude Code, add it as a plugin, which also keeps it updated:
 ```
+/plugin marketplace add millia-labs/open-conxi
+/plugin install open-conxi@open-conxi
+```
+Later, `npx open-conxi@latest update` gets new versions and `npx open-conxi uninstall` removes them. A skill of yours with the same name is never overwritten unless you add `--force`.
+
+**I use claude.ai in the browser.** Download the single-skill zips from the [latest release](https://github.com/millia-labs/open-conxi/releases/latest). In Claude, open Customize, then Skills, then the plus button, then Upload a skill, one zip at a time. Start with `hotel-setup.zip` and `hotel-dashboard.zip`. Team and Enterprise admins can share a skill with the whole hotel. Then say: set up my hotel.
 
 **Paste.** Open any `SKILL.md`, copy it into a Project's instructions.
+
+## A dashboard that updates itself
+
+In Claude Code, open a terminal in your hotel folder and run:
+```bash
+npx open-conxi dashboard
+```
+The dashboard opens in your browser and updates every time a skill saves `hotel-data.json`. Leave the window open. Nothing leaves your computer. Ctrl+C stops it.
+
+## Tell the team through Beeper
+
+Five skills end with a message for a staff chat: the morning flash and review escalations for managers, the board for housekeeping, work orders for maintenance, the roster for all staff. If your team chats run on WhatsApp, Telegram, Signal or Slack and you use [Beeper Desktop](https://www.beeper.com), Open Conxi can put each message straight into the right chat.
+
+1. `npx open-conxi team connect` and paste a Beeper Desktop access token (Beeper, Settings, Developers). Once.
+2. `npx open-conxi team chats` lists your chat names. Put them in `hotel-profile.md` under `team_chats` (hotel-setup asks for them).
+3. That is all. After a skill runs, its team message waits in the chat as a draft. A person reads it and presses send. Say "send it straight away" if you want it to go out without the check.
+
+Open Conxi never clears text someone is halfway through typing in a chat. It stops and says so.
 
 ## Try it on the mock hotel
 

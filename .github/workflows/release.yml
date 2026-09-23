@@ -15,4 +15,4 @@ jobs:
       - uses: softprops/action-gh-release@v2
         with:
           files: dist/*.zip
-          body: "Twelve Claude skills for hotels. Upload any zip in claude.ai under Customize, Skills. Run order: hotel-setup, hotel-dashboard, then the rest."
+          body: "Thirteen Claude skills for hotels. Claude Code without a terminal: download open-conxi-installer.zip and double-click the installer inside. claude.ai: upload the single-skill zips under Customize, Skills. Run order: hotel-setup, hotel-dashboard, then the rest; hotel-routine runs the day."

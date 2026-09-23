@@ -4,9 +4,9 @@ const { execFileSync } = require("node:child_process");
 const path = require("node:path");
 const CLI = path.join(__dirname, "..", "bin", "cli.js");
 
-test("list prints all twelve skills", () => {
+test("list prints all thirteen skills", () => {
   const out = execFileSync("node", [CLI, "list"], { encoding: "utf8" });
-  for (const s of ["hotel-setup","hotel-dashboard","morning-flash","review-replies","guest-messages","turnover-board","work-orders","rate-check","group-displacement","staff-roster","ota-reconciliation","owner-report"]) {
+  for (const s of ["hotel-setup","hotel-dashboard","morning-flash","review-replies","guest-messages","turnover-board","work-orders","rate-check","group-displacement","staff-roster","ota-reconciliation","owner-report","hotel-routine"]) {
     assert.ok(out.includes(s), s);
   }
 });
@@ -22,7 +22,7 @@ test("unknown command exits 1", () => {
 
 const fs = require("node:fs");
 const os = require("node:os");
-const ALL = ["hotel-setup","hotel-dashboard","morning-flash","review-replies","guest-messages","turnover-board","work-orders","rate-check","group-displacement","staff-roster","ota-reconciliation","owner-report"];
+const ALL = ["hotel-setup","hotel-dashboard","morning-flash","review-replies","guest-messages","turnover-board","work-orders","rate-check","group-displacement","staff-roster","ota-reconciliation","owner-report","hotel-routine"];
 const run = (dir, ...args) => execFileSync("node", [CLI, ...args], { encoding: "utf8", env: { ...process.env, CLAUDE_SKILLS_DIR: dir } });
 
 test("install copies every skill flat, with SKILL.md at the top of each folder", () => {
@@ -54,4 +54,12 @@ test("update re-copies and uninstall removes only Open Conxi skills", () => {
 test("help lists the dashboard command", () => {
   const out = execFileSync("node", [CLI, "help"], { encoding: "utf8" });
   assert.match(out, /dashboard/);
+});
+
+test("team with no Beeper token explains how to connect", () => {
+  const home = fs.mkdtempSync(path.join(os.tmpdir(), "och-"));
+  let err = "";
+  try { execFileSync("node", [CLI, "team", "send", "--to", "x", "--text", "hi"], { stdio: "pipe", env: { ...process.env, HOME: home, BEEPER_TOKEN: "" } }); }
+  catch (e) { err = String(e.stderr); }
+  assert.match(err, /npx open-conxi team connect/);
 });
