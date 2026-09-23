@@ -13,6 +13,7 @@ Run order: hotel-setup, hotel-dashboard, then this skill. Every morning.
 - Optional: budget and same-day-last-year figures. Without them the flash shows actuals only and says so.
 - Optional: next 7 days on-the-books by date and cancellations in the last 7 days.
 - Missing any item: print the flash with that line marked "not provided", never estimate it.
+- A figure the GM hedges ("around 33k", "about", "like", "I think"): show it as "approx" in the flash, write it as null in the delta, and ask for the exact figure from the report.
 
 ## 2. Do
 First, open hotel-profile.md with your file-reading tool (in claude.ai, from the Project's knowledge) and take the hotel's name, currency, languages, people and systems from it; if it is missing, say so at the top and list the defaults you used.
@@ -31,7 +32,7 @@ DO-CONFIRM, before sending the flash.
 - [ ] Every number has a comparison or the words "no comparator provided".
 - [ ] Each VIP line names one concrete action for today.
 - [ ] Each risk names an owner and a date.
-- [ ] Exactly three decisions, each answerable yes or no.
+- [ ] Exactly three decisions, each answerable yes or no, each with the cost of yes and the cost of no from the pasted data, or "cost not provided"; no cost is invented.
 - [ ] One page: under 60 lines.
 
 ## 4. Check yourself

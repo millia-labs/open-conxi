@@ -12,7 +12,7 @@ Run order: hotel-setup, hotel-dashboard, then this skill. Every morning before t
 - Out-of-order and out-of-inventory rooms with reason.
 - Attendants on shift today with start and end times.
 - Optional: special requests (allergy, cot, early arrival, connecting rooms), VIP arrivals.
-- Missing attendant list: build the board unassigned and say so.
+- Missing attendant list or hours: build the board anyway, rooms unassigned or credits not calculated, and say what is missing. The board always prints, even when the GM only asked for the team message.
 
 ## 2. Do
 First, open hotel-profile.md with your file-reading tool (in claude.ai, from the Project's knowledge) and take the hotel's name, currency, languages, people and systems from it; if it is missing, say so at the top and list the defaults you used.
@@ -42,7 +42,7 @@ READ-DO, run by the supervisor before a room is marked ready.
 - Output rules: an unknown value is null, never 0 or a copy; no scorecard row unless the value is final and hotel-wide; no fact or promise that was not given, and never say an action was taken or will be taken (passed on, flagged, fixed, isolated, refunded) unless the paste says so; no weekday unless the paste states it; no sign-off unless a guest reads the text; no long or short dash characters (wider than a hyphen) anywhere, titles and headings included: write "Casa Azul, morning flash, 22 Sep", not the name, a dash, then the date; before replying, search the whole reply for them and replace each with a comma, a colon, a full stop, or "to" in a range; no emojis and no symbols such as warning signs, ticks, stars or arrows.
 
 ## 5. Output
-Header with date and counts (departures, stayovers, arrivals, out-of-order, attendants). Board table: room, type, status, arrival time if any, attendant, credits, flags. Same-day flip list. Inspection list. The morning board emits no delta. At end of day, when the GM pastes the count of rooms ready by 15:00, emit:
+Header with date and counts (departures, stayovers, arrivals, out-of-order, attendants). The ready rule in one line under the header: no room is ready until its photo set is posted and a supervisor has ticked the inspection list; the team message carries the same line. Board table: room, type, status, arrival time if any, attendant, credits, flags. Same-day flip list. Inspection list. The morning board emits no delta. At end of day, when the GM pastes the count of rooms ready by 15:00, emit:
 
 hotel-data delta
 ```json

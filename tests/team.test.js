@@ -111,3 +111,10 @@ test("readTeamChats also reads the one-line form hotel-setup writes", () => {
   fs.writeFileSync(path.join(dir, "hotel-profile.md"), 'team_chats: {managers: "Duty managers, KL", housekeeping: "HK team", maintenance: "", all_staff: \'All staff\'}\n');
   assert.deepEqual(readTeamChats(dir), { managers: "Duty managers, KL", housekeeping: "HK team", all_staff: "All staff" });
 });
+
+test("a message over 900 characters is refused before touching Beeper", async () => {
+  const b = await fakeBeeper();
+  await assert.rejects(deliver({ url: b.url, token: "good" }, { to: "Maintenance", text: "x".repeat(901) }), /901 characters/);
+  b.srv.close();
+  assert.equal(b.writes.length, 0);
+});

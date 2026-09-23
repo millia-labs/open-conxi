@@ -9,6 +9,8 @@ const readline = require("node:readline");
 
 const CONFIG = path.join(os.homedir(), ".open-conxi", "beeper.json");
 const CONNECT = "Run: npx open-conxi team connect";
+// One skill's message is under 600 characters; hotel-routine merges several into one under 900.
+const MAX_CHARS = 900;
 
 function loadConfig() {
   let saved = {};
@@ -86,6 +88,7 @@ async function resolveChat(cfg, name) {
 
 async function deliver(cfg, { to, text, send = false, dir }) {
   if (!text || !text.trim()) throw new Error("The message is empty, nothing to send.");
+  if (text.length > MAX_CHARS) throw new Error(`The message is ${text.length} characters. Keep it under ${MAX_CHARS} so staff read it on a phone: cut it down and try again.`);
   const roles = dir ? readTeamChats(dir) : {};
   const name = roles[to] || to;
   const chat = await resolveChat(cfg, name);
