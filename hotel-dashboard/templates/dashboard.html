@@ -6,7 +6,7 @@
 <style>
 :root{--bg:#ffffff;--card:#ffffff;--ink:#14252a;--ink-2:#3c4a4e;--muted:#6b7678;--line:#e3e6e5;--chip:#e2e5e4;--tint:#eef1f0;--copper:#a65a2e;--copper-tint:#f7e6da;--dark:#14252a;--on-dark:#f3f1ec;--on-dark-muted:#9fb0ae;
  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;--sans:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif}
-*{box-sizing:border-box}
+*{box-sizing:border-box}[hidden]{display:none!important}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
 .wrap{max-width:1200px;margin:0 auto;padding:48px 16px 64px}
 @media (min-width:720px){.wrap{padding:64px 40px 80px}}
@@ -55,7 +55,7 @@ td .of{color:var(--muted);font-size:11px}td.late{color:var(--copper);font-weight
 footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);font:400 11px/1.7 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 @media (max-width:560px){.bar-row{grid-template-columns:84px 1fr;row-gap:6px}.bar-row .nums{grid-column:2}.card{padding:22px 20px}}
 </style></head><body><div class="wrap">
-<div class="topbar"><div class="brand">Open <span>Conxi</span></div><div class="eyebrow" id="asof"></div></div>
+<div class="topbar"><div class="brand">Open <span>Conxi</span></div><span style="display:flex;gap:12px;align-items:center"><span class="pill copper" id="live" hidden>Live</span><div class="eyebrow" id="asof"></div></span></div>
 <header><div class="eyebrow copper">Hotel dashboard</div><h1 id="title" style="margin-bottom:0">Hotel dashboard</h1></header>
 <div class="sec" style="margin-top:0"><h2>Latest day</h2><span class="cap" id="kpi-cap"></span></div>
 <div class="grid kpis" id="kpis"></div>
@@ -132,4 +132,10 @@ function scoreNum(v){if(typeof v!=='number')return fmt(v);if(v<=1)return pct(v);
 const wk=D.scorecard.map(r=>r.week).filter(Boolean).sort().pop();if(wk)document.getElementById('score-cap').textContent='Week '+wk;
 const scW=new Set(D.scorecard.map(r=>r.week)).size;
 table('score',[{h:'Measure',f:r=>esc(r.name)},...(scW>1?[{h:'Week',cls:()=>'m',f:r=>esc(r.week)}]:[]),{h:'Value',n:1,f:r=>scoreNum(r.value)},{h:'Target',n:1,f:r=>scoreNum(r.target)},{h:'Owner',f:r=>esc(r.owner)}],D.scorecard,'No scorecard yet. Run owner-report.');
+if(location.protocol.startsWith('http')&&window.EventSource){
+ try{const y=sessionStorage.getItem('oc-scroll');if(y){scrollTo(0,+y);sessionStorage.removeItem('oc-scroll');}}catch(e){}
+ const es=new EventSource('/events');const live=document.getElementById('live');
+ es.onopen=()=>{live.hidden=false;};es.onerror=()=>{live.hidden=true;};
+ es.addEventListener('update',()=>{try{sessionStorage.setItem('oc-scroll',scrollY);}catch(e){}location.reload();});
+}
 </script></body></html>

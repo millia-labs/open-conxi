@@ -50,3 +50,8 @@ test("update re-copies and uninstall removes only Open Conxi skills", () => {
   for (const s of ALL) assert.ok(!fs.existsSync(path.join(dir, s)), s);
   assert.ok(fs.existsSync(path.join(dir, "someone-else")));
 });
+
+test("help lists the dashboard command", () => {
+  const out = execFileSync("node", [CLI, "help"], { encoding: "utf8" });
+  assert.match(out, /dashboard/);
+});

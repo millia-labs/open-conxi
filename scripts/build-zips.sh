@@ -9,4 +9,11 @@ for s in "${SKILLS[@]}"; do
   zip -qr "dist/$s.zip" "$s" -x '*.DS_Store'
 done
 zip -qr dist/open-conxi-all.zip "${SKILLS[@]}" docs/CONTRACT.md docs/SCHEMA.md README.md LICENSE -x '*.DS_Store'
+# Double-click installer: one folder with the skills and a Mac and a Windows installer.
+STAGE="$(mktemp -d)/Open Conxi"
+mkdir -p "$STAGE"
+cp -R "${SKILLS[@]}" "$STAGE/"
+cp "install/Install Open Conxi.command" "install/Install Open Conxi.cmd" "install/READ ME FIRST.txt" "$STAGE/"
+node -p "require('./package.json').version" > "$STAGE/VERSION"
+(cd "$(dirname "$STAGE")" && zip -qry "$OLDPWD/dist/open-conxi-installer.zip" "Open Conxi" -x '*.DS_Store')
 ls -la dist

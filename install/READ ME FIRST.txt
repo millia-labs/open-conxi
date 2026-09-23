@@ -1,0 +1,15 @@
+Open Conxi, free Claude skills for independent hotels
+
+1. Install Claude Code first if you have not: https://claude.com/claude-code
+2. Mac: double-click "Install Open Conxi.command".
+   If the Mac says it cannot check the developer, right-click the file,
+   choose Open, then Open again. You only do this once.
+   Windows: double-click "Install Open Conxi.cmd".
+3. Quit and reopen Claude Code.
+4. Type: set up my hotel
+
+To see your dashboard update by itself as you work, open a terminal in your
+hotel folder and run: npx open-conxi dashboard
+
+Using claude.ai in the browser instead? Upload the single-skill zips from the
+release page under Customize, then Skills. This folder is for Claude Code.
