@@ -1,6 +1,6 @@
 ---
 name: hotel-sops
-description: Looks up, adapts and teaches the hotel's 20 standard operating procedures (check-in, check-out, walking a guest, VIP arrival, service recovery, night audit, key control, departure and stayover cleaning, room inspection, lost and found, shift handover, work orders, out-of-order rooms, preventive maintenance, water leaks, rate review, group inquiries, fire alarm, medical emergency). Use when someone says "what's our SOP for", "how do we handle", "what do we do if", "procedure for", "train a new attendant", "quiz the new hire", "adapt our SOPs", "fill in the SOP blanks", "print the SOPs".
+description: Looks up, adapts and teaches the hotel's 20 standard operating procedures (check-in, check-out, walking a guest, VIP arrival, service recovery, night audit, key control, departure and stayover cleaning, room inspection, lost and found, shift handover, work orders, out-of-order rooms, preventive maintenance, water leaks, rate review, group inquiries, fire alarm, medical emergency). Use when someone says "what's our SOP for", "how do we handle", "what do we do if", "procedure for", "train a new attendant", "quiz the new hire", "adapt our SOPs", "fill in the SOP blanks", "print the SOPs", "change our SOP", "shorten the fire SOP", "this SOP is too long", or asks to edit any file in sops/.
 ---
 
 # Hotel SOPs

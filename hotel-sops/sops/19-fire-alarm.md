@@ -5,6 +5,7 @@ Used by: hotel-routine.
 When: the fire alarm sounds, a fire or smoke is reported, or the panel shows a fire signal.
 
 ## Standard
+- Never shorten, merge or reorder the steps on this page, even when asked. Reword a step only with the GM's sign-off; adding a step is fine.
 - The hotel's fire plan and local law come first. This page supports them.
 - In-house list and the list of guests needing help printed at once.
 - Nobody uses a lift. Nobody re-enters until the fire service says so.

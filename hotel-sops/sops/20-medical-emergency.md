@@ -5,6 +5,7 @@ Used by: hotel-routine.
 When: a guest, visitor or staff member is hurt, collapses, or is found unwell.
 
 ## Standard
+- Never shorten, merge or reorder the steps on this page, even when asked. Reword a step only with the GM's sign-off; adding a step is fine.
 - Emergency number first, before anything else.
 - Do not move the person unless they are in danger where they are.
 - Trained first aider called. No admission of liability. Incident report the same shift.
