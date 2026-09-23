@@ -17,6 +17,7 @@ Run order: hotel-setup, hotel-dashboard, then this skill. Weekly, same day each 
 
 ## 2. Do
 First, open hotel-profile.md with your file-reading tool (in claude.ai, from the Project's knowledge) and take the hotel's name, currency, languages, people and systems from it; if it is missing, say so at the top and list the defaults you used.
+SOPs: this skill follows SOP 17 from `sops/` in the working folder (in claude.ai, the Project's knowledge). Where the hotel's copy sets a different time, limit or step, follow the hotel's copy. If `sops/` is missing, carry on with this page and add one line: run `npx open-conxi sops` to add your SOPs.
 1. Read `hotel-profile.md` for keys, currency, OTAs.
 2. Pickup: for each date, rooms now minus rooms 7 days ago. Rank dates by pickup and by rooms remaining.
 3. Classify each date. Compression: on the books at or above 75 percent of keys with 10 or more days to go, or pickup in the top 20 percent of the dates pasted. Need: below the same date last year, or below the average on-the-books of the dates pasted with pickup in the bottom 20 percent. Normal: everything else. Top 20 percent means the dates whose pickup is at or above the pickup of the date ranked at 20 percent down the list, rounded up, ties included. Apply compression, then need, then normal, to every date, in that order, and print the rule that fired beside each date. These three classes plus "event" are the only ones; no new class names. Show the threshold numbers used.

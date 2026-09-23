@@ -16,6 +16,7 @@ Run order: hotel-setup, hotel-dashboard, then this skill. Weekly, before the ros
 
 ## 2. Do
 First, open hotel-profile.md with your file-reading tool (in claude.ai, from the Project's knowledge) and take the hotel's name, currency, languages, people and systems from it; if it is missing, say so at the top and list the defaults you used.
+SOPs: this skill follows SOP 12 from `sops/` in the working folder (in claude.ai, the Project's knowledge). Where the hotel's copy sets a different time, limit or step, follow the hotel's copy. If `sops/` is missing, carry on with this page and add one line: run `npx open-conxi sops` to add your SOPs.
 1. Read `hotel-profile.md` for keys, F&B, currency.
 2. Demand per day: housekeeping hours from the hotel's stated standard (rooms per attendant per shift, converted to hours); only if no standard was given use departures times 0.5 hour plus stayovers times 0.33 hour, and say so; add public-area hours if given; front desk hours = shifts to cover the desk plus 1 extra during the arrival peak when arrivals exceed 25 percent of keys; F&B hours = forecast covers divided by covers per server times shift length; engineering = one shift per day plus on-call.
 3. Assign staff to shifts by department, using each person's contract hours first, then overtime only where demand cannot be met, then a named casual or agency slot.

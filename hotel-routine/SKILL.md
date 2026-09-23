@@ -28,6 +28,7 @@ Only what today's jobs need. The routine asks for all of it in one message, so t
 
 ## 2. Do
 First, open hotel-profile.md with your file-reading tool (in claude.ai, from the Project's knowledge) and take the hotel's name, currency, languages, people and systems from it; if it is missing, say so at the top and list the defaults you used.
+SOPs: this skill follows SOP 03, SOP 10, SOP 12, SOP 14, SOP 16, SOP 19 and SOP 20 from `sops/` in the working folder (in claude.ai, the Project's knowledge). Where the hotel's copy sets a different time, limit or step, follow the hotel's copy. If `sops/` is missing, carry on with this page and add one line: run `npx open-conxi sops` to add your SOPs.
 1. If hotel-profile.md is missing, stop and say: run hotel-setup first.
 2. Say which jobs are due today and ask for all their pastes in one numbered message, using the table above. If the GM already pasted, skip the question.
 3. Run the due jobs in this order, each by following its own SKILL.md exactly, including its checklist and its saving step: morning-flash, work-orders, turnover-board, review-replies, then rate-check, staff-roster, group-displacement, ota-reconciliation, owner-report. Work orders run before the board so a room made out of order this morning is not assigned for cleaning.
@@ -37,6 +38,7 @@ First, open hotel-profile.md with your file-reading tool (in claude.ai, from the
    - A P0 or P1 work order appears in the flash's risks.
    - A review that names a room defect has an open work order, or the routine lists it as needing one.
    - A count is taken from the pasted list, never worked out from other figures. If a count someone would derive (stayovers from rooms sold minus departures) disagrees with the pasted list, the list stands and the gap is a missing input to ask about, never an oversell or a shortfall to act on.
+   - When a cross-check fires, attach the matching SOP by number and its first three steps, in short, to that chat's message: a guest booked into an out-of-order room SOP 03 (managers), water or a leak SOP 16 (maintenance), a room going out of order SOP 14 (maintenance and housekeeping), rooms to release SOP 10 (housekeeping). Cut SOP steps before facts to stay under 900 characters.
    Fix the output that is wrong, and say what changed.
 5. Team messages: each job ends with a team message for one chat. Merge all messages for the same chat into one, highest priority first, under 900 characters. Managers get the flash decisions and review escalations; housekeeping gets the board; maintenance gets new and overdue orders; all staff gets the roster only.
 6. Deliver each merged message with the team message rule in section 5, one chat at a time.
@@ -61,7 +63,7 @@ READ-DO, before the first team message is drafted.
 
 ## 5. Output
 1. Day sheet at the top: a table of job, status (done, or skipped with the export needed), the one number that matters from it, and what the team send command printed for its chat, in the command's own words ("Draft is waiting in ..."). A draft is never called sent.
-2. Cross-check fixes, one line each.
+2. Cross-check fixes, one line each, naming the SOP used.
 3. Each job's output under its own heading, as its skill prints it.
 4. The merged team messages, one per chat, under the heading "Team message drafts" (or "Team messages sent" only for those the command reported as sent).
 
